@@ -132,12 +132,11 @@ function apiRouter(action, payload) {
  * ส่งข้อความแจ้งเตือนผ่าน LINE (รองรับทั้ง LINE Messaging API มาตรฐานใหม่ และ LINE Notify)
  */
 function sendLineNotifyMessage(payload) {
-  var token = payload ? payload.token : '';
-  var message = payload ? payload.message : '';
+  var token = (payload && payload.token && payload.token !== 'LINE_NOTIFY_DEMO_TOKEN_FM_STUDIO') 
+    ? payload.token 
+    : '9byuGbRAT8DnHw/T9+z9uZ3c9k/YLMAhpu8tQRkVgZ2EhIMir6qXDJCB94fHjC7Vj/05jRIaWafSLVhyYyKnoiBBOtu+BG2VSLRdidZ+bX09yY07xihqLpAU6MvBSivn8GTPxfxeFRSkwxHECt19MQdB04t89/1O/w1cDnyilFU=';
+  var message = (payload && payload.message) ? payload.message : '🔔 ทดสอบการส่งแจ้งเตือนจากระบบวิชาการโรงเรียน';
   var targetId = payload ? payload.targetId : '';
-  if (!token || !message) {
-    return { success: false, error: 'ต้องระบุ Token และ Message' };
-  }
 
   // 1. ลองส่งแบบ LINE Messaging API (LINE Official Account - Broadcast / Push)
   try {
