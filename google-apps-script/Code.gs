@@ -6,6 +6,15 @@
 
 const FOLDER_NAME = 'MIS_Academic_Uploads';
 
+// ฟังก์ชันสำหรับกดทดสอบส่ง และกดให้สิทธิ์การเข้าถึง (Authorization)
+function testSendLine() {
+  var res = sendLineNotifyMessage({
+    message: '🎉 ยินดีด้วยครับ! ให้สิทธิ์ Google สำเร็จแล้ว ระบบแจ้งเตือน LINE ใช้งานได้ 100% ✨'
+  });
+  Logger.log(res);
+  return res;
+}
+
 // เข้าใช้งานหน้าเว็บ Web App หรือรับคำขอ API (GET)
 function doGet(e) {
   if (e && e.parameter && e.parameter.action) {
