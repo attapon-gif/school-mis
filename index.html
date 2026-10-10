@@ -2609,6 +2609,175 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
     </div>
   </div>
 
+  <!-- ================================================================= -->
+  <!-- MODAL: ADD / EDIT USER (เพิ่ม/แก้ไขบัญชีผู้ใช้และสิทธิ์) -->
+  <!-- ================================================================= -->
+  <div id="modalAddUser" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 sm:p-4">
+    <div class="card-3d max-w-lg w-full p-5 sm:p-7 space-y-4 shadow-2xl rounded-2xl max-h-[92vh] overflow-y-auto">
+      <div class="flex justify-between items-center pb-3 border-b border-slate-200">
+        <div class="flex items-center gap-2.5">
+          <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center font-bold">
+            <i data-lucide="user-cog" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 id="modalUserTitle" class="text-base sm:text-lg font-black text-slate-900">เพิ่มบัญชีผู้ใช้งานใหม่</h3>
+            <p class="text-xs text-slate-500">กำหนดชื่อบัญชี รหัสผ่าน และบทบาทการเข้าถึง</p>
+          </div>
+        </div>
+        <button type="button" onclick="closeModal('modalAddUser')" class="text-slate-400 hover:text-slate-600 p-1.5 rounded-lg hover:bg-slate-100 transition">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <form id="formUserModal" onsubmit="handleSaveUser(event)" class="space-y-3.5 text-xs text-left">
+        <input type="hidden" id="editUserId" value="">
+
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">ชื่อ-นามสกุล (Full Name) *</label>
+          <input type="text" id="userFormName" required placeholder="เช่น นายอรรถพล ฉาไธสง หรือ ด.ช.สมชาย" class="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs font-semibold outline-none focus:border-blue-600">
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">ชื่อผู้ใช้ (Username) *</label>
+            <input type="text" id="userFormUsername" required placeholder="เช่น teacher01, attapon" class="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs font-mono font-semibold outline-none focus:border-blue-600">
+          </div>
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">รหัสผ่าน (Password) *</label>
+            <input type="text" id="userFormPassword" required value="1234" placeholder="รหัสผ่านเข้าใช้งาน" class="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs font-mono font-semibold outline-none focus:border-blue-600">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">ระดับสิทธิ์ (Role) *</label>
+            <select id="userFormRole" required class="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs font-bold bg-white text-slate-800 outline-none focus:border-blue-600">
+              <option value="admin">🛡️ ผู้ดูแลระบบ (Admin)</option>
+              <option value="director">🎓 ผู้อำนวยการ (Director)</option>
+              <option value="academic">📘 หัวหน้างานวิชาการ (Academic Head)</option>
+              <option value="registrar">📋 นายทะเบียนวัดผล (Registrar)</option>
+              <option value="teacher">👨‍🏫 ครูผู้สอน (Teacher)</option>
+              <option value="supervisor">🔍 ผู้นิเทศภายใน (Supervisor)</option>
+              <option value="student">🎒 นักเรียน (Student)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">เบอร์โทรศัพท์ (Phone)</label>
+            <input type="text" id="userFormPhone" placeholder="เช่น 062-3636031" class="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs font-semibold outline-none focus:border-blue-600">
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">ตำแหน่ง / กลุ่มสาระการเรียนรู้</label>
+          <input type="text" id="userFormPosition" placeholder="เช่น ครูผู้สอน กลุ่มสาระฯ วิทยาศาสตร์และเทคโนโลยี" class="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs font-semibold outline-none focus:border-blue-600">
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">สถานะการใช้งาน (Status)</label>
+          <select id="userFormStatus" class="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs font-bold bg-white text-slate-800 outline-none focus:border-blue-600">
+            <option value="active">🟢 เปิดใช้งานปกติ (Active)</option>
+            <option value="inactive">🔴 ระงับการใช้งานชั่วคราว (Disabled)</option>
+          </select>
+        </div>
+
+        <div class="pt-3 flex gap-2">
+          <button type="submit" class="flex-1 btn-ega-primary py-2.5 text-xs font-bold flex items-center justify-center gap-1.5 shadow">
+            <i data-lucide="check" class="w-4 h-4"></i> บันทึกข้อมูลบัญชี
+          </button>
+          <button type="button" onclick="closeModal('modalAddUser')" class="px-4 py-2.5 border border-slate-300 rounded-xl text-slate-600 hover:bg-slate-100 font-bold text-xs">
+            ยกเลิก
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- ================================================================= -->
+  <!-- MODAL: CONNECT GOOGLE SHEETS DATABASE (เชื่อมต่อฐานข้อมูล Google Sheets) -->
+  <!-- ================================================================= -->
+  <div id="modalConnectGoogleSheets" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 sm:p-4">
+    <div class="card-3d max-w-xl w-full p-5 sm:p-7 space-y-4 shadow-2xl rounded-2xl max-h-[92vh] overflow-y-auto">
+      <div class="flex justify-between items-center pb-3 border-b border-slate-200">
+        <div class="flex items-center gap-2.5">
+          <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">
+            <i data-lucide="file-spreadsheet" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="text-base sm:text-lg font-black text-slate-900">เชื่อมต่อฐานข้อมูล Google Sheets & Google Drive</h3>
+            <p class="text-xs text-slate-500">ซิงค์คะแนน นักเรียน ตารางสอน และแผนการสอนขึ้น Cloud ฟรี 100%</p>
+          </div>
+        </div>
+        <button type="button" onclick="closeModal('modalConnectGoogleSheets')" class="text-slate-400 hover:text-slate-600 p-1.5 rounded-lg hover:bg-slate-100 transition">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Current Connection Status Banner -->
+      <div id="gasConnectionStatusBanner" class="p-3.5 rounded-xl border flex items-center justify-between gap-3 bg-amber-50 border-amber-200 text-amber-900">
+        <div class="flex items-center gap-2.5">
+          <span class="w-3 h-3 rounded-full bg-amber-500 animate-pulse flex-shrink-0"></span>
+          <div>
+            <div id="gasStatusTitle" class="font-bold text-xs">สถานะ: กำลังใช้ฐานข้อมูลจำลองในเครื่อง (Local Storage)</div>
+            <div id="gasStatusDesc" class="text-[11px] text-amber-700">ยังไม่ได้ระบุ Web App URL เพื่อเชื่อมต่อไปยัง Google Sheets</div>
+          </div>
+        </div>
+        <button type="button" id="btnTestGasConnection" onclick="testGasConnection()" class="px-3 py-1.5 rounded-lg bg-white hover:bg-amber-100 border border-amber-300 text-amber-800 text-xs font-bold transition flex items-center gap-1">
+          <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> ทดสอบ
+        </button>
+      </div>
+
+      <!-- Web App URL Config Form -->
+      <div class="space-y-3 text-xs">
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">
+            Google Apps Script Web App URL (URL สำหรับเชื่อมต่อ)
+          </label>
+          <div class="relative">
+            <input type="url" id="inputGasWebAppUrl" placeholder="https://script.google.com/macros/s/AKfycb.../exec" class="w-full pl-3 pr-24 py-2.5 border border-slate-300 rounded-xl text-xs font-mono font-medium outline-none focus:border-emerald-600">
+            <button type="button" onclick="saveGasWebAppUrl()" class="absolute right-1.5 top-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-1.5 rounded-lg transition text-xs shadow-sm">
+              บันทึก URL
+            </button>
+          </div>
+          <p class="text-[11px] text-slate-400 mt-1">
+            URL ที่ได้จากการกด <strong>Deploy > New deployment (ทุกคน / Anyone)</strong> ใน Google Apps Script
+          </p>
+        </div>
+
+        <!-- Quick Action Buttons -->
+        <div class="grid grid-cols-2 gap-2.5 pt-1">
+          <button type="button" onclick="triggerInitSetupFromModal()" class="py-2.5 px-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold flex items-center justify-center gap-1.5 shadow transition">
+            <i data-lucide="database" class="w-4 h-4"></i> สร้าง 10 แท็บ & ซิงค์ข้อมูลสด
+          </button>
+          <button type="button" onclick="copyGasCodeToClipboard()" class="py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold border border-slate-300 flex items-center justify-center gap-1.5 transition">
+            <i data-lucide="copy" class="w-4 h-4"></i> คัดลอกโค้ด Code.gs
+          </button>
+        </div>
+      </div>
+
+      <!-- Step-by-Step Mini Guide -->
+      <div class="border-t border-slate-200 pt-3 space-y-2 text-xs">
+        <h4 class="font-bold text-slate-800 flex items-center gap-1.5">
+          <i data-lucide="help-circle" class="w-4 h-4 text-emerald-600"></i> ขั้นตอนการสร้าง Google Sheets (ทำครั้งเดียว 2 นาที):
+        </h4>
+        <ol class="list-decimal list-inside space-y-1 text-slate-600 text-[11px] leading-relaxed pl-1">
+          <li>เปิด Google Sheets ใหม่ที่ <a href="https://sheets.new" target="_blank" class="text-blue-600 underline font-bold">sheets.new</a></li>
+          <li>ไปที่เมนู <strong>ส่วนขยาย (Extensions) > Apps Script</strong></li>
+          <li>ลบโค้ดเดิม แล้ววางโค้ดจากปุ่ม <em>"คัดลอกโค้ด Code.gs"</em> ด้านบน</li>
+          <li>กด <strong>การทำให้ใช้งานได้ (Deploy) > การทำให้ใช้งานได้รายการใหม่ (New deployment)</strong></li>
+          <li>เลือกประเภท <strong>เว็บแอป (Web app)</strong>, สิทธิ์การเข้าถึงเลือก <strong>"ทุกคน (Anyone)"</strong> แล้วกด Deploy</li>
+          <li>คัดลอก <strong>Web App URL</strong> มาวางในช่องด้านบน แล้วกด <strong>"บันทึก URL"</strong> เป็นอันเสร็จสิ้น!</li>
+        </ol>
+      </div>
+
+      <div class="pt-2 border-t border-slate-100 flex justify-end">
+        <button type="button" onclick="closeModal('modalConnectGoogleSheets')" class="px-4 py-2 border border-slate-300 rounded-xl text-slate-600 hover:bg-slate-100 font-bold text-xs">
+          ปิดหน้าต่าง
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- PRINTABLE AREA (FOR PDF) -->
   <div id="printableArea" class="hidden printable-area"></div>
 
@@ -4473,176 +4642,7 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
     };
   <\/script>
 
-  <!-- ================================================================= -->
-  <!-- MODAL: ADD / EDIT USER (เพิ่ม/แก้ไขบัญชีผู้ใช้และสิทธิ์) -->
-  <!-- ================================================================= -->
-  <div id="modalAddUser" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 sm:p-4">
-    <div class="card-3d max-w-lg w-full p-5 sm:p-7 space-y-4 shadow-2xl rounded-2xl max-h-[92vh] overflow-y-auto">
-      <div class="flex justify-between items-center pb-3 border-b border-slate-200">
-        <div class="flex items-center gap-2.5">
-          <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center font-bold">
-            <i data-lucide="user-cog" class="w-5 h-5"></i>
-          </div>
-          <div>
-            <h3 id="modalUserTitle" class="text-base sm:text-lg font-black text-slate-900">เพิ่มบัญชีผู้ใช้งานใหม่</h3>
-            <p class="text-xs text-slate-500">กำหนดชื่อบัญชี รหัสผ่าน และบทบาทการเข้าถึง</p>
-          </div>
-        </div>
-        <button type="button" onclick="closeModal('modalAddUser')" class="text-slate-400 hover:text-slate-600 p-1.5 rounded-lg hover:bg-slate-100 transition">
-          <i data-lucide="x" class="w-5 h-5"></i>
-        </button>
-      </div>
-
-      <form id="formUserModal" onsubmit="handleSaveUser(event)" class="space-y-3.5 text-xs text-left">
-        <input type="hidden" id="editUserId" value="">
-
-        <div>
-          <label class="block font-bold text-slate-700 mb-1">ชื่อ-นามสกุล (Full Name) *</label>
-          <input type="text" id="userFormName" required placeholder="เช่น นายอรรถพล ฉาไธสง หรือ ด.ช.สมชาย" class="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs font-semibold outline-none focus:border-blue-600">
-        </div>
-
-        <div class="grid grid-cols-2 gap-3">
-          <div>
-            <label class="block font-bold text-slate-700 mb-1">ชื่อผู้ใช้ (Username) *</label>
-            <input type="text" id="userFormUsername" required placeholder="เช่น teacher01, attapon" class="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs font-mono font-semibold outline-none focus:border-blue-600">
-          </div>
-          <div>
-            <label class="block font-bold text-slate-700 mb-1">รหัสผ่าน (Password) *</label>
-            <input type="text" id="userFormPassword" required value="1234" placeholder="รหัสผ่านเข้าใช้งาน" class="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs font-mono font-semibold outline-none focus:border-blue-600">
-          </div>
-        </div>
-
-        <div class="grid grid-cols-2 gap-3">
-          <div>
-            <label class="block font-bold text-slate-700 mb-1">ระดับสิทธิ์ (Role) *</label>
-            <select id="userFormRole" required class="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs font-bold bg-white text-slate-800 outline-none focus:border-blue-600">
-              <option value="admin">🛡️ ผู้ดูแลระบบ (Admin)</option>
-              <option value="director">🎓 ผู้อำนวยการ (Director)</option>
-              <option value="academic">📘 หัวหน้างานวิชาการ (Academic Head)</option>
-              <option value="registrar">📋 นายทะเบียนวัดผล (Registrar)</option>
-              <option value="teacher">👨‍🏫 ครูผู้สอน (Teacher)</option>
-              <option value="supervisor">🔍 ผู้นิเทศภายใน (Supervisor)</option>
-              <option value="student">🎒 นักเรียน (Student)</option>
-            </select>
-          </div>
-          <div>
-            <label class="block font-bold text-slate-700 mb-1">เบอร์โทรศัพท์ (Phone)</label>
-            <input type="text" id="userFormPhone" placeholder="เช่น 062-3636031" class="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs font-semibold outline-none focus:border-blue-600">
-          </div>
-        </div>
-
-        <div>
-          <label class="block font-bold text-slate-700 mb-1">ตำแหน่ง / กลุ่มสาระการเรียนรู้</label>
-          <input type="text" id="userFormPosition" placeholder="เช่น ครูผู้สอน กลุ่มสาระฯ วิทยาศาสตร์และเทคโนโลยี" class="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs font-semibold outline-none focus:border-blue-600">
-        </div>
-
-        <div>
-          <label class="block font-bold text-slate-700 mb-1">สถานะการใช้งาน (Status)</label>
-          <select id="userFormStatus" class="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs font-bold bg-white text-slate-800 outline-none focus:border-blue-600">
-            <option value="active">🟢 เปิดใช้งานปกติ (Active)</option>
-            <option value="inactive">🔴 ระงับการใช้งานชั่วคราว (Disabled)</option>
-          </select>
-        </div>
-
-        <div class="pt-3 flex gap-2">
-          <button type="submit" class="flex-1 btn-ega-primary py-2.5 text-xs font-bold flex items-center justify-center gap-1.5 shadow">
-            <i data-lucide="check" class="w-4 h-4"></i> บันทึกข้อมูลบัญชี
-          </button>
-          <button type="button" onclick="closeModal('modalAddUser')" class="px-4 py-2.5 border border-slate-300 rounded-xl text-slate-600 hover:bg-slate-100 font-bold text-xs">
-            ยกเลิก
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-
-  <!-- ================================================================= -->
-  <!-- MODAL: CONNECT GOOGLE SHEETS DATABASE (เชื่อมต่อฐานข้อมูล Google Sheets) -->
-  <!-- ================================================================= -->
-  <div id="modalConnectGoogleSheets" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 sm:p-4">
-    <div class="card-3d max-w-xl w-full p-5 sm:p-7 space-y-4 shadow-2xl rounded-2xl max-h-[92vh] overflow-y-auto">
-      <div class="flex justify-between items-center pb-3 border-b border-slate-200">
-        <div class="flex items-center gap-2.5">
-          <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">
-            <i data-lucide="file-spreadsheet" class="w-5 h-5"></i>
-          </div>
-          <div>
-            <h3 class="text-base sm:text-lg font-black text-slate-900">เชื่อมต่อฐานข้อมูล Google Sheets & Google Drive</h3>
-            <p class="text-xs text-slate-500">ซิงค์คะแนน นักเรียน ตารางสอน และแผนการสอนขึ้น Cloud ฟรี 100%</p>
-          </div>
-        </div>
-        <button type="button" onclick="closeModal('modalConnectGoogleSheets')" class="text-slate-400 hover:text-slate-600 p-1.5 rounded-lg hover:bg-slate-100 transition">
-          <i data-lucide="x" class="w-5 h-5"></i>
-        </button>
-      </div>
-
-      <!-- Current Connection Status Banner -->
-      <div id="gasConnectionStatusBanner" class="p-3.5 rounded-xl border flex items-center justify-between gap-3 bg-amber-50 border-amber-200 text-amber-900">
-        <div class="flex items-center gap-2.5">
-          <span class="w-3 h-3 rounded-full bg-amber-500 animate-pulse flex-shrink-0"></span>
-          <div>
-            <div id="gasStatusTitle" class="font-bold text-xs">สถานะ: กำลังใช้ฐานข้อมูลจำลองในเครื่อง (Local Storage)</div>
-            <div id="gasStatusDesc" class="text-[11px] text-amber-700">ยังไม่ได้ระบุ Web App URL เพื่อเชื่อมต่อไปยัง Google Sheets</div>
-          </div>
-        </div>
-        <button type="button" id="btnTestGasConnection" onclick="testGasConnection()" class="px-3 py-1.5 rounded-lg bg-white hover:bg-amber-100 border border-amber-300 text-amber-800 text-xs font-bold transition flex items-center gap-1">
-          <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> ทดสอบ
-        </button>
-      </div>
-
-      <!-- Web App URL Config Form -->
-      <div class="space-y-3 text-xs">
-        <div>
-          <label class="block font-bold text-slate-700 mb-1">
-            Google Apps Script Web App URL (URL สำหรับเชื่อมต่อ)
-          </label>
-          <div class="relative">
-            <input type="url" id="inputGasWebAppUrl" placeholder="https://script.google.com/macros/s/AKfycb.../exec" class="w-full pl-3 pr-24 py-2.5 border border-slate-300 rounded-xl text-xs font-mono font-medium outline-none focus:border-emerald-600">
-            <button type="button" onclick="saveGasWebAppUrl()" class="absolute right-1.5 top-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-1.5 rounded-lg transition text-xs shadow-sm">
-              บันทึก URL
-            </button>
-          </div>
-          <p class="text-[11px] text-slate-400 mt-1">
-            URL ที่ได้จากการกด <strong>Deploy > New deployment (ทุกคน / Anyone)</strong> ใน Google Apps Script
-          </p>
-        </div>
-
-        <!-- Quick Action Buttons -->
-        <div class="grid grid-cols-2 gap-2.5 pt-1">
-          <button type="button" onclick="triggerInitSetupFromModal()" class="py-2.5 px-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold flex items-center justify-center gap-1.5 shadow transition">
-            <i data-lucide="database" class="w-4 h-4"></i> สร้าง 10 แท็บ & ซิงค์ข้อมูลสด
-          </button>
-          <button type="button" onclick="copyGasCodeToClipboard()" class="py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold border border-slate-300 flex items-center justify-center gap-1.5 transition">
-            <i data-lucide="copy" class="w-4 h-4"></i> คัดลอกโค้ด Code.gs
-          </button>
-        </div>
-      </div>
-
-      <!-- Step-by-Step Mini Guide -->
-      <div class="border-t border-slate-200 pt-3 space-y-2 text-xs">
-        <h4 class="font-bold text-slate-800 flex items-center gap-1.5">
-          <i data-lucide="help-circle" class="w-4 h-4 text-emerald-600"></i> ขั้นตอนการสร้าง Google Sheets (ทำครั้งเดียว 2 นาที):
-        </h4>
-        <ol class="list-decimal list-inside space-y-1 text-slate-600 text-[11px] leading-relaxed pl-1">
-          <li>เปิด Google Sheets ใหม่ที่ <a href="https://sheets.new" target="_blank" class="text-blue-600 underline font-bold">sheets.new</a></li>
-          <li>ไปที่เมนู <strong>ส่วนขยาย (Extensions) > Apps Script</strong></li>
-          <li>ลบโค้ดเดิม แล้ววางโค้ดจากปุ่ม <em>"คัดลอกโค้ด Code.gs"</em> ด้านบน</li>
-          <li>กด <strong>การทำให้ใช้งานได้ (Deploy) > การทำให้ใช้งานได้รายการใหม่ (New deployment)</strong></li>
-          <li>เลือกประเภท <strong>เว็บแอป (Web app)</strong>, สิทธิ์การเข้าถึงเลือก <strong>"ทุกคน (Anyone)"</strong> แล้วกด Deploy</li>
-          <li>คัดลอก <strong>Web App URL</strong> มาวางในช่องด้านบน แล้วกด <strong>"บันทึก URL"</strong> เป็นอันเสร็จสิ้น!</li>
-        </ol>
-      </div>
-
-      <div class="pt-2 border-t border-slate-100 flex justify-end">
-        <button type="button" onclick="closeModal('modalConnectGoogleSheets')" class="px-4 py-2 border border-slate-300 rounded-xl text-slate-600 hover:bg-slate-100 font-bold text-xs">
-          ปิดหน้าต่าง
-        </button>
-      </div>
-    </div>
-  </div>
-
-</body>
+  </body>
 </html>`);
           printWindow.document.close();
         }
