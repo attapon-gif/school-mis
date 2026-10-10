@@ -129,14 +129,38 @@ function apiRouter(action, payload) {
 }
 
 /**
- * ส่งข้อความแจ้งเตือนผ่าน LINE Notify (รองรับการเรียกจาก Web App ไม่ติด CORS)
+ * ส่งข้อความแจ้งเตือนผ่าน LINE (รองรับทั้ง LINE Messaging API มาตรฐานใหม่ และ LINE Notify)
  */
 function sendLineNotifyMessage(payload) {
   var token = payload ? payload.token : '';
   var message = payload ? payload.message : '';
+  var targetId = payload ? payload.targetId : '';
   if (!token || !message) {
     return { success: false, error: 'ต้องระบุ Token และ Message' };
   }
+
+  // 1. ลองส่งแบบ LINE Messaging API (LINE Official Account - Broadcast / Push)
+  try {
+    var msgEndpoint = targetId ? 'https://api.line.me/v2/bot/message/push' : 'https://api.line.me/v2/bot/message/broadcast';
+    var msgBody = targetId ? { to: targetId, messages: [{ type: 'text', text: message }] } : { messages: [{ type: 'text', text: message }] };
+    var msgOptions = {
+      method: 'post',
+      headers: {
+        'Authorization': 'Bearer ' + token,
+        'Content-Type': 'application/json'
+      },
+      payload: JSON.stringify(msgBody),
+      muteHttpExceptions: true
+    };
+    var msgRes = UrlFetchApp.fetch(msgEndpoint, msgOptions);
+    if (msgRes.getResponseCode() === 200) {
+      return { success: true, mode: 'messaging_api', status: 200, response: msgRes.getContentText() };
+    }
+  } catch (errMsg) {
+    // ลอง LINE Notify ต่อไป
+  }
+
+  // 2. ลองส่งแบบ LINE Notify เดิม (กรณี Token เก่าที่ยังไม่หมดอายุ)
   try {
     var options = {
       method: 'post',

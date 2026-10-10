@@ -496,17 +496,38 @@ app.post('/api/substitutes', (req, res) => {
   db.substitutes.unshift(subRecord);
   writeDb(db);
   res.json({ success: true, substitute: subRecord });
+});
+
 // -------------------------------------------------------------
-// LINE Notify Proxy API
+// LINE Notification API (LINE Messaging API + LINE Notify)
 // -------------------------------------------------------------
 app.post('/api/line-notify', async (req, res) => {
-  const { token, message } = req.body;
+  const { token, message, targetId } = req.body;
   if (!token || !message) {
     return res.status(400).json({ success: false, error: 'Token and message required' });
   }
+  const fetchFn = globalThis.fetch;
   try {
-    const fetchFn = globalThis.fetch;
+    // 1. ลองส่งแบบ LINE Messaging API (มาตรฐานใหม่ของ LINE)
     if (fetchFn) {
+      try {
+        const msgEndpoint = targetId ? 'https://api.line.me/v2/bot/message/push' : 'https://api.line.me/v2/bot/message/broadcast';
+        const msgBody = targetId ? { to: targetId, messages: [{ type: 'text', text: message }] } : { messages: [{ type: 'text', text: message }] };
+        const msgRes = await fetchFn(msgEndpoint, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(msgBody)
+        });
+        if (msgRes.status === 200) {
+          const data = await msgRes.json().catch(() => ({}));
+          return res.json({ success: true, mode: 'messaging_api', status: 200, data });
+        }
+      } catch (eMsg) {}
+
+      // 2. ลองส่งแบบ LINE Notify เดิม
       const response = await fetchFn('https://notify-api.line.me/api/notify', {
         method: 'POST',
         headers: {
@@ -515,7 +536,7 @@ app.post('/api/line-notify', async (req, res) => {
         },
         body: new URLSearchParams({ message })
       });
-      const data = await response.json();
+      const data = await response.json().catch(() => ({}));
       return res.json({ success: response.status === 200, status: response.status, data });
     } else {
       const https = require('https');
