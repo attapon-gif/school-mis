@@ -118,9 +118,40 @@ function apiRouter(action, payload) {
         return saveClassroom(payload);
       case 'saveRoom':
         return saveRoom(payload);
+      case 'sendLineNotify':
+        return sendLineNotifyMessage(payload);
       default:
         return { success: false, error: 'Unknown action: ' + action };
     }
+  } catch (err) {
+    return { success: false, error: err.toString() };
+  }
+}
+
+/**
+ * ส่งข้อความแจ้งเตือนผ่าน LINE Notify (รองรับการเรียกจาก Web App ไม่ติด CORS)
+ */
+function sendLineNotifyMessage(payload) {
+  var token = payload ? payload.token : '';
+  var message = payload ? payload.message : '';
+  if (!token || !message) {
+    return { success: false, error: 'ต้องระบุ Token และ Message' };
+  }
+  try {
+    var options = {
+      method: 'post',
+      headers: {
+        'Authorization': 'Bearer ' + token
+      },
+      payload: {
+        'message': message
+      },
+      muteHttpExceptions: true
+    };
+    var response = UrlFetchApp.fetch('https://notify-api.line.me/api/notify', options);
+    var resCode = response.getResponseCode();
+    var resText = response.getContentText();
+    return { success: resCode === 200, status: resCode, response: resText };
   } catch (err) {
     return { success: false, error: err.toString() };
   }

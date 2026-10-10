@@ -496,6 +496,58 @@ app.post('/api/substitutes', (req, res) => {
   db.substitutes.unshift(subRecord);
   writeDb(db);
   res.json({ success: true, substitute: subRecord });
+// -------------------------------------------------------------
+// LINE Notify Proxy API
+// -------------------------------------------------------------
+app.post('/api/line-notify', async (req, res) => {
+  const { token, message } = req.body;
+  if (!token || !message) {
+    return res.status(400).json({ success: false, error: 'Token and message required' });
+  }
+  try {
+    const fetchFn = globalThis.fetch;
+    if (fetchFn) {
+      const response = await fetchFn('https://notify-api.line.me/api/notify', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: new URLSearchParams({ message })
+      });
+      const data = await response.json();
+      return res.json({ success: response.status === 200, status: response.status, data });
+    } else {
+      const https = require('https');
+      const querystring = require('querystring');
+      const postData = querystring.stringify({ message });
+      const reqLine = https.request({
+        hostname: 'notify-api.line.me',
+        path: '/api/notify',
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Length': Buffer.byteLength(postData)
+        }
+      }, (resLine) => {
+        let body = '';
+        resLine.on('data', chunk => body += chunk);
+        resLine.on('end', () => {
+          try {
+            res.json({ success: resLine.statusCode === 200, status: resLine.statusCode, data: JSON.parse(body) });
+          } catch(e) {
+            res.json({ success: resLine.statusCode === 200, status: resLine.statusCode, data: body });
+          }
+        });
+      });
+      reqLine.on('error', (err) => res.status(500).json({ success: false, error: err.message }));
+      reqLine.write(postData);
+      reqLine.end();
+    }
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
 });
 
 // -------------------------------------------------------------

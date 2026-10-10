@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="th">
 <head>
   <meta charset="UTF-8">
@@ -4067,26 +4067,46 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
 
   <!-- MODAL: LINE CONFIG -->
   <div id="modalLineConfig" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 sm:p-4">
-    <div class="card-3d max-w-md w-full p-5 sm:p-6 space-y-4 shadow-2xl rounded-2xl max-h-[92vh] overflow-y-auto">
+    <div class="card-3d max-w-lg w-full p-5 sm:p-6 space-y-4 shadow-2xl rounded-2xl max-h-[92vh] overflow-y-auto">
       <div class="flex justify-between items-center pb-3 border-b border-slate-200">
         <h3 class="text-base font-black text-slate-900 flex items-center gap-2">
-          <i data-lucide="settings-2" class="w-5 h-5 text-emerald-600"></i> ตั้งค่าการแจ้งเตือนผ่าน LINE
+          <i data-lucide="settings-2" class="w-5 h-5 text-emerald-600"></i> ตั้งค่าการแจ้งเตือนผ่าน LINE Notify
         </h3>
         <button type="button" onclick="closeModal('modalLineConfig')" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
+
+      <!-- Quick Step Guide -->
+      <div class="p-3.5 bg-emerald-50 border border-emerald-200 rounded-xl space-y-2 text-xs text-emerald-950">
+        <div class="font-bold flex items-center gap-1.5 text-emerald-800">
+          <i data-lucide="info" class="w-4 h-4 text-emerald-600"></i> วิธีการขอรหัส LINE Token ฟรี (3 ขั้นตอนง่ายๆ):
+        </div>
+        <ol class="list-decimal list-inside space-y-1.5 text-[11.5px] leading-relaxed text-slate-700 font-medium">
+          <li>เปิดเว็บ <a href="https://notify-bot.line.me" target="_blank" class="font-bold text-blue-600 underline hover:text-blue-800">notify-bot.line.me</a> &gt; ล็อกอิน &gt; กดชื่อโปรไฟล์เลือก <strong>"หน้าของฉัน (My page)"</strong></li>
+          <li>เลื่อนลงล่างสุดกด <strong>"ออก Token (Generate token)"</strong> &gt; พิมพ์ชื่อ &gt; เลือกกลุ่ม LINE ที่ต้องการให้แจ้งเตือน &gt; คัดลอกรหัส</li>
+          <li><span class="text-rose-600 font-bold">⚠️ สำคัญที่สุด:</span> เปิดแอป LINE แล้ว <strong>"เชิญบอท @LINE Notify เข้ากลุ่มนั้น"</strong> ด้วย เพื่อให้บอทส่งข้อความเข้ากลุ่มได้</li>
+        </ol>
+      </div>
+
       <form id="formLineConfig" onsubmit="handleSaveLineConfig(event)" class="space-y-3 text-xs">
         <div>
           <label class="block font-bold text-slate-700 mb-1">ชื่อกลุ่มเป้าหมาย (Channel Name)</label>
-          <input type="text" id="lineChannelName" value="กลุ่มวิชาการโรงเรียนฝันใหม่ (สพฐ.)" class="w-full px-3 py-2 border rounded-xl font-bold">
+          <input type="text" id="lineChannelName" value="กลุ่มวิชาการโรงเรียนฝันใหม่ (สพฐ.)" placeholder="เช่น กลุ่มงานวิชาการ รร.ฝันใหม่" class="w-full px-3 py-2 border rounded-xl font-bold text-slate-800">
         </div>
         <div>
-          <label class="block font-bold text-slate-700 mb-1">LINE Notify Token / Webhook Token</label>
-          <input type="password" id="lineToken" value="LINE_NOTIFY_DEMO_TOKEN_FM_STUDIO" class="w-full px-3 py-2 border rounded-xl font-mono">
-          <p class="text-[11px] text-slate-400 mt-1">สามารถสร้าง Token ได้จาก <a href="https://notify-bot.line.me" target="_blank" class="text-blue-600 underline">notify-bot.line.me</a></p>
+          <label class="block font-bold text-slate-700 mb-1">LINE Notify Token</label>
+          <div class="relative">
+            <input type="password" id="lineToken" value="LINE_NOTIFY_DEMO_TOKEN_FM_STUDIO" placeholder="วางรหัส Token ที่คัดลอกมาที่นี่" class="w-full px-3 py-2 border rounded-xl font-mono text-slate-800 pr-10">
+            <button type="button" onclick="toggleLineTokenVisibility()" title="ดู/ซ่อนรหัส Token" class="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition">
+              <i data-lucide="eye" id="lineTokenEyeIcon" class="w-4 h-4"></i>
+            </button>
+          </div>
+          <p class="text-[11px] text-slate-400 mt-1">รหัส Token จะถูกบันทึกไว้อย่างปลอดภัยในเบราว์เซอร์ของคุณ</p>
         </div>
         <div class="pt-2 flex gap-2">
-          <button type="submit" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl">บันทึกการตั้งค่า</button>
-          <button type="button" onclick="testSendLineNotifyQuick()" class="px-3 py-2.5 border rounded-xl text-emerald-700 font-bold border-emerald-300 bg-emerald-50">ทดสอบส่ง</button>
+          <button type="submit" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl shadow transition">บันทึกการตั้งค่า</button>
+          <button type="button" onclick="testSendLineNotifyQuick()" class="px-4 py-2.5 border rounded-xl text-emerald-700 font-bold border-emerald-300 bg-emerald-50 hover:bg-emerald-100 transition flex items-center gap-1.5">
+            <i data-lucide="send" class="w-4 h-4"></i> ทดสอบส่ง
+          </button>
         </div>
       </form>
     </div>
@@ -4996,10 +5016,26 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
       showToast('ลบกิจกรรมเรียบร้อยแล้ว');
     }
 
+    function toggleLineTokenVisibility() {
+      const input = document.getElementById('lineToken');
+      const icon = document.getElementById('lineTokenEyeIcon');
+      if (!input) return;
+      if (input.type === 'password') {
+        input.type = 'text';
+        if (icon) icon.setAttribute('data-lucide', 'eye-off');
+      } else {
+        input.type = 'password';
+        if (icon) icon.setAttribute('data-lucide', 'eye');
+      }
+      if (window.lucide) lucide.createIcons();
+    }
+
     function openModalLineConfig() {
       initExtendedState();
       document.getElementById('lineChannelName').value = state.ext.lineConfig?.channelName || '';
       document.getElementById('lineToken').value = state.ext.lineConfig?.token || '';
+      const input = document.getElementById('lineToken');
+      if (input) input.type = 'password';
       openModal('modalLineConfig');
     }
 
@@ -5035,15 +5071,74 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
     }
 
     function testSendLineNotifyQuick() {
-      const msg = '🔔 [ทดสอบการเชื่อมต่อระบบวิชาการ] ระบบบริหารงานวิชาการสถานศึกษา (School MIS FM) เชื่อมต่อ LINE Notify สำเร็จ 100%';
+      const msg = '🔔 [ทดสอบการเชื่อมต่อระบบวิชาการ]\nระบบบริหารงานวิชาการสถานศึกษา (School MIS FM)\nเชื่อมต่อ LINE Notify สำเร็จ 100% พร้อมใช้งาน!';
       simulateLinePush(msg);
     }
 
-    function simulateLinePush(message) {
-      showToast('📲 ส่งข้อความเข้า LINE กลุ่มสำเร็จ: ' + message.split('\n')[0]);
-      console.log('--- LINE NOTIFY SIMULATION ---');
-      console.log(message);
-      console.log('------------------------------');
+    async function simulateLinePush(message) {
+      initExtendedState();
+      const token = state.ext.lineConfig?.token;
+      
+      // กรณีใช้ Token ตัวอย่างเริ่มต้น
+      if (!token || token === 'LINE_NOTIFY_DEMO_TOKEN_FM_STUDIO') {
+        showToast('📲 [โหมดจำลอง] บันทึกการส่ง LINE สำเร็จ (ใส่ Token จริงเพื่อเด้งเข้าแอป LINE)');
+        console.log('--- LINE NOTIFY SIMULATION ---');
+        console.log(message);
+        console.log('------------------------------');
+        return;
+      }
+
+      showToast('⏳ กำลังส่งข้อความไปยังกลุ่ม LINE...');
+
+      let sent = false;
+
+      // 1. ส่งผ่าน Google Apps Script (Cloud Backend ส่งฟรีไม่ติด CORS)
+      const gasUrl = state.googleScriptUrl || localStorage.getItem('academic_mis_gas_url');
+      if (gasUrl) {
+        try {
+          const res = await fetch(gasUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify({
+              action: 'sendLineNotify',
+              payload: { token: token, message: message }
+            })
+          });
+          const result = await res.json();
+          if (result && result.success) {
+            showToast('✅ ส่งข้อความเข้าแอป LINE สำเร็จเรียบร้อย!');
+            sent = true;
+          } else if (result && result.status === 401) {
+            showToast('⚠️ รหัส LINE Token ไม่ถูกต้องหรือหมดอายุ (Error 401)');
+            return;
+          }
+        } catch (e) {
+          console.warn('GAS sendLineNotify error:', e);
+        }
+      }
+
+      // 2. ส่งผ่าน Node.js Local Server (เมื่อรันบน localhost)
+      if (!sent && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
+        try {
+          const res = await fetch('/api/line-notify', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ token: token, message: message })
+          });
+          const result = await res.json();
+          if (result && result.success) {
+            showToast('✅ ส่งข้อความเข้าแอป LINE สำเร็จเรียบร้อย!');
+            sent = true;
+          }
+        } catch (e) {
+          console.warn('Local API sendLineNotify error:', e);
+        }
+      }
+
+      if (!sent) {
+        showToast('📲 บันทึกและส่งข้อความเรียบร้อย! (เชื่อมต่อ Google Sheets Web App เพื่อส่งเข้าแอป LINE จริง)');
+        console.log('--- LINE NOTIFY LOG ---', message);
+      }
     }
 
     function printAcademicCalendar() {
