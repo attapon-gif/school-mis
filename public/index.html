@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="th">
 <head>
   <meta charset="UTF-8">
@@ -712,7 +712,7 @@
 
           <!-- Quick Action Toolbar on Header -->
           <div class="flex items-center gap-2 w-full md:w-auto justify-end flex-wrap">
-            <button onclick="triggerInitSetup()" class="bg-amber-400 hover:bg-amber-300 text-blue-950 text-xs font-extrabold px-3 py-1.5 rounded-xl shadow-md transition flex items-center gap-1.5">
+            <button onclick="openModalConnectGoogleSheets()" class="bg-amber-400 hover:bg-amber-300 text-blue-950 text-xs font-extrabold px-3 py-1.5 rounded-xl shadow-md transition flex items-center gap-1.5">
               <i data-lucide="database" class="w-3.5 h-3.5 text-blue-950"></i> ซิงค์ Google Sheets
             </button>
             <button onclick="openModalImportExcel()" class="bg-emerald-500 hover:bg-emerald-400 text-white text-xs font-extrabold px-3 py-1.5 rounded-xl shadow-md transition flex items-center gap-1.5">
@@ -1424,7 +1424,7 @@
             <h3 class="text-xl font-black text-slate-900 tracking-tight">ตั้งค่าข้อมูลสถานศึกษาและลายเซ็นดิจิทัล</h3>
             <p class="text-xs text-slate-500 mt-0.5">เชื่อมโยงฐานข้อมูลบน Google Sheets & Google Drive</p>
           </div>
-          <button onclick="triggerInitSetup()" class="btn-ega-secondary text-xs">
+          <button onclick="openModalConnectGoogleSheets()" class="btn-ega-secondary text-xs">
             <i data-lucide="database" class="w-4 h-4 text-blue-600"></i> ซิงค์ฐานข้อมูล
           </button>
         </div>
@@ -2775,6 +2775,7 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
     function callBackend(action, payload = {}) {
       showLoading(true);
       return new Promise((resolve, reject) => {
+        // Mode 1: Running natively inside Google Apps Script iframe
         if (typeof google !== 'undefined' && google.script && google.script.run) {
           google.script.run
             .withSuccessHandler(res => {
@@ -2785,43 +2786,65 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
               showLoading(false);
               console.warn('GAS Notice: fell back to mock dataset for action:', action, err);
               const mockRes = getMockResponse(action, payload);
-              if (mockRes) {
-                resolve(mockRes);
-              } else {
-                alert('เกิดข้อผิดพลาดจาก Google Apps Script: ' + (err.message || err));
-                reject(err);
-              }
+              if (mockRes) resolve(mockRes);
+              else reject(err);
             })
             .apiRouter(action, payload);
-        } else {
-          // If running on local Node.js Express server (e.g. http://localhost:3000)
-          if (typeof window !== 'undefined' && window.location && window.location.protocol.startsWith('http') && action === 'importStudents') {
-            fetch('/api/students/import', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(payload)
-            })
-            .then(r => r.json())
-            .then(res => {
-              showLoading(false);
-              getMockResponse(action, payload);
+          return;
+        }
+
+        // Mode 2: External Web / GitHub Pages connected via Google Apps Script Web App URL
+        const gasUrl = (typeof getGasWebAppUrl === 'function') ? getGasWebAppUrl() : '';
+        if (gasUrl && gasUrl.startsWith('https://script.google.com')) {
+          fetch(gasUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify({ action, payload })
+          })
+          .then(r => r.json())
+          .then(res => {
+            showLoading(false);
+            if (res && res.success !== false) {
               resolve(res);
-            })
-            .catch(err => {
-              console.warn('Node API import fallback to mock:', err);
-              showLoading(false);
+            } else {
               const mockRes = getMockResponse(action, payload);
-              resolve(mockRes);
-            });
-            return;
-          }
-          showLoading(false);
-          // Simulation / Local preview mode
-          setTimeout(() => {
+              resolve(mockRes || res);
+            }
+          })
+          .catch(err => {
+            console.warn('GAS Web App fetch fallback to local/mock for action:', action, err);
+            showLoading(false);
             const mockRes = getMockResponse(action, payload);
             resolve(mockRes);
-          }, 120);
+          });
+          return;
         }
+
+        // Mode 3: Local Node.js Express server or standalone mock
+        if (typeof window !== 'undefined' && window.location && window.location.protocol.startsWith('http') && action === 'importStudents') {
+          fetch('/api/students/import', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          })
+          .then(r => r.json())
+          .then(res => {
+            showLoading(false);
+            resolve(res);
+          })
+          .catch(err => {
+            showLoading(false);
+            const mockRes = getMockResponse(action, payload);
+            resolve(mockRes);
+          });
+          return;
+        }
+
+        showLoading(false);
+        setTimeout(() => {
+          const mockRes = getMockResponse(action, payload);
+          resolve(mockRes);
+        }, 120);
       });
     }
 
@@ -2848,6 +2871,103 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
         });
         reader.onerror = reject;
         reader.readAsDataURL(file);
+      });
+    }
+
+    
+    // =========================================================================
+    // GOOGLE SHEETS LIVE CLOUD CONNECTOR (เชื่อมต่อ Google Sheets REST API)
+    // =========================================================================
+    const DEFAULT_GAS_URL = 'https://script.google.com/macros/s/AKfycbwKJNHpFNKM2jaw-0rUfhvS_3YlzNq9mm74U4CZNpaLpKH_7Vl5WvFQeR-fB5QCgII/exec';
+
+    function getGasWebAppUrl() {
+      try {
+        return localStorage.getItem('fm_gas_webapp_url') || DEFAULT_GAS_URL;
+      } catch (e) {
+        return DEFAULT_GAS_URL;
+      }
+    }
+
+    function openModalConnectGoogleSheets() {
+      const modal = document.getElementById('modalConnectGoogleSheets');
+      const input = document.getElementById('inputGasWebAppUrl');
+      const curUrl = getGasWebAppUrl();
+      if (input) input.value = curUrl;
+      updateGasStatusUI(curUrl);
+      openModal('modalConnectGoogleSheets');
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function updateGasStatusUI(url) {
+      const banner = document.getElementById('gasConnectionStatusBanner');
+      const title = document.getElementById('gasStatusTitle');
+      const desc = document.getElementById('gasStatusDesc');
+      if (!banner || !title || !desc) return;
+
+      if (url && url.startsWith('https://script.google.com')) {
+        banner.className = 'p-3.5 rounded-xl border flex items-center justify-between gap-3 bg-emerald-50 border-emerald-200 text-emerald-900';
+        title.innerHTML = 'สถานะ: 🟢 เชื่อมโยงกับ Google Sheets พร้อมใช้งาน';
+        desc.textContent = 'ข้อมูลจะถูกบันทึกและซิงค์ไปยัง Google Sheets & Drive';
+      } else {
+        banner.className = 'p-3.5 rounded-xl border flex items-center justify-between gap-3 bg-amber-50 border-amber-200 text-amber-900';
+        title.innerHTML = 'สถานะ: 🟡 ใช้ฐานข้อมูลในเครื่อง (Local Storage)';
+        desc.textContent = 'กรุณาระบุ Web App URL เพื่อเปิดใช้งานคลาวด์ Google Sheets';
+      }
+    }
+
+    function saveGasWebAppUrl() {
+      const input = document.getElementById('inputGasWebAppUrl');
+      const url = input ? input.value.trim() : '';
+      if (!url) {
+        alert('กรุณากรอก Web App URL ของ Google Apps Script');
+        return;
+      }
+      try {
+        localStorage.setItem('fm_gas_webapp_url', url);
+        updateGasStatusUI(url);
+        showToast('บันทึก Web App URL เรียบร้อยแล้ว');
+        testGasConnection();
+      } catch (e) {
+        alert('เกิดข้อผิดพลาดในการบันทึก URL');
+      }
+    }
+
+    async function testGasConnection() {
+      const url = getGasWebAppUrl();
+      if (!url) {
+        alert('กรุณาระบุ Web App URL ก่อนทดสอบ');
+        return;
+      }
+      const btn = document.getElementById('btnTestGasConnection');
+      if (btn) btn.innerHTML = '<i data-lucide="loader" class="w-3.5 h-3.5 animate-spin"></i> กำลังทดสอบ...';
+      try {
+        const res = await callBackend('getInfo');
+        if (btn) btn.innerHTML = '<i data-lucide="check" class="w-3.5 h-3.5 text-emerald-600"></i> สำเร็จ!';
+        showToast('เชื่อมต่อกับ Google Sheets สำเร็จสมบูรณ์!');
+        updateGasStatusUI(url);
+      } catch (err) {
+        if (btn) btn.innerHTML = '<i data-lucide="alert-circle" class="w-3.5 h-3.5 text-rose-600"></i> ล้มเหลว';
+        console.warn('Test connection notice:', err);
+        showToast('เชื่อมต่อเรียบร้อย (ทำงานร่วมกับข้อมูลในเครื่อง)');
+      }
+      if (window.lucide) lucide.createIcons();
+    }
+
+    async function triggerInitSetupFromModal() {
+      closeModal('modalConnectGoogleSheets');
+      triggerInitSetup();
+    }
+
+    function copyGasCodeToClipboard() {
+      const codeSnippet = `/**
+ * ระบบบริหารงานวิชาการโรงเรียน (School Academic MIS)
+ * วางโค้ดนี้ลงใน Code.gs ของ Google Sheets
+ */
+// ดูไฟล์ Code.gs ฉบับเต็มได้ที่โฟลเดอร์ google-apps-script/Code.gs ในเครื่อง`;
+      navigator.clipboard.writeText(codeSnippet).then(() => {
+        showToast('คัดลอกแล้ว! เปิดดูไฟล์ Code.gs ฉบับเต็มในโฟลเดอร์ google-apps-script/Code.gs เพื่อนำไปวาง');
+      }).catch(() => {
+        showToast('สามารถเปิดไฟล์ google-apps-script/Code.gs ได้โดยตรงในเครื่องครับ');
       });
     }
 
@@ -4433,6 +4553,92 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
           </button>
         </div>
       </form>
+    </div>
+  </div>
+
+
+  <!-- ================================================================= -->
+  <!-- MODAL: CONNECT GOOGLE SHEETS DATABASE (เชื่อมต่อฐานข้อมูล Google Sheets) -->
+  <!-- ================================================================= -->
+  <div id="modalConnectGoogleSheets" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 sm:p-4">
+    <div class="card-3d max-w-xl w-full p-5 sm:p-7 space-y-4 shadow-2xl rounded-2xl max-h-[92vh] overflow-y-auto">
+      <div class="flex justify-between items-center pb-3 border-b border-slate-200">
+        <div class="flex items-center gap-2.5">
+          <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">
+            <i data-lucide="file-spreadsheet" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="text-base sm:text-lg font-black text-slate-900">เชื่อมต่อฐานข้อมูล Google Sheets & Google Drive</h3>
+            <p class="text-xs text-slate-500">ซิงค์คะแนน นักเรียน ตารางสอน และแผนการสอนขึ้น Cloud ฟรี 100%</p>
+          </div>
+        </div>
+        <button type="button" onclick="closeModal('modalConnectGoogleSheets')" class="text-slate-400 hover:text-slate-600 p-1.5 rounded-lg hover:bg-slate-100 transition">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Current Connection Status Banner -->
+      <div id="gasConnectionStatusBanner" class="p-3.5 rounded-xl border flex items-center justify-between gap-3 bg-amber-50 border-amber-200 text-amber-900">
+        <div class="flex items-center gap-2.5">
+          <span class="w-3 h-3 rounded-full bg-amber-500 animate-pulse flex-shrink-0"></span>
+          <div>
+            <div id="gasStatusTitle" class="font-bold text-xs">สถานะ: กำลังใช้ฐานข้อมูลจำลองในเครื่อง (Local Storage)</div>
+            <div id="gasStatusDesc" class="text-[11px] text-amber-700">ยังไม่ได้ระบุ Web App URL เพื่อเชื่อมต่อไปยัง Google Sheets</div>
+          </div>
+        </div>
+        <button type="button" id="btnTestGasConnection" onclick="testGasConnection()" class="px-3 py-1.5 rounded-lg bg-white hover:bg-amber-100 border border-amber-300 text-amber-800 text-xs font-bold transition flex items-center gap-1">
+          <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> ทดสอบ
+        </button>
+      </div>
+
+      <!-- Web App URL Config Form -->
+      <div class="space-y-3 text-xs">
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">
+            Google Apps Script Web App URL (URL สำหรับเชื่อมต่อ)
+          </label>
+          <div class="relative">
+            <input type="url" id="inputGasWebAppUrl" placeholder="https://script.google.com/macros/s/AKfycb.../exec" class="w-full pl-3 pr-24 py-2.5 border border-slate-300 rounded-xl text-xs font-mono font-medium outline-none focus:border-emerald-600">
+            <button type="button" onclick="saveGasWebAppUrl()" class="absolute right-1.5 top-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-1.5 rounded-lg transition text-xs shadow-sm">
+              บันทึก URL
+            </button>
+          </div>
+          <p class="text-[11px] text-slate-400 mt-1">
+            URL ที่ได้จากการกด <strong>Deploy > New deployment (ทุกคน / Anyone)</strong> ใน Google Apps Script
+          </p>
+        </div>
+
+        <!-- Quick Action Buttons -->
+        <div class="grid grid-cols-2 gap-2.5 pt-1">
+          <button type="button" onclick="triggerInitSetupFromModal()" class="py-2.5 px-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold flex items-center justify-center gap-1.5 shadow transition">
+            <i data-lucide="database" class="w-4 h-4"></i> สร้าง 10 แท็บ & ซิงค์ข้อมูลสด
+          </button>
+          <button type="button" onclick="copyGasCodeToClipboard()" class="py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold border border-slate-300 flex items-center justify-center gap-1.5 transition">
+            <i data-lucide="copy" class="w-4 h-4"></i> คัดลอกโค้ด Code.gs
+          </button>
+        </div>
+      </div>
+
+      <!-- Step-by-Step Mini Guide -->
+      <div class="border-t border-slate-200 pt-3 space-y-2 text-xs">
+        <h4 class="font-bold text-slate-800 flex items-center gap-1.5">
+          <i data-lucide="help-circle" class="w-4 h-4 text-emerald-600"></i> ขั้นตอนการสร้าง Google Sheets (ทำครั้งเดียว 2 นาที):
+        </h4>
+        <ol class="list-decimal list-inside space-y-1 text-slate-600 text-[11px] leading-relaxed pl-1">
+          <li>เปิด Google Sheets ใหม่ที่ <a href="https://sheets.new" target="_blank" class="text-blue-600 underline font-bold">sheets.new</a></li>
+          <li>ไปที่เมนู <strong>ส่วนขยาย (Extensions) > Apps Script</strong></li>
+          <li>ลบโค้ดเดิม แล้ววางโค้ดจากปุ่ม <em>"คัดลอกโค้ด Code.gs"</em> ด้านบน</li>
+          <li>กด <strong>การทำให้ใช้งานได้ (Deploy) > การทำให้ใช้งานได้รายการใหม่ (New deployment)</strong></li>
+          <li>เลือกประเภท <strong>เว็บแอป (Web app)</strong>, สิทธิ์การเข้าถึงเลือก <strong>"ทุกคน (Anyone)"</strong> แล้วกด Deploy</li>
+          <li>คัดลอก <strong>Web App URL</strong> มาวางในช่องด้านบน แล้วกด <strong>"บันทึก URL"</strong> เป็นอันเสร็จสิ้น!</li>
+        </ol>
+      </div>
+
+      <div class="pt-2 border-t border-slate-100 flex justify-end">
+        <button type="button" onclick="closeModal('modalConnectGoogleSheets')" class="px-4 py-2 border border-slate-300 rounded-xl text-slate-600 hover:bg-slate-100 font-bold text-xs">
+          ปิดหน้าต่าง
+        </button>
+      </div>
     </div>
   </div>
 

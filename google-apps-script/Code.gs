@@ -6,12 +6,53 @@
 
 const FOLDER_NAME = 'MIS_Academic_Uploads';
 
-// เข้าใช้งานหน้าเว็บ Web App
+// เข้าใช้งานหน้าเว็บ Web App หรือรับคำขอ API (GET)
 function doGet(e) {
+  if (e && e.parameter && e.parameter.action) {
+    var action = e.parameter.action;
+    var payload = {};
+    if (e.parameter.payload) {
+      try { payload = JSON.parse(e.parameter.payload); } catch(err){}
+    }
+    var result = apiRouter(action, payload);
+    return ContentService.createTextOutput(JSON.stringify(result || { success: true }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
   return HtmlService.createHtmlOutputFromFile('Index')
     .setTitle('ระบบบริหารงานวิชาการโรงเรียนฝันใหม่ (เวอร์ชัน FM)')
     .addMetaTag('viewport', 'width=device-width, initial-scale=1.0')
     .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
+}
+
+// รับคำขอ API จากภายนอก (POST สำหรับเชื่อมต่อกับ GitHub Pages หรือเว็บภายนอก)
+function doPost(e) {
+  var lock = LockService.getScriptLock();
+  lock.tryLock(15000);
+  try {
+    var data = {};
+    if (e && e.postData && e.postData.contents) {
+      try {
+        data = JSON.parse(e.postData.contents);
+      } catch(err) {
+        data = e.parameter || {};
+      }
+    } else if (e && e.parameter) {
+      data = e.parameter;
+    }
+    var action = data.action || (e.parameter && e.parameter.action);
+    var payload = data.payload || {};
+    if (typeof payload === 'string') {
+      try { payload = JSON.parse(payload); } catch(err){}
+    }
+    var result = apiRouter(action, payload);
+    return ContentService.createTextOutput(JSON.stringify(result || { success: true }))
+      .setMimeType(ContentService.MimeType.JSON);
+  } catch (err) {
+    return ContentService.createTextOutput(JSON.stringify({ success: false, error: err.toString() }))
+      .setMimeType(ContentService.MimeType.JSON);
+  } finally {
+    lock.releaseLock();
+  }
 }
 
 // รวมไฟล์ย่อย (ถ้ามี)
