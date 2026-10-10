@@ -1,0 +1,14 @@
+{
+  "name": "academic-mis",
+  "version": "1.0.0",
+  "description": "ระบบบริหารงานวิชาการโรงเรียน (School Academic MIS) ครบวงจร 4 เมนูหลัก",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "multer": "^1.4.5-lts.1"
+  }
+}

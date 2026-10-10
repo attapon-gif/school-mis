@@ -1,0 +1,546 @@
+{
+  "schoolInfo": {
+    "name": "โรงเรียนฝันใหม่",
+    "subTitle": "สำนักงานคณะกรรมการการศึกษาขั้นพื้นฐาน (สพฐ.)",
+    "version": "FM",
+    "academicYear": "2569",
+    "term": "1",
+    "directorName": "ดร.วิชัย เกียรติสกุล",
+    "directorPosition": "ผู้อำนวยการสถานศึกษา",
+    "headAcademicName": "นางสาวนฤมล บุญประเสริฐ",
+    "logoUrl": "/assets/logo.jpg",
+    "signatureUrl": "/uploads/signatures/default_signature.png",
+    "developer": "funmai studio",
+    "developerEmail": "attapon@nbcc.ac.th",
+    "developerPhone": "062-3636031"
+  },
+  "teachers": [
+    {
+      "id": "T01",
+      "name": "นายอรรถพล ฉาไธสง",
+      "subject": "วิทยาการคำนวณและดิจิทัล",
+      "dept": "กลุ่มสาระฯ วิทยาศาสตร์และเทคโนโลยี",
+      "phone": "081-234-5678"
+    },
+    {
+      "id": "T02",
+      "name": "นางสาวปราณี ศรีสุข",
+      "subject": "ภาษาไทย",
+      "dept": "กลุ่มสาระฯ ภาษาไทย",
+      "phone": "082-345-6789"
+    },
+    {
+      "id": "T03",
+      "name": "นายสมชาย ใจดี",
+      "subject": "คณิตศาสตร์",
+      "dept": "กลุ่มสาระฯ คณิตศาสตร์",
+      "phone": "083-456-7890"
+    },
+    {
+      "id": "T04",
+      "name": "นางสาวกานดา มณีวรรณ",
+      "subject": "วิทยาศาสตร์และฟิสิกส์",
+      "dept": "กลุ่มสาระฯ วิทยาศาสตร์และเทคโนโลยี",
+      "phone": "084-567-8901"
+    },
+    {
+      "id": "T05",
+      "name": "นายวีระศักดิ์ ยิ่งยง",
+      "subject": "สังคมศึกษา ศาสนาฯ",
+      "dept": "กลุ่มสาระฯ สังคมศึกษา",
+      "phone": "085-678-9012"
+    }
+  ],
+  "classrooms": [
+    "ม.1/1",
+    "ม.1/2",
+    "ม.2/1",
+    "ม.2/2",
+    "ม.3/1",
+    "ม.3/2"
+  ],
+  "rooms": [
+    "ห้อง 101",
+    "ห้อง 102",
+    "ห้อง 201",
+    "ห้อง 202",
+    "ห้องปฏิบัติการคอมพิวเตอร์ 1",
+    "ห้องวิทยาศาสตร์ 1"
+  ],
+  "students": [
+    {
+      "id": "S67001",
+      "citizenId": "1399900123451",
+      "name": "ด.ช.ธนภัทร วงศ์ษา",
+      "classroom": "ม.1/1",
+      "number": 1
+    },
+    {
+      "id": "S67002",
+      "citizenId": "1399900123452",
+      "name": "ด.ญ.กัญญารัตน์ สุขสวัสดิ์",
+      "classroom": "ม.1/1",
+      "number": 2
+    },
+    {
+      "id": "S67003",
+      "citizenId": "1399900123453",
+      "name": "นายณัฐวุฒิ มีโชค",
+      "classroom": "ม.1/2",
+      "number": 1
+    },
+    {
+      "id": "S67004",
+      "citizenId": "1399900123454",
+      "name": "นางสาวศิริพร เจริญสุข",
+      "classroom": "ม.2/1",
+      "number": 1
+    },
+    {
+      "id": "S67005",
+      "citizenId": "1399900123455",
+      "name": "ด.ช.ปรเมศวร์ ใจงาม",
+      "classroom": "ม.3/1",
+      "number": 1
+    },
+    {
+      "id": "S67006",
+      "citizenId": "1399900123456",
+      "name": "นางสาววรรณภา แสนดี",
+      "classroom": "ม.3/2",
+      "number": 1
+    }
+  ],
+  "grades": [
+    {
+      "id": "G001",
+      "studentId": "S67001",
+      "courseCode": "ว21201",
+      "courseName": "วิทยาการคำนวณและดิจิทัล",
+      "credits": 1,
+      "scoreMid": 28,
+      "scoreFinal": 27,
+      "scoreCollect": 35,
+      "total": 90,
+      "grade": "4",
+      "status": "ปกติ",
+      "remark": ""
+    },
+    {
+      "id": "G002",
+      "studentId": "S67001",
+      "courseCode": "ท21101",
+      "courseName": "ภาษาไทย 1",
+      "credits": 1.5,
+      "scoreMid": 24,
+      "scoreFinal": 25,
+      "scoreCollect": 31,
+      "total": 80,
+      "grade": "4",
+      "status": "ปกติ",
+      "remark": ""
+    },
+    {
+      "id": "G003",
+      "studentId": "S67001",
+      "courseCode": "ค21101",
+      "courseName": "คณิตศาสตร์ 1",
+      "credits": 1.5,
+      "scoreMid": 20,
+      "scoreFinal": 22,
+      "scoreCollect": 28,
+      "total": 70,
+      "grade": "3",
+      "status": "ปกติ",
+      "remark": ""
+    },
+    {
+      "id": "G004",
+      "studentId": "S67002",
+      "courseCode": "ค21101",
+      "courseName": "คณิตศาสตร์ 1",
+      "credits": 1.5,
+      "scoreMid": 12,
+      "scoreFinal": 10,
+      "scoreCollect": 22,
+      "total": 44,
+      "grade": "0",
+      "status": "ติด 0 (รอสอบแก้ตัว)",
+      "remark": "ส่งงานไม่ครบ / นัดสอบแก้ตัว 15 ต.ค."
+    },
+    {
+      "id": "G005",
+      "studentId": "S67002",
+      "courseCode": "ว21201",
+      "courseName": "วิทยาการคำนวณและดิจิทัล",
+      "credits": 1,
+      "scoreMid": 22,
+      "scoreFinal": 24,
+      "scoreCollect": 30,
+      "total": 76,
+      "grade": "3.5",
+      "status": "ปกติ",
+      "remark": ""
+    },
+    {
+      "id": "G006",
+      "studentId": "S67003",
+      "courseCode": "ท21101",
+      "courseName": "ภาษาไทย 1",
+      "credits": 1.5,
+      "scoreMid": 18,
+      "scoreFinal": 0,
+      "scoreCollect": 25,
+      "total": 43,
+      "grade": "ร",
+      "status": "ติด ร (รอส่งชิ้นงาน)",
+      "remark": "ขาดส่งรายงานเล่มโครงงาน"
+    },
+    {
+      "id": "G007",
+      "studentId": "S67003",
+      "courseCode": "ส21101",
+      "courseName": "สังคมศึกษา 1",
+      "credits": 1.5,
+      "scoreMid": 22,
+      "scoreFinal": 20,
+      "scoreCollect": 26,
+      "total": 68,
+      "grade": "2.5",
+      "status": "ปกติ",
+      "remark": ""
+    },
+    {
+      "id": "G008",
+      "studentId": "S67004",
+      "courseCode": "ว21201",
+      "courseName": "วิทยาการคำนวณและดิจิทัล",
+      "credits": 1,
+      "scoreMid": 15,
+      "scoreFinal": 18,
+      "scoreCollect": 20,
+      "total": 53,
+      "grade": "มส",
+      "status": "ติด มส (เวลาเรียนไม่ถึง 80%)",
+      "remark": "ขาดเรียน 5 ครั้ง นัดทำงานเสริมชดเชย"
+    },
+    {
+      "id": "G009",
+      "studentId": "S67005",
+      "courseCode": "ว21101",
+      "courseName": "วิทยาศาสตร์ 1",
+      "credits": 1.5,
+      "scoreMid": 14,
+      "scoreFinal": 11,
+      "scoreCollect": 20,
+      "total": 45,
+      "grade": "0",
+      "status": "ติด 0 (รอสอบแก้ตัว)",
+      "remark": "คะแนนสอบปลายภาคไม่ผ่านเกณฑ์"
+    },
+    {
+      "id": "G010",
+      "studentId": "S67006",
+      "courseCode": "ว21201",
+      "courseName": "วิทยาการคำนวณและดิจิทัล",
+      "credits": 1,
+      "scoreMid": 29,
+      "scoreFinal": 28,
+      "scoreCollect": 38,
+      "total": 95,
+      "grade": "4",
+      "status": "ปกติ",
+      "remark": "คะแนนยอดเยี่ยม"
+    },
+    {
+      "id": "G011",
+      "studentId": "S67006",
+      "courseCode": "ค21101",
+      "courseName": "คณิตศาสตร์ 1",
+      "credits": 1.5,
+      "scoreMid": 27,
+      "scoreFinal": 26,
+      "scoreCollect": 35,
+      "total": 88,
+      "grade": "4",
+      "status": "ปกติ",
+      "remark": ""
+    }
+  ],
+  "lessonPlans": [
+    {
+      "id": "LP001",
+      "teacherId": "T01",
+      "teacherName": "นายอรรถพล ฉาไธสง",
+      "subject": "วิทยาการคำนวณและดิจิทัล (ว21201)",
+      "classroom": "ม.1/1",
+      "unitTitle": "หน่วยที่ 1: การคิดเชิงคำนวณและการแก้ปัญหาด้วยโค้ด",
+      "learningHours": 8,
+      "planFileUrl": "/uploads/plans/sample_plan1.pdf",
+      "fileName": "แผนการจัดการเรียนรู้_ว21201_หน่วย1_อรรถพล.pdf",
+      "submittedDate": "2026-10-01 09:30",
+      "status": "อนุมัติแล้ว",
+      "directorComment": "แผนการจัดการเรียนรู้เน้น Active Learning สอดคล้องกับมาตรฐาน ทัศนคติดีมาก อนุมัติใช้จัดการเรียนรู้ได้",
+      "approvedDate": "2026-10-03 14:15",
+      "signatureStampUrl": "/uploads/signatures/default_signature.png",
+      "postLesson": {
+        "isRecorded": true,
+        "recordedDate": "2026-10-06 16:30",
+        "result": "นักเรียนร้อยละ 88 สามารถเขียนผังงาน (Flowchart) และวิเคราะห์โจทย์ได้ถูกต้องตามเกณฑ์",
+        "problem": "มีนักเรียน 3 คนที่สมาธิสั้นและพิมพ์คีย์บอร์ดช้า ทำให้ทำแบบฝึกหัดไม่ทันเพื่อนในคาบ",
+        "solution": "ใช้วิธีจับคู่เพื่อนช่วยเพื่อน (Buddy System) และให้แบบฝึกหัดเสริมกลับไปทบทวนที่บ้าน"
+      }
+    },
+    {
+      "id": "LP002",
+      "teacherId": "T02",
+      "teacherName": "นางสาวปราณี ศรีสุข",
+      "subject": "ภาษาไทย 1 (ท21101)",
+      "classroom": "ม.1/2",
+      "unitTitle": "หน่วยที่ 2: วรรณคดีวิจักษ์และบทละครพูด",
+      "learningHours": 6,
+      "planFileUrl": "/uploads/plans/sample_plan2.pdf",
+      "fileName": "แผนการจัดการเรียนรู้_ภาษาไทย_หน่วย2_ปราณี.pdf",
+      "submittedDate": "2026-10-04 11:20",
+      "status": "รอตรวจ",
+      "directorComment": "",
+      "approvedDate": "",
+      "signatureStampUrl": "",
+      "postLesson": {
+        "isRecorded": false,
+        "recordedDate": "",
+        "result": "",
+        "problem": "",
+        "solution": ""
+      }
+    },
+    {
+      "id": "LP003",
+      "teacherId": "T03",
+      "teacherName": "นายสมชาย ใจดี",
+      "subject": "คณิตศาสตร์ 1 (ค21101)",
+      "classroom": "ม.1/1",
+      "unitTitle": "หน่วยที่ 1: จำนวนเต็มและสมบัติของจำนวนจริง",
+      "learningHours": 10,
+      "planFileUrl": "/uploads/plans/sample_plan3.pdf",
+      "fileName": "แผนคณิตศาสตร์_ม1_สมชาย.pdf",
+      "submittedDate": "2026-10-02 13:45",
+      "status": "อนุมัติแล้ว",
+      "directorComment": "กิจกรรมมีความหลากหลาย อนุมัติครับ",
+      "approvedDate": "2026-10-04 10:00",
+      "signatureStampUrl": "/uploads/signatures/default_signature.png",
+      "postLesson": {
+        "isRecorded": false,
+        "recordedDate": "",
+        "result": "",
+        "problem": "",
+        "solution": ""
+      }
+    }
+  ],
+  "supervisions": [
+    {
+      "id": "SUP001",
+      "date": "2026-10-15",
+      "period": "คาบที่ 3 (10.10 - 11.00)",
+      "teacherId": "T01",
+      "teacherName": "นายอรรถพล ฉาไธสง",
+      "subject": "วิทยาการคำนวณและดิจิทัล",
+      "classroom": "ม.1/1",
+      "room": "ห้องปฏิบัติการคอมพิวเตอร์ 1",
+      "supervisorId": "SUP01",
+      "supervisorName": "นางสาวนฤมล บุญประเสริฐ (หน.วิชาการ)",
+      "status": "เสร็จสิ้น",
+      "scores": {
+        "preparation": 5,
+        "activeLearning": 5,
+        "mediaTech": 5,
+        "classroomMgmt": 4.5,
+        "measurement": 5,
+        "total": 98
+      },
+      "feedback": "การจัดกิจกรรมการเรียนรู้มีความทันสมัย นักเรียนมีส่วนร่วมและสนุกสนานกับสื่อดิจิทัล สื่อสารชัดเจนและควบคุมเวลาได้ดีเยี่ยม",
+      "photos": [
+        "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=600&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1577896851231-70ef18881754?w=600&auto=format&fit=crop&q=60"
+      ]
+    },
+    {
+      "id": "SUP002",
+      "date": "2026-10-22",
+      "period": "คาบที่ 2 (09.20 - 10.10)",
+      "teacherId": "T02",
+      "teacherName": "นางสาวปราณี ศรีสุข",
+      "subject": "ภาษาไทย 1",
+      "classroom": "ม.1/2",
+      "room": "ห้อง 102",
+      "supervisorId": "SUP01",
+      "supervisorName": "นางสาวนฤมล บุญประเสริฐ (หน.วิชาการ)",
+      "status": "รอนิเทศ",
+      "scores": null,
+      "feedback": "",
+      "photos": []
+    },
+    {
+      "id": "SUP003",
+      "date": "2026-10-28",
+      "period": "คาบที่ 5 (12.40 - 13.30)",
+      "teacherId": "T03",
+      "teacherName": "นายสมชาย ใจดี",
+      "subject": "คณิตศาสตร์ 1",
+      "classroom": "ม.1/1",
+      "room": "ห้อง 101",
+      "supervisorId": "DIR01",
+      "supervisorName": "ดร.วิชัย เกียรติสกุล (ผู้อำนวยการ)",
+      "status": "รอนิเทศ",
+      "scores": null,
+      "feedback": "",
+      "photos": []
+    }
+  ],
+  "periods": [
+    {
+      "id": 1,
+      "time": "08.30 - 09.20",
+      "name": "คาบ 1"
+    },
+    {
+      "id": 2,
+      "time": "09.20 - 10.10",
+      "name": "คาบ 2"
+    },
+    {
+      "id": 3,
+      "time": "10.10 - 11.00",
+      "name": "คาบ 3"
+    },
+    {
+      "id": 4,
+      "time": "11.00 - 11.50",
+      "name": "คาบ 4 (พักกลางวัน)"
+    },
+    {
+      "id": 5,
+      "time": "12.40 - 13.30",
+      "name": "คาบ 5"
+    },
+    {
+      "id": 6,
+      "time": "13.30 - 14.20",
+      "name": "คาบ 6"
+    },
+    {
+      "id": 7,
+      "time": "14.20 - 15.10",
+      "name": "คาบ 7"
+    }
+  ],
+  "days": [
+    "จันทร์",
+    "อังคาร",
+    "พุธ",
+    "พฤหัสบดี",
+    "ศุกร์"
+  ],
+  "timetables": [
+    {
+      "id": "TT001",
+      "day": "จันทร์",
+      "period": 1,
+      "classroom": "ม.1/1",
+      "subject": "ภาษาไทย 1",
+      "teacherId": "T02",
+      "teacherName": "นางสาวปราณี ศรีสุข",
+      "room": "ห้อง 101"
+    },
+    {
+      "id": "TT002",
+      "day": "จันทร์",
+      "period": 2,
+      "classroom": "ม.1/1",
+      "subject": "คณิตศาสตร์ 1",
+      "teacherId": "T03",
+      "teacherName": "นายสมชาย ใจดี",
+      "room": "ห้อง 101"
+    },
+    {
+      "id": "TT003",
+      "day": "จันทร์",
+      "period": 3,
+      "classroom": "ม.1/1",
+      "subject": "วิทยาการคำนวณและดิจิทัล",
+      "teacherId": "T01",
+      "teacherName": "นายอรรถพล ฉาไธสง",
+      "room": "ห้องปฏิบัติการคอมพิวเตอร์ 1"
+    },
+    {
+      "id": "TT004",
+      "day": "จันทร์",
+      "period": 5,
+      "classroom": "ม.1/1",
+      "subject": "สังคมศึกษา 1",
+      "teacherId": "T05",
+      "teacherName": "นายวีระศักดิ์ ยิ่งยง",
+      "room": "ห้อง 101"
+    },
+    {
+      "id": "TT005",
+      "day": "จันทร์",
+      "period": 6,
+      "classroom": "ม.1/1",
+      "subject": "วิทยาศาสตร์และฟิสิกส์",
+      "teacherId": "T04",
+      "teacherName": "นางสาวกานดา มณีวรรณ",
+      "room": "ห้องวิทยาศาสตร์ 1"
+    },
+    {
+      "id": "TT006",
+      "day": "อังคาร",
+      "period": 1,
+      "classroom": "ม.1/2",
+      "subject": "วิทยาการคำนวณและดิจิทัล",
+      "teacherId": "T01",
+      "teacherName": "นายอรรถพล ฉาไธสง",
+      "room": "ห้องปฏิบัติการคอมพิวเตอร์ 1"
+    },
+    {
+      "id": "TT007",
+      "day": "อังคาร",
+      "period": 2,
+      "classroom": "ม.1/2",
+      "subject": "ภาษาไทย 1",
+      "teacherId": "T02",
+      "teacherName": "นางสาวปราณี ศรีสุข",
+      "room": "ห้อง 102"
+    },
+    {
+      "id": "TT008",
+      "day": "พุธ",
+      "period": 2,
+      "classroom": "ม.1/1",
+      "subject": "ภาษาไทย 1",
+      "teacherId": "T02",
+      "teacherName": "นางสาวปราณี ศรีสุข",
+      "room": "ห้อง 101"
+    }
+  ],
+  "substitutes": [
+    {
+      "id": "SUB001",
+      "date": "2026-10-14",
+      "day": "พุธ",
+      "period": 2,
+      "periodTime": "09.20 - 10.10",
+      "classroom": "ม.1/1",
+      "subject": "ภาษาไทย 1",
+      "absentTeacherId": "T02",
+      "absentTeacherName": "นางสาวปราณี ศรีสุข",
+      "absentReason": "ลาป่วย (มีใบรับรองแพทย์)",
+      "subTeacherId": "T01",
+      "subTeacherName": "นายอรรถพล ฉาไธสง",
+      "status": "อนุมัติสอนแทนแล้ว",
+      "assignedDate": "2026-10-13 15:00",
+      "remark": "มอบหมายให้นักเรียนทำแบบฝึกหัดทบทวนวรรณคดี"
+    }
+  ]
+}
