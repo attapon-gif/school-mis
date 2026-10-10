@@ -588,7 +588,7 @@
       <div class="px-3 py-2 flex-1 space-y-1">
         <div class="px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-400 flex items-center justify-between">
           <span>เมนูหลัก (Navigation)</span>
-          <span class="text-[10px] bg-slate-800 px-1.5 py-0.5 rounded text-slate-400 font-semibold">7 ระบบ</span>
+          <span class="text-[10px] bg-slate-800 px-1.5 py-0.5 rounded text-slate-400 font-semibold">8 ระบบ</span>
         </div>
 
         <nav class="space-y-1">
@@ -616,9 +616,13 @@
             <i data-lucide="layout-grid" class="w-4 h-4 text-orange-400 flex-shrink-0"></i>
             <span class="flex-1 truncate">5. ตารางสอน & จัดสอนแทน</span>
           </button>
+          <button onclick="switchTab('tab-users')" id="nav-users" class="nav-tab flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/80 transition-all duration-150 w-full text-left">
+            <i data-lucide="shield-check" class="w-4 h-4 text-emerald-400 flex-shrink-0"></i>
+            <span class="flex-1 truncate">6. กำหนดสิทธิ์ผู้ใช้งาน</span>
+          </button>
           <button onclick="switchTab('tab-settings')" id="nav-settings" class="nav-tab flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/80 transition-all duration-150 w-full text-left">
             <i data-lucide="sliders-horizontal" class="w-4 h-4 text-slate-400 flex-shrink-0"></i>
-            <span class="flex-1 truncate">ตั้งค่าสถานศึกษา & ลายเซ็น</span>
+            <span class="flex-1 truncate">7. ตั้งค่าสถานศึกษา & ลายเซ็น</span>
           </button>
         </nav>
 
@@ -1500,6 +1504,179 @@
           <p class="font-bold">💡 เคล็ดลับการจัดการข้อมูลฉบับแอดมินมือโปร:</p>
           <p>• <strong>เพิ่มทีละรายการ:</strong> สามารถกดปุ่มด้านบนเพื่อกรอกแบบฟอร์มได้ทันที ข้อมูลจะวิ่งเข้าสู่ระบบอัตโนมัติ</p>
           <p>• <strong>นำเข้าข้อมูลจำนวนมาก (Bulk Import):</strong> เปิดชีต Google Sheets แล้วคัดลอก (Copy-Paste) รายชื่อนักเรียนหรือผลการเรียนจากไฟล์ Excel เดิมมาวางได้ทีละร้อยๆ แถว แล้วกดปุ่ม <em>"ซิงค์ Google Sheets"</em> ด้านบนได้เลยครับ</p>
+        </div>
+      </div>
+    </section>
+
+  
+    <!-- =============================================================== -->
+    <!-- TAB 7: กำหนดสิทธิ์ผู้ใช้งานและจัดการบัญชี (User & Role Permission Management) -->
+    <!-- =============================================================== -->
+    <section id="tab-users" class="tab-content hidden space-y-6">
+      <!-- Header Banner -->
+      <div class="card-3d p-6 sm:p-7 rounded-2xl bg-gradient-to-r from-slate-900 via-blue-950 to-indigo-950 text-white relative overflow-hidden shadow-xl border border-blue-900/40">
+        <div class="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <div class="space-y-1.5">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/20 text-cyan-300 text-xs font-bold border border-blue-400/30">
+              <i data-lucide="shield" class="w-3.5 h-3.5"></i> ระบบความปลอดภัย & การควบคุมการเข้าถึง (RBAC)
+            </div>
+            <h2 class="text-xl sm:text-2xl font-black tracking-tight text-white flex items-center gap-2.5">
+              <span>กำหนดสิทธิ์ผู้ใช้งานและจัดการบัญชี</span>
+              <span class="text-xs bg-emerald-500 text-white font-extrabold px-2 py-0.5 rounded-full uppercase">เวอร์ชัน FM</span>
+            </h2>
+            <p class="text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed">
+              จัดการบัญชีผู้ใช้งาน กำหนดบทบาท และตั้งค่าสิทธิ์การเข้าถึง 4 เสาหลักวิชาการ (ตัดเกรด, แผนการสอน, นิเทศภายใน, ตารางสอน) แยกตามกลุ่มผู้บริหาร ครู และเจ้าหน้าที่
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-2.5 flex-shrink-0">
+            <button type="button" onclick="openModalAddUser()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow-lg shadow-blue-900/50 transition flex items-center gap-2 border border-blue-400/30">
+              <i data-lucide="user-plus" class="w-4 h-4 text-cyan-200"></i> เพิ่มบัญชีผู้ใช้ใหม่
+            </button>
+            <button type="button" onclick="resetDefaultUsers()" class="bg-slate-800/80 hover:bg-slate-700 text-slate-200 font-bold text-xs px-3.5 py-2.5 rounded-xl transition flex items-center gap-1.5 border border-slate-700">
+              <i data-lucide="rotate-ccw" class="w-4 h-4 text-amber-400"></i> คืนค่าเริ่มต้น
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Stats Cards -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+        <div class="card-3d p-4 rounded-xl border-l-4 border-l-blue-600 flex items-center justify-between">
+          <div>
+            <p class="text-xs font-bold text-slate-500 uppercase tracking-wider">ผู้ใช้ทั้งหมด</p>
+            <h3 id="statTotalUsers" class="text-2xl font-black text-slate-900 mt-0.5">8</h3>
+            <p class="text-[11px] text-slate-400 mt-0.5">บัญชีในระบบ</p>
+          </div>
+          <div class="w-11 h-11 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center font-bold">
+            <i data-lucide="users" class="w-6 h-6"></i>
+          </div>
+        </div>
+
+        <div class="card-3d p-4 rounded-xl border-l-4 border-l-purple-600 flex items-center justify-between">
+          <div>
+            <p class="text-xs font-bold text-slate-500 uppercase tracking-wider">ฝ่ายบริหาร & วิชาการ</p>
+            <h3 id="statExecUsers" class="text-2xl font-black text-purple-700 mt-0.5">3</h3>
+            <p class="text-[11px] text-slate-400 mt-0.5">ผอ. / แอดมิน / วิชาการ</p>
+          </div>
+          <div class="w-11 h-11 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center font-bold">
+            <i data-lucide="award" class="w-6 h-6"></i>
+          </div>
+        </div>
+
+        <div class="card-3d p-4 rounded-xl border-l-4 border-l-emerald-600 flex items-center justify-between">
+          <div>
+            <p class="text-xs font-bold text-slate-500 uppercase tracking-wider">ครูผู้สอน & เจ้าหน้าที่</p>
+            <h3 id="statTeacherUsers" class="text-2xl font-black text-emerald-700 mt-0.5">4</h3>
+            <p class="text-[11px] text-slate-400 mt-0.5">ครูประจำวิชา / ทะเบียน</p>
+          </div>
+          <div class="w-11 h-11 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">
+            <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+          </div>
+        </div>
+
+        <div class="card-3d p-4 rounded-xl border-l-4 border-l-cyan-600 flex items-center justify-between">
+          <div>
+            <p class="text-xs font-bold text-slate-500 uppercase tracking-wider">สถานะพร้อมใช้งาน</p>
+            <h3 id="statActiveUsers" class="text-2xl font-black text-cyan-700 mt-0.5">100%</h3>
+            <p class="text-[11px] text-emerald-600 font-bold mt-0.5">● เปิดใช้งานทุกบัญชี</p>
+          </div>
+          <div class="w-11 h-11 rounded-xl bg-cyan-100 text-cyan-700 flex items-center justify-center font-bold">
+            <i data-lucide="check-circle" class="w-6 h-6"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Subtabs: Users Table vs Permission Matrix -->
+      <div class="flex border-b border-slate-200 gap-2">
+        <button type="button" onclick="switchUserSubTab('subtab-users-list')" id="btnSubtabUsersList" class="px-4 py-2.5 text-xs sm:text-sm font-bold border-b-2 border-blue-600 text-blue-700 flex items-center gap-2 transition">
+          <i data-lucide="users" class="w-4 h-4"></i> รายชื่อบัญชีผู้ใช้งาน (Accounts)
+        </button>
+        <button type="button" onclick="switchUserSubTab('subtab-matrix')" id="btnSubtabMatrix" class="px-4 py-2.5 text-xs sm:text-sm font-bold border-b-2 border-transparent text-slate-500 hover:text-slate-800 flex items-center gap-2 transition">
+          <i data-lucide="sliders" class="w-4 h-4"></i> เมทริกซ์กำหนดสิทธิ์ตามบทบาท (Permission Matrix)
+        </button>
+      </div>
+
+      <!-- SUBTAB 1: USERS LIST TABLE -->
+      <div id="subtab-users-list" class="space-y-4">
+        <!-- Search & Filters -->
+        <div class="card-3d p-4 rounded-2xl flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-3">
+          <div class="flex-1 relative">
+            <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-3"></i>
+            <input type="text" id="inputSearchUser" oninput="filterUsersList()" placeholder="ค้นหาชื่อ, Username, หรือกลุ่มสาระฯ..." class="w-full pl-10 pr-3 py-2 text-xs border border-slate-300 rounded-xl outline-none focus:border-blue-600 font-medium">
+          </div>
+          <div class="flex items-center gap-2">
+            <select id="selectFilterUserRole" onchange="filterUsersList()" class="px-3 py-2 text-xs border border-slate-300 rounded-xl bg-white text-slate-700 font-bold outline-none focus:border-blue-600">
+              <option value="all">ทุกระดับสิทธิ์ (All Roles)</option>
+              <option value="admin">🛡️ ผู้ดูแลระบบ (Admin)</option>
+              <option value="director">🎓 ผู้อำนวยการ (Director)</option>
+              <option value="academic">📘 หัวหน้างานวิชาการ (Academic Head)</option>
+              <option value="registrar">📋 นายทะเบียนวัดผล (Registrar)</option>
+              <option value="teacher">👨‍🏫 ครูผู้สอน (Teacher)</option>
+              <option value="supervisor">🔍 ผู้นิเทศภายใน (Supervisor)</option>
+              <option value="student">🎒 นักเรียน (Student)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Users Table -->
+        <div class="card-3d rounded-2xl overflow-hidden shadow-sm border border-slate-200">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-slate-100 text-slate-700 uppercase font-black tracking-wider border-b border-slate-200">
+                <tr>
+                  <th class="p-3.5 sm:px-4">ผู้ใช้งาน / ข้อมูล</th>
+                  <th class="p-3.5 sm:px-4">Username & รหัสผ่าน</th>
+                  <th class="p-3.5 sm:px-4">ระดับสิทธิ์ (Role)</th>
+                  <th class="p-3.5 sm:px-4">กลุ่มสาระฯ / สังกัด</th>
+                  <th class="p-3.5 sm:px-4 text-center">สถานะ</th>
+                  <th class="p-3.5 sm:px-4 text-right">การจัดการ</th>
+                </tr>
+              </thead>
+              <tbody id="userTableBody" class="divide-y divide-slate-100 font-medium text-slate-800">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUBTAB 2: ROLE PERMISSION MATRIX -->
+      <div id="subtab-matrix" class="hidden space-y-4">
+        <div class="card-3d p-5 rounded-2xl space-y-4 border border-slate-200">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 pb-3 border-b border-slate-200">
+            <div>
+              <h3 class="text-base font-black text-slate-900 flex items-center gap-2">
+                <i data-lucide="shield-check" class="w-5 h-5 text-blue-600"></i> ตารางสิทธิ์การเข้าถึง 4 เสาหลักวิชาการ
+              </h3>
+              <p class="text-xs text-slate-500 mt-0.5">ติ๊กเลือกฟังก์ชันที่แต่ละบทบาทสามารถเข้าใช้งานได้ ระบบจะบันทึกและปรับการแสดงผลเมนูทันที</p>
+            </div>
+            <div class="flex gap-2">
+              <button type="button" onclick="saveRolePermissions()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-4 py-2 rounded-xl shadow transition flex items-center gap-1.5">
+                <i data-lucide="save" class="w-4 h-4"></i> บันทึกการกำหนดสิทธิ์
+              </button>
+            </div>
+          </div>
+
+          <!-- Matrix Table -->
+          <div class="overflow-x-auto">
+            <table class="w-full text-xs text-left border-collapse">
+              <thead class="bg-slate-100 text-slate-700 font-black">
+                <tr>
+                  <th class="p-3 border border-slate-200 min-w-[220px]">โมดูลและฟังก์ชันวิชาการ</th>
+                  <th class="p-3 border border-slate-200 text-center min-w-[90px]">แอดมิน<br><span class="text-[10px] text-slate-400 font-normal">Admin</span></th>
+                  <th class="p-3 border border-slate-200 text-center min-w-[90px]">ผู้อำนวยการ<br><span class="text-[10px] text-slate-400 font-normal">Director</span></th>
+                  <th class="p-3 border border-slate-200 text-center min-w-[90px]">หน.วิชาการ<br><span class="text-[10px] text-slate-400 font-normal">Academic</span></th>
+                  <th class="p-3 border border-slate-200 text-center min-w-[90px]">นายทะเบียน<br><span class="text-[10px] text-slate-400 font-normal">Registrar</span></th>
+                  <th class="p-3 border border-slate-200 text-center min-w-[90px]">ครูผู้สอน<br><span class="text-[10px] text-slate-400 font-normal">Teacher</span></th>
+                  <th class="p-3 border border-slate-200 text-center min-w-[90px]">ผู้นิเทศ<br><span class="text-[10px] text-slate-400 font-normal">Supervisor</span></th>
+                  <th class="p-3 border border-slate-200 text-center min-w-[90px]">นักเรียน<br><span class="text-[10px] text-slate-400 font-normal">Student</span></th>
+                </tr>
+              </thead>
+              <tbody id="matrixTableBody" class="divide-y divide-slate-200">
+                <!-- Dynamically rendered matrix checkboxes -->
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </section>
@@ -2763,6 +2940,591 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
 
     
     // =============================================================
+    
+    // =========================================================================
+    // USER ACCOUNTS & PERMISSION MATRIX LOGIC (ระบบกำหนดสิทธิ์และจัดการผู้ใช้งาน)
+    // =========================================================================
+    const DEFAULT_SYSTEM_USERS = [
+      {
+        id: 'U01',
+        username: 'admin',
+        password: 'admin',
+        name: 'ผู้ดูแลระบบ (แอดมินโรงเรียน)',
+        role: 'admin',
+        position: 'ผู้ดูแลระบบสารสนเทศสถานศึกษา',
+        dept: 'กลุ่มงานสารสนเทศและเทคโนโลยี',
+        phone: '062-3636031',
+        avatarIcon: 'shield-check',
+        status: 'active'
+      },
+      {
+        id: 'U02',
+        username: 'director',
+        password: '1234',
+        name: 'ดร.วิชัย เกียรติสกุล',
+        role: 'director',
+        position: 'ผู้อำนวยการสถานศึกษา เชี่ยวชาญ',
+        dept: 'ฝ่ายบริหารสถานศึกษา',
+        phone: '081-999-8877',
+        avatarIcon: 'award',
+        status: 'active'
+      },
+      {
+        id: 'U03',
+        username: 'academic',
+        password: '1234',
+        name: 'นางสาวนฤมล บุญประเสริฐ',
+        role: 'academic',
+        position: 'หัวหน้ากลุ่มบริหารงานวิชาการ',
+        dept: 'ฝ่ายบริหารงานวิชาการ',
+        phone: '089-111-2233',
+        avatarIcon: 'graduation-cap',
+        status: 'active'
+      },
+      {
+        id: 'U04',
+        username: 'registrar',
+        password: '1234',
+        name: 'นายสมเกียรติ มั่นคง',
+        role: 'registrar',
+        position: 'นายทะเบียนและประมวลผล',
+        dept: 'งานทะเบียนและวัดผล',
+        phone: '086-444-5566',
+        avatarIcon: 'clipboard-list',
+        status: 'active'
+      },
+      {
+        id: 'U05',
+        username: 'teacher',
+        password: '1234',
+        name: 'นายอรรถพล ฉาไธสง',
+        role: 'teacher',
+        position: 'ครูผู้สอน (วิทยาการคำนวณและดิจิทัล)',
+        dept: 'กลุ่มสาระฯ วิทยาศาสตร์และเทคโนโลยี',
+        phone: '062-3636031',
+        teacherId: 'T01',
+        avatarIcon: 'user',
+        status: 'active'
+      },
+      {
+        id: 'U06',
+        username: 'pranee',
+        password: '1234',
+        name: 'นางสาวปราณี ศรีสุข',
+        role: 'teacher',
+        position: 'ครูผู้สอน (กลุ่มสาระฯ ภาษาไทย)',
+        dept: 'กลุ่มสาระฯ ภาษาไทย',
+        phone: '082-345-6789',
+        teacherId: 'T02',
+        avatarIcon: 'user',
+        status: 'active'
+      },
+      {
+        id: 'U07',
+        username: 'supervisor',
+        password: '1234',
+        name: 'ดร.มงคล อุดมสุข',
+        role: 'supervisor',
+        position: 'ศึกษานิเทศก์ชำนาญการพิเศษ (สพฐ.)',
+        dept: 'กลุ่มนิเทศ ติดตาม และประเมินผล',
+        phone: '081-555-6677',
+        avatarIcon: 'search-check',
+        status: 'active'
+      },
+      {
+        id: 'U08',
+        username: 'student',
+        password: '1234',
+        name: 'ด.ช.ธนภัทร วงศ์ษา',
+        role: 'student',
+        position: 'นักเรียนชั้น ม.1/1 เลขที่ 1',
+        dept: 'ชั้นมัธยมศึกษาปีที่ 1/1',
+        phone: '088-777-9900',
+        studentId: 'S67001',
+        avatarIcon: 'user-check',
+        status: 'active'
+      }
+    ];
+
+    const DEFAULT_ROLE_PERMISSIONS = {
+      admin: {
+        title: 'ผู้ดูแลระบบ (Admin)',
+        badgeColor: 'bg-rose-100 text-rose-800 border-rose-300',
+        permissions: {
+          dashboard: true,
+          grades: true,
+          resolveDeficiency: true,
+          studentP6: true,
+          plansSubmit: true,
+          plansReview: true,
+          supervision: true,
+          timetable: true,
+          users: true,
+          settings: true
+        }
+      },
+      director: {
+        title: 'ผู้อำนวยการ (Director)',
+        badgeColor: 'bg-purple-100 text-purple-800 border-purple-300',
+        permissions: {
+          dashboard: true,
+          grades: true,
+          resolveDeficiency: true,
+          studentP6: true,
+          plansSubmit: false,
+          plansReview: true,
+          supervision: true,
+          timetable: true,
+          users: true,
+          settings: true
+        }
+      },
+      academic: {
+        title: 'หัวหน้างานวิชาการ (Academic Head)',
+        badgeColor: 'bg-blue-100 text-blue-800 border-blue-300',
+        permissions: {
+          dashboard: true,
+          grades: true,
+          resolveDeficiency: true,
+          studentP6: true,
+          plansSubmit: true,
+          plansReview: true,
+          supervision: true,
+          timetable: true,
+          users: true,
+          settings: true
+        }
+      },
+      registrar: {
+        title: 'นายทะเบียนวัดผล (Registrar)',
+        badgeColor: 'bg-amber-100 text-amber-800 border-amber-300',
+        permissions: {
+          dashboard: true,
+          grades: true,
+          resolveDeficiency: true,
+          studentP6: true,
+          plansSubmit: false,
+          plansReview: false,
+          supervision: false,
+          timetable: true,
+          users: false,
+          settings: false
+        }
+      },
+      teacher: {
+        title: 'ครูผู้สอน (Teacher)',
+        badgeColor: 'bg-emerald-100 text-emerald-800 border-emerald-300',
+        permissions: {
+          dashboard: true,
+          grades: true,
+          resolveDeficiency: true,
+          studentP6: true,
+          plansSubmit: true,
+          plansReview: false,
+          supervision: true,
+          timetable: true,
+          users: false,
+          settings: false
+        }
+      },
+      supervisor: {
+        title: 'ผู้นิเทศภายใน (Supervisor)',
+        badgeColor: 'bg-indigo-100 text-indigo-800 border-indigo-300',
+        permissions: {
+          dashboard: true,
+          grades: false,
+          resolveDeficiency: false,
+          studentP6: false,
+          plansSubmit: false,
+          plansReview: false,
+          supervision: true,
+          timetable: false,
+          users: false,
+          settings: false
+        }
+      },
+      student: {
+        title: 'นักเรียน/ผู้ปกครอง (Student)',
+        badgeColor: 'bg-cyan-100 text-cyan-800 border-cyan-300',
+        permissions: {
+          dashboard: false,
+          grades: false,
+          resolveDeficiency: false,
+          studentP6: true,
+          plansSubmit: false,
+          plansReview: false,
+          supervision: false,
+          timetable: false,
+          users: false,
+          settings: false
+        }
+      }
+    };
+
+    const PERMISSION_MODULE_DEFS = [
+      { key: 'dashboard', name: '1. ดูแดชบอร์ดภาพรวม', desc: 'สถิติผลการเรียน เกรด 0 ร มส และแผนภูมิ' },
+      { key: 'grades', name: '2. ผลการเรียน & ตัดเกรด', desc: 'กรอกคะแนน ตัดเกรดรายวิชา' },
+      { key: 'resolveDeficiency', name: '3. อนุมัติแก้ 0, ร, มส', desc: 'บันทึกคำร้องและปรับเกรดหลังสอบแก้ตัว' },
+      { key: 'studentP6', name: '4. ตรวจสอบ & พิมพ์ ปพ.6', desc: 'ค้นหาผลการเรียนรายบุคคลและพิมพ์แบบรายงาน' },
+      { key: 'plansSubmit', name: '5. ส่งแผน & บันทึกหลังสอน', desc: 'อัปโหลดแผนการสอนและกรอกผลหลังการจัดกิจกรรม' },
+      { key: 'plansReview', name: '6. ตรวจแผน & ประทับลายเซ็น ผอ.', desc: 'อนุมัติแผนและประทับลายเซ็นดิจิทัล' },
+      { key: 'supervision', name: '7. นิเทศภายใน & รูบริก สพฐ.', desc: 'ปฏิทินนัดหมาย ประเมิน 5 ด้าน 100 คะแนน' },
+      { key: 'timetable', name: '8. ตารางสอน & สอนแทน', desc: 'จัดตารางสอนไม่ชน และค้นหาครูสอนแทน' },
+      { key: 'users', name: '9. กำหนดสิทธิ์ผู้ใช้งาน', desc: 'เพิ่มบัญชี แก้ไขสิทธิ์ และรหัสผ่าน' },
+      { key: 'settings', name: '10. ตั้งค่าสถานศึกษา & ลายเซ็น', desc: 'เปลี่ยนชื่อโรงเรียน ปีการศึกษา และไฟล์ลายเซ็น' }
+    ];
+
+    function initUserManagementState() {
+      if (!state.users) {
+        try {
+          const stored = localStorage.getItem('fm_system_users');
+          state.users = stored ? JSON.parse(stored) : JSON.parse(JSON.stringify(DEFAULT_SYSTEM_USERS));
+        } catch (e) {
+          state.users = JSON.parse(JSON.stringify(DEFAULT_SYSTEM_USERS));
+        }
+      }
+      if (!state.rolePermissions) {
+        try {
+          const storedPerms = localStorage.getItem('fm_role_permissions');
+          state.rolePermissions = storedPerms ? JSON.parse(storedPerms) : JSON.parse(JSON.stringify(DEFAULT_ROLE_PERMISSIONS));
+        } catch (e) {
+          state.rolePermissions = JSON.parse(JSON.stringify(DEFAULT_ROLE_PERMISSIONS));
+        }
+      }
+    }
+
+    function switchUserSubTab(subTabId) {
+      document.getElementById('subtab-users-list').classList.add('hidden');
+      document.getElementById('subtab-matrix').classList.add('hidden');
+      
+      const btnList = document.getElementById('btnSubtabUsersList');
+      const btnMat = document.getElementById('btnSubtabMatrix');
+      
+      btnList.className = 'px-4 py-2.5 text-xs sm:text-sm font-bold border-b-2 border-transparent text-slate-500 hover:text-slate-800 flex items-center gap-2 transition';
+      btnMat.className = 'px-4 py-2.5 text-xs sm:text-sm font-bold border-b-2 border-transparent text-slate-500 hover:text-slate-800 flex items-center gap-2 transition';
+      
+      const target = document.getElementById(subTabId);
+      if (target) target.classList.remove('hidden');
+      
+      if (subTabId === 'subtab-users-list') {
+        btnList.className = 'px-4 py-2.5 text-xs sm:text-sm font-bold border-b-2 border-blue-600 text-blue-700 flex items-center gap-2 transition';
+        renderUserManagementTable();
+      } else {
+        btnMat.className = 'px-4 py-2.5 text-xs sm:text-sm font-bold border-b-2 border-blue-600 text-blue-700 flex items-center gap-2 transition';
+        renderRolePermissionMatrix();
+      }
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function renderUserManagementTable() {
+      initUserManagementState();
+      const tbody = document.getElementById('userTableBody');
+      if (!tbody) return;
+
+      const searchTerm = (document.getElementById('inputSearchUser')?.value || '').trim().toLowerCase();
+      const roleFilter = document.getElementById('selectFilterUserRole')?.value || 'all';
+
+      const filtered = state.users.filter(u => {
+        const matchSearch = !searchTerm || 
+          (u.name && u.name.toLowerCase().includes(searchTerm)) ||
+          (u.username && u.username.toLowerCase().includes(searchTerm)) ||
+          (u.position && u.position.toLowerCase().includes(searchTerm)) ||
+          (u.dept && u.dept.toLowerCase().includes(searchTerm));
+        const matchRole = roleFilter === 'all' || u.role === roleFilter;
+        return matchSearch && matchRole;
+      });
+
+      // Update stats
+      const elTotal = document.getElementById('statTotalUsers');
+      const elExec = document.getElementById('statExecUsers');
+      const elTeacher = document.getElementById('statTeacherUsers');
+      if (elTotal) elTotal.textContent = state.users.length;
+      if (elExec) elExec.textContent = state.users.filter(u => ['admin', 'director', 'academic'].includes(u.role)).length;
+      if (elTeacher) elTeacher.textContent = state.users.filter(u => ['teacher', 'registrar'].includes(u.role)).length;
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" class="p-8 text-center text-slate-400 font-semibold">ไม่พบข้อมูลบัญชีผู้ใช้ที่ค้นหา</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(u => {
+        const roleDef = state.rolePermissions[u.role] || { title: u.role, badgeColor: 'bg-slate-100 text-slate-800 border-slate-300' };
+        const isActive = u.status === 'active';
+        return `
+          <tr class="hover:bg-blue-50/40 transition border-b border-slate-100">
+            <td class="p-3.5 sm:px-4">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-800 flex items-center justify-center font-bold text-xs flex-shrink-0">
+                  <i data-lucide="${u.avatarIcon || 'user'}" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <div class="font-bold text-slate-900">${u.name}</div>
+                  <div class="text-[11px] text-slate-500">${u.position || '-'}</div>
+                </div>
+              </div>
+            </td>
+            <td class="p-3.5 sm:px-4">
+              <div class="font-mono font-bold text-slate-900">${u.username}</div>
+              <div class="text-[11px] text-slate-400 font-mono flex items-center gap-1">
+                <span>รหัสผ่าน:</span>
+                <span class="bg-slate-100 px-1.5 py-0.2 rounded font-bold text-slate-600">${u.password || '1234'}</span>
+              </div>
+            </td>
+            <td class="p-3.5 sm:px-4">
+              <span class="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-bold border ${roleDef.badgeColor}">
+                ${roleDef.title}
+              </span>
+            </td>
+            <td class="p-3.5 sm:px-4 text-slate-600">
+              <div>${u.dept || '-'}</div>
+              <div class="text-[11px] text-slate-400">${u.phone || ''}</div>
+            </td>
+            <td class="p-3.5 sm:px-4 text-center">
+              <button type="button" onclick="toggleUserStatus('${u.id}')" title="คลิกเพื่อเปิด/ปิดใช้งาน" class="cursor-pointer">
+                ${isActive 
+                  ? '<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[11px] font-bold border border-emerald-200">🟢 ใช้งานปกติ</span>' 
+                  : '<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-rose-50 text-rose-700 text-[11px] font-bold border border-rose-200">🔴 ระงับ</span>'}
+              </button>
+            </td>
+            <td class="p-3.5 sm:px-4 text-right">
+              <div class="flex items-center justify-end gap-1.5">
+                <button type="button" onclick="quickSwitchToUser('${u.id}')" title="เข้าสู่ระบบด้วยบัญชีนี้ทันที" class="p-1.5 rounded-lg bg-blue-50 text-blue-700 hover:bg-blue-100 font-bold transition flex items-center gap-1 text-[11px]">
+                  <i data-lucide="log-in" class="w-3.5 h-3.5"></i> สลับเข้า
+                </button>
+                <button type="button" onclick="openModalAddUser('${u.id}')" title="แก้ไขข้อมูล/สิทธิ์" class="p-1.5 rounded-lg bg-amber-50 text-amber-700 hover:bg-amber-100 transition">
+                  <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
+                </button>
+                <button type="button" onclick="deleteUser('${u.id}')" title="ลบบัญชีนี้" class="p-1.5 rounded-lg bg-rose-50 text-rose-700 hover:bg-rose-100 transition ${u.username === 'admin' ? 'hidden' : ''}">
+                  <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function filterUsersList() {
+      renderUserManagementTable();
+    }
+
+    function renderRolePermissionMatrix() {
+      initUserManagementState();
+      const tbody = document.getElementById('matrixTableBody');
+      if (!tbody) return;
+
+      const roles = ['admin', 'director', 'academic', 'registrar', 'teacher', 'supervisor', 'student'];
+
+      tbody.innerHTML = PERMISSION_MODULE_DEFS.map(mod => {
+        const checkboxes = roles.map(r => {
+          const isChecked = state.rolePermissions[r]?.permissions?.[mod.key] ? 'checked' : '';
+          const isDisabled = (r === 'admin' && mod.key === 'users') ? 'disabled' : '';
+          return `
+            <td class="p-2.5 border border-slate-200 text-center">
+              <input type="checkbox" id="perm_${r}_${mod.key}" ${isChecked} ${isDisabled} class="w-4 h-4 rounded text-blue-600 focus:ring-blue-500 cursor-pointer">
+            </td>
+          `;
+        }).join('');
+
+        return `
+          <tr class="hover:bg-slate-50 transition border-b border-slate-200">
+            <td class="p-3 border border-slate-200">
+              <div class="font-bold text-slate-900">${mod.name}</div>
+              <div class="text-[11px] text-slate-500">${mod.desc}</div>
+            </td>
+            ${checkboxes}
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function saveRolePermissions() {
+      initUserManagementState();
+      const roles = ['admin', 'director', 'academic', 'registrar', 'teacher', 'supervisor', 'student'];
+
+      roles.forEach(r => {
+        if (!state.rolePermissions[r]) state.rolePermissions[r] = { permissions: {} };
+        PERMISSION_MODULE_DEFS.forEach(mod => {
+          const el = document.getElementById(`perm_${r}_${mod.key}`);
+          if (el) {
+            state.rolePermissions[r].permissions[mod.key] = el.checked;
+          }
+        });
+      });
+
+      try {
+        localStorage.setItem('fm_role_permissions', JSON.stringify(state.rolePermissions));
+      } catch (e) {}
+
+      // Re-apply to current user session
+      if (state.currentUser) {
+        applyRolePermissions(state.currentUser.role);
+      }
+
+      showToast('บันทึกการกำหนดสิทธิ์ตามบทบาทเรียบร้อยแล้ว');
+    }
+
+    function restoreDefaultPermissions() {
+      if (confirm('คุณต้องการคืนค่าสิทธิ์มาตรฐานของทุกบทบาทใช่หรือไม่?')) {
+        state.rolePermissions = JSON.parse(JSON.stringify(DEFAULT_ROLE_PERMISSIONS));
+        try {
+          localStorage.setItem('fm_role_permissions', JSON.stringify(state.rolePermissions));
+        } catch (e) {}
+        renderRolePermissionMatrix();
+        if (state.currentUser) applyRolePermissions(state.currentUser.role);
+        showToast('คืนค่าสิทธิ์เริ่มต้นเรียบร้อยแล้ว');
+      }
+    }
+
+    function openModalAddUser(userId = null) {
+      initUserManagementState();
+      const modal = document.getElementById('modalAddUser');
+      const title = document.getElementById('modalUserTitle');
+      const form = document.getElementById('formUserModal');
+      form.reset();
+
+      if (userId) {
+        const u = state.users.find(x => x.id === userId);
+        if (u) {
+          title.textContent = 'แก้ไขบัญชีผู้ใช้: ' + u.name;
+          document.getElementById('editUserId').value = u.id;
+          document.getElementById('userFormName').value = u.name;
+          document.getElementById('userFormUsername').value = u.username;
+          document.getElementById('userFormPassword').value = u.password || '1234';
+          document.getElementById('userFormRole').value = u.role;
+          document.getElementById('userFormPosition').value = u.position || '';
+          document.getElementById('userFormPhone').value = u.phone || '';
+          document.getElementById('userFormStatus').value = u.status || 'active';
+        }
+      } else {
+        title.textContent = 'เพิ่มบัญชีผู้ใช้งานใหม่';
+        document.getElementById('editUserId').value = '';
+        document.getElementById('userFormPassword').value = '1234';
+        document.getElementById('userFormStatus').value = 'active';
+      }
+
+      openModal('modalAddUser');
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function handleSaveUser(e) {
+      e.preventDefault();
+      initUserManagementState();
+      const editId = document.getElementById('editUserId').value;
+      const name = document.getElementById('userFormName').value.trim();
+      const username = document.getElementById('userFormUsername').value.trim();
+      const password = document.getElementById('userFormPassword').value.trim();
+      const role = document.getElementById('userFormRole').value;
+      const position = document.getElementById('userFormPosition').value.trim();
+      const phone = document.getElementById('userFormPhone').value.trim();
+      const status = document.getElementById('userFormStatus').value;
+
+      let avatar = 'user';
+      if (role === 'admin') avatar = 'shield-check';
+      else if (role === 'director') avatar = 'award';
+      else if (role === 'academic') avatar = 'graduation-cap';
+      else if (role === 'registrar') avatar = 'clipboard-list';
+      else if (role === 'supervisor') avatar = 'search-check';
+      else if (role === 'student') avatar = 'user-check';
+
+      if (editId) {
+        // Edit existing
+        const idx = state.users.findIndex(x => x.id === editId);
+        if (idx !== -1) {
+          state.users[idx] = {
+            ...state.users[idx],
+            name, username, password, role, position, phone, status, avatarIcon: avatar
+          };
+          showToast('บันทึกการแก้ไขบัญชีเรียบร้อยแล้ว');
+        }
+      } else {
+        // Check duplicate username
+        if (state.users.some(x => x.username.toLowerCase() === username.toLowerCase())) {
+          alert('ชื่อผู้ใช้งาน (Username) นี้มีอยู่ในระบบแล้ว กรุณาใช้ชื่ออื่น');
+          return;
+        }
+        const newId = 'U' + String(Date.now()).slice(-4);
+        state.users.push({
+          id: newId,
+          name, username, password, role, position, phone, status, avatarIcon: avatar,
+          dept: position
+        });
+        showToast('เพิ่มบัญชีผู้ใช้ใหม่สำเร็จ');
+      }
+
+      try {
+        localStorage.setItem('fm_system_users', JSON.stringify(state.users));
+      } catch (err) {}
+
+      closeModal('modalAddUser');
+      renderUserManagementTable();
+    }
+
+    function toggleUserStatus(userId) {
+      initUserManagementState();
+      const u = state.users.find(x => x.id === userId);
+      if (u) {
+        if (u.username === 'admin') {
+          alert('ไม่สามารถระงับบัญชีผู้ดูแลระบบหลักได้');
+          return;
+        }
+        u.status = u.status === 'active' ? 'inactive' : 'active';
+        try {
+          localStorage.setItem('fm_system_users', JSON.stringify(state.users));
+        } catch (e) {}
+        renderUserManagementTable();
+        showToast('อัปเดตสถานะบัญชีเรียบร้อยแล้ว');
+      }
+    }
+
+    function deleteUser(userId) {
+      initUserManagementState();
+      const u = state.users.find(x => x.id === userId);
+      if (!u) return;
+      if (u.username === 'admin') {
+        alert('ไม่อนุญาตให้ลบบัญชีผู้ดูแลระบบหลัก (Admin)');
+        return;
+      }
+      if (confirm('คุณแน่ใจหรือไม่ว่าต้องการลบบัญชี ' + u.name + ' (' + u.username + ')?')) {
+        state.users = state.users.filter(x => x.id !== userId);
+        try {
+          localStorage.setItem('fm_system_users', JSON.stringify(state.users));
+        } catch (e) {}
+        renderUserManagementTable();
+        showToast('ลบบัญชีเรียบร้อยแล้ว');
+      }
+    }
+
+    function resetDefaultUsers() {
+      if (confirm('คุณต้องการรีเซ็ตรายชื่อผู้ใช้งานทั้งหมดกลับเป็นค่าเริ่มต้นใช่หรือไม่?')) {
+        state.users = JSON.parse(JSON.stringify(DEFAULT_SYSTEM_USERS));
+        try {
+          localStorage.setItem('fm_system_users', JSON.stringify(state.users));
+        } catch (e) {}
+        renderUserManagementTable();
+        showToast('รีเซ็ตรายชื่อผู้ใช้เริ่มต้นเรียบร้อยแล้ว');
+      }
+    }
+
+    function quickSwitchToUser(userId) {
+      initUserManagementState();
+      const u = state.users.find(x => x.id === userId);
+      if (!u) return;
+      if (u.status === 'inactive') {
+        alert('บัญชีนี้ถูกระงับการใช้งานอยู่ ไม่สามารถเข้าสู่ระบบได้');
+        return;
+      }
+      let userObj = {
+        ...u,
+        isLoggedIn: true,
+        loginTime: new Date().toLocaleString('th-TH')
+      };
+      applyUserSession(userObj);
+      showToast('สลับเข้าใช้งานในสิทธิ์: ' + u.name + ' (' + (state.rolePermissions[u.role]?.title || u.role) + ')');
+    }
+
     // EGA+ AUTHENTICATION, USER SESSION & ROLE CONTROLS
     // =============================================================
     const SYSTEM_ACCOUNTS = {
@@ -2864,7 +3626,20 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
         return;
       }
 
-      let acc = SYSTEM_ACCOUNTS[role] || SYSTEM_ACCOUNTS.admin;
+      initUserManagementState();
+      let matchedUser = state.users.find(u => u.username.toLowerCase() === username.toLowerCase());
+      if (matchedUser) {
+        if (matchedUser.password && matchedUser.password !== password) {
+          alert('รหัสผ่านไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง');
+          return;
+        }
+        if (matchedUser.status === 'inactive') {
+          alert('บัญชีนี้ถูกระงับการใช้งาน กรุณาติดต่อผู้ดูแลระบบ');
+          return;
+        }
+      }
+
+      let acc = matchedUser || SYSTEM_ACCOUNTS[role] || SYSTEM_ACCOUNTS.admin;
       let userObj = {
         ...acc,
         username: username,
@@ -2969,40 +3744,42 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
     }
 
     function getRoleBadgeTitle(role) {
+      initUserManagementState();
+      if (state.rolePermissions && state.rolePermissions[role]) {
+        return state.rolePermissions[role].title.split(' ')[0];
+      }
       if (role === 'admin') return 'ผู้ดูแลระบบ';
       if (role === 'director') return 'ผู้อำนวยการ';
+      if (role === 'academic') return 'หน.วิชาการ';
+      if (role === 'registrar') return 'นายทะเบียน';
       if (role === 'teacher') return 'ครูผู้สอน';
+      if (role === 'supervisor') return 'ผู้นิเทศ';
       if (role === 'student') return 'นักเรียน';
       return 'ผู้ใช้งาน';
     }
 
     function applyRolePermissions(role) {
+      initUserManagementState();
+      const perms = state.rolePermissions[role]?.permissions || {};
+
+      const navDashboard = document.getElementById('nav-dashboard');
       const navGrades = document.getElementById('nav-grades');
+      const navStudent = document.getElementById('nav-student');
       const navPlans = document.getElementById('nav-plans');
       const navSupv = document.getElementById('nav-supervision');
+      const navTimetable = document.getElementById('nav-timetable');
+      const navUsers = document.getElementById('nav-users');
       const navSettings = document.getElementById('nav-settings');
-      const navStudent = document.getElementById('nav-student');
 
-      if (role === 'student') {
-        if (navGrades) navGrades.classList.add('hidden');
-        if (navPlans) navPlans.classList.add('hidden');
-        if (navSupv) navSupv.classList.add('hidden');
-        if (navSettings) navSettings.classList.add('hidden');
-        if (navStudent) navStudent.classList.remove('hidden');
-      } else if (role === 'teacher') {
-        if (navGrades) navGrades.classList.remove('hidden');
-        if (navPlans) navPlans.classList.remove('hidden');
-        if (navSupv) navSupv.classList.remove('hidden');
-        if (navSettings) navSettings.classList.add('hidden');
-        if (navStudent) navStudent.classList.remove('hidden');
-      } else {
-        // director or admin
-        if (navGrades) navGrades.classList.remove('hidden');
-        if (navPlans) navPlans.classList.remove('hidden');
-        if (navSupv) navSupv.classList.remove('hidden');
-        if (navSettings) navSettings.classList.remove('hidden');
-        if (navStudent) navStudent.classList.remove('hidden');
-      }
+      // Set visibility based on permissions
+      if (navDashboard) perms.dashboard !== false ? navDashboard.classList.remove('hidden') : navDashboard.classList.add('hidden');
+      if (navGrades) perms.grades ? navGrades.classList.remove('hidden') : navGrades.classList.add('hidden');
+      if (navStudent) perms.studentP6 ? navStudent.classList.remove('hidden') : navStudent.classList.add('hidden');
+      if (navPlans) (perms.plansSubmit || perms.plansReview) ? navPlans.classList.remove('hidden') : navPlans.classList.add('hidden');
+      if (navSupv) perms.supervision ? navSupv.classList.remove('hidden') : navSupv.classList.add('hidden');
+      if (navTimetable) perms.timetable ? navTimetable.classList.remove('hidden') : navTimetable.classList.add('hidden');
+      if (navUsers) perms.users ? navUsers.classList.remove('hidden') : navUsers.classList.add('hidden');
+      if (navSettings) perms.settings ? navSettings.classList.remove('hidden') : navSettings.classList.add('hidden');
     }
 
     function selectStudentById(studentId) {
@@ -3100,6 +3877,7 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
       if (tabId === 'tab-plans') loadLessonPlans();
       if (tabId === 'tab-supervision') loadSupervisions();
       if (tabId === 'tab-timetable') loadTimetableData();
+      if (tabId === 'tab-users') renderUserManagementTable();
 
       if (window.lucide) lucide.createIcons();
     }
@@ -3574,6 +4352,90 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
       }, 400);
     };
   <\/script>
+
+  <!-- ================================================================= -->
+  <!-- MODAL: ADD / EDIT USER (เพิ่ม/แก้ไขบัญชีผู้ใช้และสิทธิ์) -->
+  <!-- ================================================================= -->
+  <div id="modalAddUser" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 sm:p-4">
+    <div class="card-3d max-w-lg w-full p-5 sm:p-7 space-y-4 shadow-2xl rounded-2xl max-h-[92vh] overflow-y-auto">
+      <div class="flex justify-between items-center pb-3 border-b border-slate-200">
+        <div class="flex items-center gap-2.5">
+          <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center font-bold">
+            <i data-lucide="user-cog" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 id="modalUserTitle" class="text-base sm:text-lg font-black text-slate-900">เพิ่มบัญชีผู้ใช้งานใหม่</h3>
+            <p class="text-xs text-slate-500">กำหนดชื่อบัญชี รหัสผ่าน และบทบาทการเข้าถึง</p>
+          </div>
+        </div>
+        <button type="button" onclick="closeModal('modalAddUser')" class="text-slate-400 hover:text-slate-600 p-1.5 rounded-lg hover:bg-slate-100 transition">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <form id="formUserModal" onsubmit="handleSaveUser(event)" class="space-y-3.5 text-xs text-left">
+        <input type="hidden" id="editUserId" value="">
+
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">ชื่อ-นามสกุล (Full Name) *</label>
+          <input type="text" id="userFormName" required placeholder="เช่น นายอรรถพล ฉาไธสง หรือ ด.ช.สมชาย" class="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs font-semibold outline-none focus:border-blue-600">
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">ชื่อผู้ใช้ (Username) *</label>
+            <input type="text" id="userFormUsername" required placeholder="เช่น teacher01, attapon" class="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs font-mono font-semibold outline-none focus:border-blue-600">
+          </div>
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">รหัสผ่าน (Password) *</label>
+            <input type="text" id="userFormPassword" required value="1234" placeholder="รหัสผ่านเข้าใช้งาน" class="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs font-mono font-semibold outline-none focus:border-blue-600">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">ระดับสิทธิ์ (Role) *</label>
+            <select id="userFormRole" required class="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs font-bold bg-white text-slate-800 outline-none focus:border-blue-600">
+              <option value="admin">🛡️ ผู้ดูแลระบบ (Admin)</option>
+              <option value="director">🎓 ผู้อำนวยการ (Director)</option>
+              <option value="academic">📘 หัวหน้างานวิชาการ (Academic Head)</option>
+              <option value="registrar">📋 นายทะเบียนวัดผล (Registrar)</option>
+              <option value="teacher">👨‍🏫 ครูผู้สอน (Teacher)</option>
+              <option value="supervisor">🔍 ผู้นิเทศภายใน (Supervisor)</option>
+              <option value="student">🎒 นักเรียน (Student)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">เบอร์โทรศัพท์ (Phone)</label>
+            <input type="text" id="userFormPhone" placeholder="เช่น 062-3636031" class="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs font-semibold outline-none focus:border-blue-600">
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">ตำแหน่ง / กลุ่มสาระการเรียนรู้</label>
+          <input type="text" id="userFormPosition" placeholder="เช่น ครูผู้สอน กลุ่มสาระฯ วิทยาศาสตร์และเทคโนโลยี" class="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs font-semibold outline-none focus:border-blue-600">
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">สถานะการใช้งาน (Status)</label>
+          <select id="userFormStatus" class="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs font-bold bg-white text-slate-800 outline-none focus:border-blue-600">
+            <option value="active">🟢 เปิดใช้งานปกติ (Active)</option>
+            <option value="inactive">🔴 ระงับการใช้งานชั่วคราว (Disabled)</option>
+          </select>
+        </div>
+
+        <div class="pt-3 flex gap-2">
+          <button type="submit" class="flex-1 btn-ega-primary py-2.5 text-xs font-bold flex items-center justify-center gap-1.5 shadow">
+            <i data-lucide="check" class="w-4 h-4"></i> บันทึกข้อมูลบัญชี
+          </button>
+          <button type="button" onclick="closeModal('modalAddUser')" class="px-4 py-2.5 border border-slate-300 rounded-xl text-slate-600 hover:bg-slate-100 font-bold text-xs">
+            ยกเลิก
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
 </body>
 </html>`);
           printWindow.document.close();
