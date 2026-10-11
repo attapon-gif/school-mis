@@ -4594,63 +4594,319 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
 
   <!-- MODAL: NEW HOME VISIT -->
   <div id="modalNewHomeVisit" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 sm:p-4">
-    <div class="card-3d max-w-xl w-full p-5 sm:p-6 space-y-4 shadow-2xl rounded-2xl max-h-[92vh] overflow-y-auto">
+    <div class="card-3d max-w-2xl w-full p-5 sm:p-6 space-y-4 shadow-2xl rounded-2xl max-h-[92vh] overflow-y-auto">
       <div class="flex justify-between items-center pb-3 border-b border-slate-200">
         <h3 class="text-base font-black text-slate-900 flex items-center gap-2">
-          <i data-lucide="home" class="w-5 h-5 text-amber-600"></i> บันทึกการเยี่ยมบ้านนักเรียน (แบบฟอร์ม สพฐ.)
+          <i data-lucide="home" class="w-5 h-5 text-amber-600"></i> บันทึกรายงานการเยี่ยมบ้านนักเรียนรายบุคคล (แบบฟอร์ม สพฐ.)
         </h3>
         <button type="button" onclick="closeModal('modalNewHomeVisit')" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
-      <form id="formHomeVisit" onsubmit="handleSaveHomeVisit(event)" class="space-y-3 text-xs">
-        <div>
-          <label class="block font-bold text-slate-700 mb-1">นักเรียนที่ได้รับการเยี่ยมบ้าน *</label>
-          <select id="hvStudentSelect" required class="w-full px-3 py-2 border rounded-xl font-bold bg-white"></select>
+      <form id="formHomeVisit" onsubmit="handleSaveHomeVisit(event)" class="space-y-4 text-xs">
+        
+        <!-- ข้อมูลนักเรียน & ครูที่ปรึกษา -->
+        <div class="p-3.5 bg-amber-50/70 border border-amber-200 rounded-xl space-y-2.5">
+          <div class="font-bold text-amber-950 flex items-center gap-1.5 text-xs">
+            <i data-lucide="user-check" class="w-4 h-4 text-amber-700"></i> ข้อมูลนักเรียน & วันที่เยี่ยมบ้าน
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+            <div class="sm:col-span-2">
+              <label class="block font-bold text-slate-700 mb-1">เลือกนักเรียนในระบบ *</label>
+              <select id="hvStudentSelect" onchange="onHomeVisitStudentChanged()" required class="w-full px-3 py-2 border rounded-xl font-bold bg-white"></select>
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">วันที่เยี่ยมบ้าน *</label>
+              <input type="date" id="hvDate" value="2026-05-05" required class="w-full px-3 py-2 border rounded-xl font-bold bg-white">
+            </div>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">คำนำหน้าชื่อ</label>
+              <input type="text" id="hvTitle" placeholder="ด.ช. / ด.ญ. / นาย" class="w-full px-3 py-1.5 border rounded-xl font-bold bg-white">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">ชื่อ</label>
+              <input type="text" id="hvFirstName" placeholder="ชื่อจริง" class="w-full px-3 py-1.5 border rounded-xl font-bold bg-white">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">นามสกุล</label>
+              <input type="text" id="hvLastName" placeholder="นามสกุล" class="w-full px-3 py-1.5 border rounded-xl font-bold bg-white">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">ชื่อเล่น</label>
+              <input type="text" id="hvNickname" placeholder="ชื่อเล่น" class="w-full px-3 py-1.5 border rounded-xl font-bold bg-white">
+            </div>
+          </div>
+          <div class="grid grid-cols-3 sm:grid-cols-5 gap-2">
+            <div class="sm:col-span-2">
+              <label class="block font-bold text-slate-700 mb-1">เลขประจำตัว</label>
+              <input type="text" id="hvStudentId" placeholder="12344" class="w-full px-3 py-1.5 border rounded-xl font-mono font-bold bg-white">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">เลขที่</label>
+              <input type="number" id="hvNumber" value="1" class="w-full px-3 py-1.5 border rounded-xl font-bold bg-white">
+            </div>
+            <div class="sm:col-span-2">
+              <label class="block font-bold text-slate-700 mb-1">ชั้น</label>
+              <input type="text" id="hvClass" placeholder="ม.1/1" class="w-full px-3 py-1.5 border rounded-xl font-bold bg-white">
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">คุณครูที่ปรึกษา 1</label>
+              <input type="text" id="hvAdvisor1" placeholder="นายทดสอบ1" class="w-full px-3 py-1.5 border rounded-xl font-bold bg-white">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">คุณครูที่ปรึกษา 2</label>
+              <input type="text" id="hvAdvisor2" placeholder="นายทดสอบ2" class="w-full px-3 py-1.5 border rounded-xl font-bold bg-white">
+            </div>
+          </div>
         </div>
-        <div class="grid grid-cols-2 gap-2">
+
+        <!-- ตอนที่ 1 ข้อ 1: ที่อยู่ปัจจุบัน -->
+        <div class="p-3.5 bg-slate-50 border border-slate-200 rounded-xl space-y-2.5">
+          <div class="font-bold text-slate-800 text-xs flex items-center gap-1.5">
+            <i data-lucide="map-pin" class="w-4 h-4 text-blue-600"></i> ตอนที่ 1: ข้อ 1. ที่อยู่ปัจจุบัน
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            <div>
+              <label class="block font-bold text-slate-600 mb-0.5">บ้านเลขที่</label>
+              <input type="text" id="hvHouseNo" placeholder="1" class="w-full px-2.5 py-1.5 border rounded-xl font-bold bg-white">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-600 mb-0.5">หมู่ที่</label>
+              <input type="text" id="hvMoo" placeholder="5" class="w-full px-2.5 py-1.5 border rounded-xl font-bold bg-white">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-600 mb-0.5">ซอย</label>
+              <input type="text" id="hvSoi" placeholder="-" class="w-full px-2.5 py-1.5 border rounded-xl font-bold bg-white">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-600 mb-0.5">ถนน</label>
+              <input type="text" id="hvRoad" placeholder="-" class="w-full px-2.5 py-1.5 border rounded-xl font-bold bg-white">
+            </div>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            <div>
+              <label class="block font-bold text-slate-600 mb-0.5">แขวง/ตำบล</label>
+              <input type="text" id="hvSubdistrict" placeholder="ตะโกตาพี" class="w-full px-2.5 py-1.5 border rounded-xl font-bold bg-white">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-600 mb-0.5">เขต/อำเภอ</label>
+              <input type="text" id="hvDistrict" placeholder="ประโคนชัย" class="w-full px-2.5 py-1.5 border rounded-xl font-bold bg-white">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-600 mb-0.5">จังหวัด</label>
+              <input type="text" id="hvProvince" placeholder="บุรีรัมย์" class="w-full px-2.5 py-1.5 border rounded-xl font-bold bg-white">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-600 mb-0.5">รหัสไปรษณีย์</label>
+              <input type="text" id="hvPostalCode" placeholder="31140" class="w-full px-2.5 py-1.5 border rounded-xl font-bold bg-white">
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <div>
+              <label class="block font-bold text-slate-600 mb-0.5">เบอร์โทรศัพท์นักเรียน</label>
+              <input type="text" id="hvStudentPhone" placeholder="1234567890" class="w-full px-2.5 py-1.5 border rounded-xl font-mono font-bold bg-white">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-600 mb-0.5">อีเมลนักเรียน</label>
+              <input type="email" id="hvStudentEmail" placeholder="ddd@gmail.com" class="w-full px-2.5 py-1.5 border rounded-xl font-bold bg-white">
+            </div>
+          </div>
+        </div>
+
+        <!-- ตอนที่ 1 ข้อ 2 & 3: บิดา และ มารดา -->
+        <div class="p-3.5 bg-slate-50 border border-slate-200 rounded-xl space-y-3">
+          <div class="font-bold text-slate-800 text-xs flex items-center gap-1.5">
+            <i data-lucide="users" class="w-4 h-4 text-emerald-600"></i> ตอนที่ 1: ข้อ 2 & 3. ข้อมูลบิดาและมารดา
+          </div>
+          <!-- บิดา -->
+          <div class="border-l-2 border-emerald-500 pl-2.5 space-y-1.5">
+            <div class="font-bold text-emerald-900 text-[11px]">2. ข้อมูลบิดา</div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+              <div>
+                <label class="block text-slate-600 text-[10px] font-bold">บิดาชื่อ</label>
+                <input type="text" id="hvFatherName" placeholder="นายทด" class="w-full px-2 py-1 border rounded-lg font-bold bg-white">
+              </div>
+              <div>
+                <label class="block text-slate-600 text-[10px] font-bold">อายุ (ปี)</label>
+                <input type="number" id="hvFatherAge" value="50" class="w-full px-2 py-1 border rounded-lg font-bold bg-white">
+              </div>
+              <div>
+                <label class="block text-slate-600 text-[10px] font-bold">อาชีพ</label>
+                <input type="text" id="hvFatherJob" placeholder="รับจ้าง" class="w-full px-2 py-1 border rounded-lg font-bold bg-white">
+              </div>
+            </div>
+            <div class="grid grid-cols-3 gap-2">
+              <div>
+                <label class="block text-slate-600 text-[10px] font-bold">รายได้ต่อเดือน</label>
+                <input type="text" id="hvFatherIncome" placeholder="9000" class="w-full px-2 py-1 border rounded-lg font-bold bg-white">
+              </div>
+              <div>
+                <label class="block text-slate-600 text-[10px] font-bold">สถานที่ประกอบอาชีพ</label>
+                <input type="text" id="hvFatherWorkplace" placeholder="บ้าน" class="w-full px-2 py-1 border rounded-lg font-bold bg-white">
+              </div>
+              <div>
+                <label class="block text-slate-600 text-[10px] font-bold">เบอร์โทรศัพท์</label>
+                <input type="text" id="hvFatherPhone" placeholder="619670376" class="w-full px-2 py-1 border rounded-lg font-mono font-bold bg-white">
+              </div>
+            </div>
+          </div>
+
+          <!-- มารดา -->
+          <div class="border-l-2 border-rose-500 pl-2.5 space-y-1.5 pt-1">
+            <div class="font-bold text-rose-900 text-[11px]">3. ข้อมูลมารดา</div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+              <div>
+                <label class="block text-slate-600 text-[10px] font-bold">มารดาชื่อ</label>
+                <input type="text" id="hvMotherName" placeholder="นางละมุน เดทเกส" class="w-full px-2 py-1 border rounded-lg font-bold bg-white">
+              </div>
+              <div>
+                <label class="block text-slate-600 text-[10px] font-bold">อายุ (ปี)</label>
+                <input type="number" id="hvMotherAge" value="64" class="w-full px-2 py-1 border rounded-lg font-bold bg-white">
+              </div>
+              <div>
+                <label class="block text-slate-600 text-[10px] font-bold">อาชีพ</label>
+                <input type="text" id="hvMotherJob" placeholder="แม่บ้าน" class="w-full px-2 py-1 border rounded-lg font-bold bg-white">
+              </div>
+            </div>
+            <div class="grid grid-cols-3 gap-2">
+              <div>
+                <label class="block text-slate-600 text-[10px] font-bold">รายได้ต่อเดือน</label>
+                <input type="text" id="hvMotherIncome" placeholder="9000" class="w-full px-2 py-1 border rounded-lg font-bold bg-white">
+              </div>
+              <div>
+                <label class="block text-slate-600 text-[10px] font-bold">สถานที่ประกอบอาชีพ</label>
+                <input type="text" id="hvMotherWorkplace" placeholder="บ้าน" class="w-full px-2 py-1 border rounded-lg font-bold bg-white">
+              </div>
+              <div>
+                <label class="block text-slate-600 text-[10px] font-bold">เบอร์โทรศัพท์</label>
+                <input type="text" id="hvMotherPhone" placeholder="619670376" class="w-full px-2 py-1 border rounded-lg font-mono font-bold bg-white">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ตอนที่ 1 ข้อ 4: กรณีไม่ใช่ผู้ปกครอง -->
+        <div class="p-3.5 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
+          <div class="font-bold text-slate-800 text-[11px]">4. กรณีบิดา/มารดาไม่ใช่ผู้ปกครอง (หรือผู้ให้ข้อมูล)</div>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            <div class="sm:col-span-2">
+              <label class="block text-slate-600 text-[10px] font-bold">ชื่อผู้ปกครอง</label>
+              <input type="text" id="hvGuardianName" placeholder="นางละมุน เดทเกส" class="w-full px-2 py-1 border rounded-lg font-bold bg-white">
+            </div>
+            <div>
+              <label class="block text-slate-600 text-[10px] font-bold">อายุ (ปี)</label>
+              <input type="number" id="hvGuardianAge" value="64" class="w-full px-2 py-1 border rounded-lg font-bold bg-white">
+            </div>
+            <div>
+              <label class="block text-slate-600 text-[10px] font-bold">เกี่ยวข้องเป็น</label>
+              <input type="text" id="hvGuardianRelation" placeholder="ป้า / ยาย / ลุง" class="w-full px-2 py-1 border rounded-lg font-bold bg-white">
+            </div>
+          </div>
+          <div class="grid grid-cols-3 gap-2">
+            <div>
+              <label class="block text-slate-600 text-[10px] font-bold">อาชีพ</label>
+              <input type="text" id="hvGuardianJob" placeholder="แม่บ้าน" class="w-full px-2 py-1 border rounded-lg font-bold bg-white">
+            </div>
+            <div>
+              <label class="block text-slate-600 text-[10px] font-bold">รายได้ต่อเดือน</label>
+              <input type="text" id="hvGuardianIncome" placeholder="9000" class="w-full px-2 py-1 border rounded-lg font-bold bg-white">
+            </div>
+            <div>
+              <label class="block text-slate-600 text-[10px] font-bold">เบอร์โทรศัพท์</label>
+              <input type="text" id="hvGuardianPhone" placeholder="619670376" class="w-full px-2 py-1 border rounded-lg font-mono font-bold bg-white">
+            </div>
+          </div>
+        </div>
+
+        <!-- ตอนที่ 1 ข้อ 5, 6, 7: พี่น้อง การอยู่อาศัย และสถานะ -->
+        <div class="p-3.5 bg-slate-50 border border-slate-200 rounded-xl space-y-2.5">
+          <div class="font-bold text-slate-800 text-xs">ตอนที่ 1: ข้อ 5, 6, 7. ข้อมูลพี่น้อง การอยู่อาศัย และสถานะครอบครัว</div>
+          
+          <div class="grid grid-cols-3 gap-2">
+            <div>
+              <label class="block text-slate-600 text-[10px] font-bold">พี่น้องร่วมบิดามารดา (คน)</label>
+              <input type="number" id="hvSiblingsTotal" value="0" class="w-full px-2 py-1 border rounded-lg font-bold bg-white">
+            </div>
+            <div>
+              <label class="block text-slate-600 text-[10px] font-bold">กำลังศึกษาอยู่ (คน)</label>
+              <input type="number" id="hvSiblingsStudying" value="0" class="w-full px-2 py-1 border rounded-lg font-bold bg-white">
+            </div>
+            <div>
+              <label class="block text-slate-600 text-[10px] font-bold">ประกอบอาชีพ (คน)</label>
+              <input type="number" id="hvSiblingsWorking" value="0" class="w-full px-2 py-1 border rounded-lg font-bold bg-white">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-3 gap-2">
+            <div>
+              <label class="block text-slate-600 text-[10px] font-bold">พี่น้องต่างบิดามารดา (คน)</label>
+              <input type="number" id="hvHalfSiblingsTotal" value="0" class="w-full px-2 py-1 border rounded-lg font-bold bg-white">
+            </div>
+            <div>
+              <label class="block text-slate-600 text-[10px] font-bold">กำลังศึกษาอยู่ (คน)</label>
+              <input type="number" id="hvHalfSiblingsStudying" value="0" class="w-full px-2 py-1 border rounded-lg font-bold bg-white">
+            </div>
+            <div>
+              <label class="block text-slate-600 text-[10px] font-bold">ประกอบอาชีพ (คน)</label>
+              <input type="number" id="hvHalfSiblingsWorking" value="0" class="w-full px-2 py-1 border rounded-lg font-bold bg-white">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">6. นักเรียนอาศัยอยู่กับ</label>
+              <select id="hvLivingWith" class="w-full px-3 py-1.5 border rounded-xl font-bold bg-white">
+                <option value="บิดามารดา">บิดามารดา</option>
+                <option value="บิดา">บิดา</option>
+                <option value="มารดา">มารดา</option>
+                <option value="พี่/น้อง">พี่/น้อง</option>
+                <option value="ปู่/ย่า">ปู่/ย่า</option>
+                <option value="ตา/ยาย">ตา/ยาย</option>
+                <option value="อื่นๆ">อื่นๆ</option>
+              </select>
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">7. สถานะของครอบครัวนักเรียน</label>
+              <select id="hvFamilyStatusOption" class="w-full px-3 py-1.5 border rounded-xl font-bold bg-white">
+                <option value="อยู่ด้วยกัน">อยู่ด้วยกัน</option>
+                <option value="หย่าร้าง">หย่าร้าง</option>
+                <option value="แยกกันอยู่">แยกกันอยู่</option>
+                <option value="บิดาเสียชีวิต">บิดาเสียชีวิต</option>
+                <option value="มารดาเสียชีวิต">มารดาเสียชีวิต</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- ข้อสังเกต ภาพถ่าย และการยืนยัน -->
+        <div class="p-3.5 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
+          <div class="font-bold text-slate-800 text-xs">ตอนที่ 2: สภาพปัญหาและรูปภาพการเยี่ยมบ้าน</div>
           <div>
-            <label class="block font-bold text-slate-700 mb-1">วันที่เยี่ยมบ้าน *</label>
-            <input type="date" id="hvDate" value="2026-10-10" required class="w-full px-3 py-2 border rounded-xl font-bold">
+            <label class="block font-bold text-slate-600 mb-0.5">สภาพปัญหาที่พบ / พฤติกรรม</label>
+            <input type="text" id="hvProblem" placeholder="สภาพแวดล้อมที่บ้านมีความเหมาะสมต่อการเรียนรู้" class="w-full px-2.5 py-1.5 border rounded-xl font-bold bg-white">
           </div>
           <div>
-            <label class="block font-bold text-slate-700 mb-1">ชื่อผู้ปกครองที่ให้ข้อมูล</label>
-            <input type="text" id="hvParentName" placeholder="เช่น นายประเสริฐ บุญรอด" class="w-full px-3 py-2 border rounded-xl font-bold">
+            <label class="block font-bold text-slate-600 mb-0.5">ความช่วยเหลือที่ต้องการ / ข้อเสนอแนะ</label>
+            <input type="text" id="hvAssistance" placeholder="ประสานงานและติดตามผลการเรียนรู้ร่วมกับผู้ปกครอง" class="w-full px-2.5 py-1.5 border rounded-xl font-bold bg-white">
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <div>
+              <label class="block font-bold text-slate-600 mb-0.5">ลิงก์ภาพถ่ายสภาพบ้าน</label>
+              <input type="url" id="hvPhotoHouseUrl" placeholder="https://..." class="w-full px-2.5 py-1.5 border rounded-xl font-mono text-[11px] bg-white">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-600 mb-0.5">ลิงก์ภาพถ่ายร่วมกับครอบครัว</label>
+              <input type="url" id="hvPhotoFamilyUrl" placeholder="https://..." class="w-full px-2.5 py-1.5 border rounded-xl font-mono text-[11px] bg-white">
+            </div>
+          </div>
+          <div class="flex items-center gap-4 pt-1">
+            <label class="flex items-center gap-1.5 font-bold text-slate-700"><input type="checkbox" id="hvTeacherSign" checked class="w-4 h-4 rounded text-blue-600"> ครูลงนามรับรอง</label>
+            <label class="flex items-center gap-1.5 font-bold text-slate-700"><input type="checkbox" id="hvParentSign" checked class="w-4 h-4 rounded text-emerald-600"> ผู้ปกครองลงนามรับรอง</label>
           </div>
         </div>
-        <div class="grid grid-cols-2 gap-2">
-          <div>
-            <label class="block font-bold text-slate-700 mb-1">สถานภาพครอบครัว</label>
-            <select id="hvFamilyStatus" class="w-full px-3 py-2 border rounded-xl font-bold bg-white">
-              <option value="บิดามารดาอยู่ร่วมกัน">บิดามารดาอยู่ร่วมกัน</option>
-              <option value="บิดามารดาแยกกันอยู่">บิดามารดาแยกกันอยู่</option>
-              <option value="บิดาหรือมารดาเสียชีวิต">บิดาหรือมารดาเสียชีวิต</option>
-              <option value="อยู่กับญาติ / ผู้อุปการะ">อยู่กับญาติ / ผู้อุปการะ</option>
-            </select>
-          </div>
-          <div>
-            <label class="block font-bold text-slate-700 mb-1">ลักษณะที่อยู่อาศัย</label>
-            <select id="hvHousingType" class="w-full px-3 py-2 border rounded-xl font-bold bg-white">
-              <option value="บ้านตนเอง มั่นคงแข็งแรง">บ้านตนเอง มั่นคงแข็งแรง</option>
-              <option value="บ้านเช่า / หอพัก">บ้านเช่า / หอพัก</option>
-              <option value="บ้านพักคนงาน">บ้านพักคนงาน</option>
-              <option value="สภาพทรุดโทรม / ไม่ปลอดภัย">สภาพทรุดโทรม / ไม่ปลอดภัย</option>
-            </select>
-          </div>
-        </div>
-        <div>
-          <label class="block font-bold text-slate-700 mb-1">ปัญหาที่พบ / สภาพแวดล้อม</label>
-          <textarea id="hvProblem" rows="2" placeholder="ระบุด้านการเรียน ด้านเศรษฐกิจ หรือสุขภาพ..." class="w-full px-3 py-2 border rounded-xl"></textarea>
-        </div>
-        <div>
-          <label class="block font-bold text-slate-700 mb-1">ความช่วยเหลือที่ต้องการจากโรงเรียน (ทุนการศึกษา / อื่นๆ)</label>
-          <input type="text" id="hvAssistance" placeholder="เช่น ขอรับทุนปัจจัยพื้นฐานนักเรียนยากจน" class="w-full px-3 py-2 border rounded-xl font-bold">
-        </div>
-        <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
-          <div class="font-bold text-slate-800">การยืนยันและลายเซ็นดิจิทัล</div>
-          <div class="flex items-center gap-3">
-            <label class="flex items-center gap-1.5"><input type="checkbox" id="hvTeacherSign" checked class="w-4 h-4 rounded text-blue-600"> ครูลงนามรับรอง</label>
-            <label class="flex items-center gap-1.5"><input type="checkbox" id="hvParentSign" checked class="w-4 h-4 rounded text-emerald-600"> ผู้ปกครองลงนามรับรอง</label>
-          </div>
-        </div>
+
         <div class="pt-2 flex gap-2">
           <button type="submit" class="flex-1 btn-ega-primary py-2.5 font-bold">บันทึกรายงานเยี่ยมบ้าน</button>
           <button type="button" onclick="closeModal('modalNewHomeVisit')" class="px-4 py-2.5 border rounded-xl text-slate-600 font-bold">ยกเลิก</button>
@@ -5060,43 +5316,131 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
       homeVisits: [
         {
           id: 'HV001',
-          studentId: 'S67001',
-          name: 'ด.ช.ณัฐพล บุญรอด',
+          studentId: '12344',
+          title: 'นาย',
+          firstName: 'ทดสอบ',
+          lastName: 'เรียนดี',
+          nickname: 'เก้า',
+          number: 1,
           class: 'ม.1/1',
-          visitDate: '2026-09-20',
-          teacherName: 'ครูสมใจ สดใส',
-          parentName: 'นายประเสริฐ บุญรอด',
-          familyStatus: 'บิดามารดาอยู่ร่วมกัน',
-          housingType: 'บ้านตนเอง มั่นคงแข็งแรง',
+          visitDate: '2026-05-05',
+          advisor1: 'ครูเปิงมาง วงศ์ดนตรี',
+          advisor2: 'ครูสมใจ สดใส',
+          houseNo: '1',
+          moo: '5',
+          soi: '-',
+          road: '-',
+          subdistrict: 'ตะโกตาพี',
+          district: 'ประโคนชัย',
+          province: 'บุรีรัมย์',
+          postalCode: '31140',
+          studentPhone: '1234567890',
+          studentEmail: 'ddd@gmail.com',
+          fatherName: 'นายทด',
+          fatherAge: 50,
+          fatherJob: 'รับจ้าง',
+          fatherIncome: '9000',
+          fatherWorkplace: 'บ้าน',
+          fatherPhone: '619670376',
+          motherName: 'นางละมุน เดทเกส',
+          motherAge: 64,
+          motherJob: 'แม่บ้าน',
+          motherIncome: '9000',
+          motherWorkplace: 'บ้าน',
+          motherPhone: '619670376',
+          guardianName: 'นางละมุน เดทเกส',
+          guardianAge: 64,
+          guardianRelation: '-',
+          guardianJob: 'แม่บ้าน',
+          guardianIncome: '9000',
+          guardianWorkplace: 'บ้าน',
+          guardianPhone: '619670376',
+          siblingsTotal: 0,
+          siblingsStudying: 0,
+          siblingsWorking: 0,
+          halfSiblingsTotal: 0,
+          halfSiblingsStudying: 0,
+          halfSiblingsWorking: 0,
+          livingWith: 'บิดามารดา',
+          familyStatusOption: 'อยู่ด้วยกัน',
+          name: 'นายทดสอบ เรียนดี',
+          teacherName: 'ครูเปิงมาง วงศ์ดนตรี',
+          parentName: 'นางละมุน เดทเกส',
+          familyStatus: 'อยู่ด้วยกัน',
+          housingType: 'บ้านพักอาศัยตนเอง',
           incomeMonthly: 18000,
           commuteMethod: 'เดินเท้า / จักรยาน',
-          hobby: 'ช่วยงานบ้าน และทำการบ้าน',
-          problemObserved: 'ขาดแคลนอุปกรณ์คอมพิวเตอร์สำหรับการสืบค้น',
-          assistanceNeeded: 'ขอรับทุนการศึกษาเพื่อการศึกษาต่อเนื่อง',
+          hobby: 'ช่วยงานบ้าน และทบทวนบทเรียน',
+          problemObserved: 'สภาพแวดล้อมที่บ้านมีความเหมาะสมต่อการเรียนรู้ มีความอบอุ่นในครอบครัว',
+          assistanceNeeded: 'ส่งเสริมการพัฒนาทักษะวิชาการและการจัดสรรเวลาอ่านหนังสือ',
           teacherSigned: true,
           parentSigned: true,
-          photoHouseUrl: 'https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=400&q=80',
-          photoFamilyUrl: 'https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=400&q=80'
+          photoHouseUrl: 'https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=600&q=80',
+          photoFamilyUrl: 'https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=600&q=80'
         },
         {
           id: 'HV002',
-          studentId: 'S67003',
-          name: 'ด.ช.ธนกฤต ชัยชนะ',
+          studentId: 'S67001',
+          title: 'ด.ช.',
+          firstName: 'ณัฐพล',
+          lastName: 'บุญรอด',
+          nickname: 'บอล',
+          number: 1,
           class: 'ม.1/1',
-          visitDate: '2026-09-22',
+          visitDate: '2026-09-20',
+          advisor1: 'ครูสมใจ สดใส',
+          advisor2: 'ครูวิชาญ มั่นคง',
+          houseNo: '45/2',
+          moo: '3',
+          soi: 'ร่วมใจ 4',
+          road: 'หนองบัว-ศรีบุญเรือง',
+          subdistrict: 'หนองบัว',
+          district: 'เมืองหนองบัวลำภู',
+          province: 'หนองบัวลำภู',
+          postalCode: '39000',
+          studentPhone: '081-2345678',
+          studentEmail: 'nattapon@school.ac.th',
+          fatherName: 'นายประเสริฐ บุญรอด',
+          fatherAge: 48,
+          fatherJob: 'เกษตรกร',
+          fatherIncome: '12000',
+          fatherWorkplace: 'สวนเกษตรผสมผสาน',
+          fatherPhone: '081-2345678',
+          motherName: 'นางสมศรี บุญรอด',
+          motherAge: 45,
+          motherJob: 'ค้าขาย',
+          motherIncome: '10000',
+          motherWorkplace: 'ตลาดสดเทศบาล',
+          motherPhone: '081-9876543',
+          guardianName: 'นายประเสริฐ บุญรอด',
+          guardianAge: 48,
+          guardianRelation: 'บิดา',
+          guardianJob: 'เกษตรกร',
+          guardianIncome: '12000',
+          guardianWorkplace: 'สวนเกษตรผสมผสาน',
+          guardianPhone: '081-2345678',
+          siblingsTotal: 2,
+          siblingsStudying: 2,
+          siblingsWorking: 0,
+          halfSiblingsTotal: 0,
+          halfSiblingsStudying: 0,
+          halfSiblingsWorking: 0,
+          livingWith: 'บิดามารดา',
+          familyStatusOption: 'อยู่ด้วยกัน',
+          name: 'ด.ช.ณัฐพล บุญรอด',
           teacherName: 'ครูสมใจ สดใส',
-          parentName: 'นายสมบัติ ชัยชนะ',
-          familyStatus: 'บิดามารดาอยู่ร่วมกัน',
-          housingType: 'บ้านพักอาศัยตนเอง',
-          incomeMonthly: 25000,
-          commuteMethod: 'ผู้ปกครองมาส่งโดยรถจักรยานยนต์',
-          hobby: 'เล่นกีฬาฟุตบอล',
-          problemObserved: 'พฤติกรรมการเล่นเกมในช่วงดึก',
-          assistanceNeeded: 'ให้คำปรึกษาด้านการจัดสรรเวลาเรียน',
+          parentName: 'นายประเสริฐ บุญรอด',
+          familyStatus: 'อยู่ด้วยกัน',
+          housingType: 'บ้านเดี่ยวชั้นเดียว',
+          incomeMonthly: 22000,
+          commuteMethod: 'จักรยาน',
+          hobby: 'อ่านหนังสือและช่วยงานเกษตร',
+          problemObserved: 'ขาดแคลนอุปกรณ์คอมพิวเตอร์สำหรับการสืบค้นข้อมูลเพิ่มเติม',
+          assistanceNeeded: 'เสนอขอรับทุนการศึกษาและสนับสนุนอุปกรณ์การเรียนรู้',
           teacherSigned: true,
           parentSigned: true,
-          photoHouseUrl: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=400&q=80',
-          photoFamilyUrl: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=400&q=80'
+          photoHouseUrl: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=600&q=80',
+          photoFamilyUrl: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=600&q=80'
         }
       ],
 
@@ -5672,6 +6016,60 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
         state.ext.researchItems.forEach(r => {
           if (r.driveUrl && (r.driveUrl.includes('1demoResearch') || r.driveUrl.includes('/car_') || r.driveUrl.includes('mock_car'))) {
             r.driveUrl = '';
+          }
+        });
+      }
+
+      // Ensure homeVisits have complete fields for OBEC form matching official template
+      if (Array.isArray(state.ext.homeVisits)) {
+        state.ext.homeVisits.forEach(v => {
+          if (!v.title) {
+            v.title = v.name?.startsWith('ด.ญ.') ? 'ด.ญ.' : (v.name?.startsWith('ด.ช.') ? 'ด.ช.' : (v.name?.startsWith('นางสาว') ? 'นางสาว' : 'นาย'));
+            const cleanName = (v.name || '').replace(/^(ด\.ช\.|ด\.ญ\.|นาย|นางสาว)\s*/, '');
+            const parts = cleanName.split(' ');
+            v.firstName = v.firstName || parts[0] || 'ทดสอบ';
+            v.lastName = v.lastName || parts.slice(1).join(' ') || 'เรียนดี';
+            v.nickname = v.nickname || 'เก้า';
+            v.number = v.number || 1;
+            v.advisor1 = v.advisor1 || v.teacherName || 'ครูเปิงมาง วงศ์ดนตรี';
+            v.advisor2 = v.advisor2 || 'ครูสมใจ สดใส';
+            v.houseNo = v.houseNo || '1';
+            v.moo = v.moo || '5';
+            v.soi = v.soi || '-';
+            v.road = v.road || '-';
+            v.subdistrict = v.subdistrict || 'ตะโกตาพี';
+            v.district = v.district || 'ประโคนชัย';
+            v.province = v.province || 'บุรีรัมย์';
+            v.postalCode = v.postalCode || '31140';
+            v.studentPhone = v.studentPhone || '1234567890';
+            v.studentEmail = v.studentEmail || 'ddd@gmail.com';
+            v.fatherName = v.fatherName || 'นายทด';
+            v.fatherAge = v.fatherAge || 50;
+            v.fatherJob = v.fatherJob || 'รับจ้าง';
+            v.fatherIncome = v.fatherIncome || '9000';
+            v.fatherWorkplace = v.fatherWorkplace || 'บ้าน';
+            v.fatherPhone = v.fatherPhone || '619670376';
+            v.motherName = v.motherName || 'นางละมุน เดทเกส';
+            v.motherAge = v.motherAge || 64;
+            v.motherJob = v.motherJob || 'แม่บ้าน';
+            v.motherIncome = v.motherIncome || '9000';
+            v.motherWorkplace = v.motherWorkplace || 'บ้าน';
+            v.motherPhone = v.motherPhone || '619670376';
+            v.guardianName = v.guardianName || v.parentName || 'นางละมุน เดทเกส';
+            v.guardianAge = v.guardianAge || 64;
+            v.guardianRelation = v.guardianRelation || '-';
+            v.guardianJob = v.guardianJob || 'แม่บ้าน';
+            v.guardianIncome = v.guardianIncome || '9000';
+            v.guardianWorkplace = v.guardianWorkplace || 'บ้าน';
+            v.guardianPhone = v.guardianPhone || '619670376';
+            v.siblingsTotal = v.siblingsTotal ?? 0;
+            v.siblingsStudying = v.siblingsStudying ?? 0;
+            v.siblingsWorking = v.siblingsWorking ?? 0;
+            v.halfSiblingsTotal = v.halfSiblingsTotal ?? 0;
+            v.halfSiblingsStudying = v.halfSiblingsStudying ?? 0;
+            v.halfSiblingsWorking = v.halfSiblingsWorking ?? 0;
+            v.livingWith = v.livingWith || 'บิดามารดา';
+            v.familyStatusOption = v.familyStatusOption || 'อยู่ด้วยกัน';
           }
         });
       }
@@ -6617,6 +7015,25 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
     // -------------------------------------------------------------------------
     // 6. ONLINE HOME VISIT SYSTEM (สพฐ.) (ข้อ 6)
     // -------------------------------------------------------------------------
+    function formatThaiDate(dStr) {
+      if (!dStr) return '';
+      const parts = String(dStr).split('T')[0].split('-');
+      if (parts.length === 3) {
+        let year = parseInt(parts[0], 10);
+        const monthIdx = parseInt(parts[1], 10) - 1;
+        const day = parseInt(parts[2], 10);
+        if (!isNaN(day) && !isNaN(monthIdx) && monthIdx >= 0 && monthIdx < 12) {
+          if (year < 2400) year += 543;
+          const thaiMonths = [
+            'มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน',
+            'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'
+          ];
+          return `${day} ${thaiMonths[monthIdx]} ${year}`;
+        }
+      }
+      return dStr;
+    }
+
     function renderHomeVisitsGrid() {
       initExtendedState();
       const container = document.getElementById('homeVisitCardsContainer');
@@ -6636,34 +7053,44 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
                 <i data-lucide="home" class="w-5 h-5"></i>
               </div>
               <div>
-                <h4 class="font-bold text-slate-900 text-sm">${v.name} (${v.class})</h4>
-                <p class="text-[11px] text-slate-500">วันที่เยี่ยม: ${v.visitDate} | ครูผู้เยี่ยม: ${v.teacherName}</p>
+                <h4 class="font-bold text-slate-900 text-sm">${v.title || ''}${v.name} ${v.nickname ? '(' + v.nickname + ')' : ''} (${v.class})</h4>
+                <p class="text-[11px] text-slate-500">เลขประจำตัว: ${v.studentId || '-'} | วันที่เยี่ยม: ${formatThaiDate(v.visitDate)}</p>
               </div>
             </div>
             <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-200">
-              ✓ ลงลายเซ็นครบถ้วน
+              ✓ บันทึก สพฐ. ครบถ้วน
             </span>
           </div>
 
           <div class="grid grid-cols-2 gap-2 text-xs text-slate-700 bg-slate-50 p-2.5 rounded-xl border border-slate-100">
-            <div><strong>ผู้ปกครอง:</strong> ${v.parentName}</div>
-            <div><strong>สถานภาพ:</strong> ${v.familyStatus}</div>
-            <div><strong>ที่อยู่อาศัย:</strong> ${v.housingType}</div>
-            <div><strong>รายได้ครอบครัว:</strong> ${v.incomeMonthly.toLocaleString()} ฿/เดือน</div>
+            <div><strong>ครูที่ปรึกษา 1:</strong> ${v.advisor1 || v.teacherName || '-'}</div>
+            <div><strong>ครูที่ปรึกษา 2:</strong> ${v.advisor2 || '-'}</div>
+            <div><strong>ผู้ปกครอง:</strong> ${v.guardianName || v.parentName || '-'}</div>
+            <div><strong>สถานภาพ:</strong> ${v.familyStatusOption || v.familyStatus || 'อยู่ด้วยกัน'}</div>
+            <div class="col-span-2 text-[11px] text-slate-600"><strong>ที่อยู่:</strong> บ้านเลขที่ ${v.houseNo || '-'} ม.${v.moo || '-'} ต.${v.subdistrict || '-'} อ.${v.district || '-'} จ.${v.province || '-'}</div>
           </div>
 
           <div class="text-xs text-slate-600 space-y-1">
-            <div><strong>ปัญหาที่พบ:</strong> ${v.problemObserved}</div>
-            <div class="text-amber-800"><strong>การช่วยเหลือที่จำเป็น:</strong> ${v.assistanceNeeded}</div>
+            <div><strong>ปัญหา/สภาพแวดล้อม:</strong> ${v.problemObserved || '-'}</div>
+            <div class="text-amber-800"><strong>การช่วยเหลือที่จำเป็น:</strong> ${v.assistanceNeeded || '-'}</div>
           </div>
 
           <div class="grid grid-cols-2 gap-2 pt-1">
-            <img src="${v.photoHouseUrl}" alt="สภาพบ้าน" class="w-full h-24 object-cover rounded-xl border border-slate-200">
-            <img src="${v.photoFamilyUrl}" alt="รูปถ่ายครอบครัว" class="w-full h-24 object-cover rounded-xl border border-slate-200">
+            <div class="relative">
+              <img src="${v.photoHouseUrl}" alt="สภาพบ้าน" class="w-full h-24 object-cover rounded-xl border border-slate-200">
+              <span class="absolute bottom-1 left-1 px-1.5 py-0.5 bg-black/60 text-white text-[9px] rounded font-semibold">1. สภาพบ้าน</span>
+            </div>
+            <div class="relative">
+              <img src="${v.photoFamilyUrl}" alt="รูปถ่ายครอบครัว" class="w-full h-24 object-cover rounded-xl border border-slate-200">
+              <span class="absolute bottom-1 left-1 px-1.5 py-0.5 bg-black/60 text-white text-[9px] rounded font-semibold">2. รูปครอบครัว</span>
+            </div>
           </div>
 
-          <div class="pt-2 flex justify-end gap-2 border-t border-slate-100">
-            <button onclick="printSingleHomeVisitReport('${v.id}')" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs flex items-center gap-1.5 shadow">
+          <div class="pt-2 flex flex-wrap justify-end gap-2 border-t border-slate-100">
+            <button onclick="downloadHomeVisitWordDoc('${v.id}')" class="px-3 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs flex items-center gap-1.5 shadow transition">
+              <i data-lucide="file-down" class="w-3.5 h-3.5 text-blue-200"></i> ดาวน์โหลด Word (.doc)
+            </button>
+            <button onclick="printSingleHomeVisitReport('${v.id}')" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs flex items-center gap-1.5 shadow transition">
               <i data-lucide="printer" class="w-3.5 h-3.5 text-amber-400"></i> พิมพ์แบบรายงาน สพฐ. (2 หน้า)
             </button>
           </div>
@@ -6672,111 +7099,460 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
       if (window.lucide) lucide.createIcons();
     }
 
+    function onHomeVisitStudentChanged() {
+      const sel = document.getElementById('hvStudentSelect');
+      if (!sel) return;
+      const stuId = sel.value;
+      initExtendedState();
+      const stu = (state.ext.dmcStudents || []).find(s => s.studentId === stuId) || 
+                  (state.students || []).find(s => s.id === stuId || s.studentId === stuId);
+      if (!stu) return;
+
+      const titleInput = document.getElementById('hvTitle');
+      const firstInput = document.getElementById('hvFirstName');
+      const lastInput = document.getElementById('hvLastName');
+      const idInput = document.getElementById('hvStudentId');
+      const numInput = document.getElementById('hvNumber');
+      const classInput = document.getElementById('hvClass');
+      const pNameInput = document.getElementById('hvGuardianName');
+      const phoneInput = document.getElementById('hvStudentPhone');
+
+      if (titleInput && stu.title) titleInput.value = stu.title;
+      if (firstInput) {
+        firstInput.value = stu.firstName || (stu.name ? stu.name.replace(/^(ด\.ช\.|ด\.ญ\.|นาย|นางสาว)\s*/, '').split(' ')[0] : '');
+      }
+      if (lastInput) {
+        lastInput.value = stu.lastName || (stu.name ? stu.name.replace(/^(ด\.ช\.|ด\.ญ\.|นาย|นางสาว)\s*/, '').split(' ').slice(1).join(' ') : '');
+      }
+      if (idInput) idInput.value = stu.studentId || stu.id || '';
+      if (numInput && stu.number) numInput.value = stu.number;
+      if (classInput && (stu.classroom || stu.class)) classInput.value = stu.classroom || stu.class;
+      if (pNameInput && stu.parentName) pNameInput.value = stu.parentName;
+      if (phoneInput && stu.phone) phoneInput.value = stu.phone;
+
+      const adv1 = document.getElementById('hvAdvisor1');
+      const adv2 = document.getElementById('hvAdvisor2');
+      if (adv1 && !adv1.value) adv1.value = state.teachers?.[0]?.name || 'ครูสมใจ สดใส';
+      if (adv2 && !adv2.value) adv2.value = state.teachers?.[1]?.name || 'ครูวิชาญ มั่นคง';
+    }
+
     function openModalNewHomeVisit() {
       document.getElementById('formHomeVisit').reset();
       document.getElementById('hvDate').value = new Date().toISOString().split('T')[0];
       populateStudentSelect('hvStudentSelect');
+      onHomeVisitStudentChanged();
       openModal('modalNewHomeVisit');
     }
 
     function handleSaveHomeVisit(e) {
       e.preventDefault();
       initExtendedState();
-      const stuId = document.getElementById('hvStudentSelect').value;
-      const stuObj = state.ext.dmcStudents.find(x => x.studentId === stuId) || { name: 'นักเรียน' };
+      const stuId = document.getElementById('hvStudentId')?.value.trim() || document.getElementById('hvStudentSelect')?.value || 'S67001';
+      const title = document.getElementById('hvTitle')?.value.trim() || 'นาย';
+      const firstName = document.getElementById('hvFirstName')?.value.trim() || 'ทดสอบ';
+      const lastName = document.getElementById('hvLastName')?.value.trim() || 'เรียนดี';
+      const fullName = `${title}${firstName} ${lastName}`.trim();
 
       const newVisit = {
         id: 'HV' + String(Date.now()).slice(-4),
         studentId: stuId,
-        name: stuObj.title ? (stuObj.title + stuObj.firstName + ' ' + stuObj.lastName) : stuObj.name,
-        class: stuObj.classroom || 'ม.1/1',
-        visitDate: document.getElementById('hvDate').value,
-        teacherName: 'ครูสมใจ สดใส',
-        parentName: document.getElementById('hvParentName').value.trim() || 'ผู้ปกครอง',
-        familyStatus: document.getElementById('hvFamilyStatus').value,
-        housingType: document.getElementById('hvHousingType').value,
-        incomeMonthly: 15000,
+        title: title,
+        firstName: firstName,
+        lastName: lastName,
+        name: fullName,
+        nickname: document.getElementById('hvNickname')?.value.trim() || 'เก้า',
+        number: parseInt(document.getElementById('hvNumber')?.value) || 1,
+        class: document.getElementById('hvClass')?.value.trim() || 'ม.1/1',
+        visitDate: document.getElementById('hvDate')?.value || new Date().toISOString().split('T')[0],
+        advisor1: document.getElementById('hvAdvisor1')?.value.trim() || 'ครูเปิงมาง วงศ์ดนตรี',
+        advisor2: document.getElementById('hvAdvisor2')?.value.trim() || 'ครูสมใจ สดใส',
+        teacherName: document.getElementById('hvAdvisor1')?.value.trim() || 'ครูเปิงมาง วงศ์ดนตรี',
+
+        houseNo: document.getElementById('hvHouseNo')?.value.trim() || '1',
+        moo: document.getElementById('hvMoo')?.value.trim() || '5',
+        soi: document.getElementById('hvSoi')?.value.trim() || '-',
+        road: document.getElementById('hvRoad')?.value.trim() || '-',
+        subdistrict: document.getElementById('hvSubdistrict')?.value.trim() || 'ตะโกตาพี',
+        district: document.getElementById('hvDistrict')?.value.trim() || 'ประโคนชัย',
+        province: document.getElementById('hvProvince')?.value.trim() || 'บุรีรัมย์',
+        postalCode: document.getElementById('hvPostalCode')?.value.trim() || '31140',
+        studentPhone: document.getElementById('hvStudentPhone')?.value.trim() || '1234567890',
+        studentEmail: document.getElementById('hvStudentEmail')?.value.trim() || 'ddd@gmail.com',
+
+        fatherName: document.getElementById('hvFatherName')?.value.trim() || 'นายทด',
+        fatherAge: parseInt(document.getElementById('hvFatherAge')?.value) || 50,
+        fatherJob: document.getElementById('hvFatherJob')?.value.trim() || 'รับจ้าง',
+        fatherIncome: document.getElementById('hvFatherIncome')?.value.trim() || '9000',
+        fatherWorkplace: document.getElementById('hvFatherWorkplace')?.value.trim() || 'บ้าน',
+        fatherPhone: document.getElementById('hvFatherPhone')?.value.trim() || '619670376',
+
+        motherName: document.getElementById('hvMotherName')?.value.trim() || 'นางละมุน เดทเกส',
+        motherAge: parseInt(document.getElementById('hvMotherAge')?.value) || 64,
+        motherJob: document.getElementById('hvMotherJob')?.value.trim() || 'แม่บ้าน',
+        motherIncome: document.getElementById('hvMotherIncome')?.value.trim() || '9000',
+        motherWorkplace: document.getElementById('hvMotherWorkplace')?.value.trim() || 'บ้าน',
+        motherPhone: document.getElementById('hvMotherPhone')?.value.trim() || '619670376',
+
+        guardianName: document.getElementById('hvGuardianName')?.value.trim() || 'นางละมุน เดทเกส',
+        guardianAge: parseInt(document.getElementById('hvGuardianAge')?.value) || 64,
+        guardianRelation: document.getElementById('hvGuardianRelation')?.value.trim() || '-',
+        guardianJob: document.getElementById('hvGuardianJob')?.value.trim() || 'แม่บ้าน',
+        guardianIncome: document.getElementById('hvGuardianIncome')?.value.trim() || '9000',
+        guardianWorkplace: document.getElementById('hvGuardianWorkplace')?.value.trim() || 'บ้าน',
+        guardianPhone: document.getElementById('hvGuardianPhone')?.value.trim() || '619670376',
+        parentName: document.getElementById('hvGuardianName')?.value.trim() || 'นางละมุน เดทเกส',
+
+        siblingsTotal: parseInt(document.getElementById('hvSiblingsTotal')?.value) || 0,
+        siblingsStudying: parseInt(document.getElementById('hvSiblingsStudying')?.value) || 0,
+        siblingsWorking: parseInt(document.getElementById('hvSiblingsWorking')?.value) || 0,
+        halfSiblingsTotal: parseInt(document.getElementById('hvHalfSiblingsTotal')?.value) || 0,
+        halfSiblingsStudying: parseInt(document.getElementById('hvHalfSiblingsStudying')?.value) || 0,
+        halfSiblingsWorking: parseInt(document.getElementById('hvHalfSiblingsWorking')?.value) || 0,
+
+        livingWith: document.getElementById('hvLivingWith')?.value || 'บิดามารดา',
+        familyStatusOption: document.getElementById('hvFamilyStatusOption')?.value || 'อยู่ด้วยกัน',
+        familyStatus: document.getElementById('hvFamilyStatusOption')?.value || 'อยู่ด้วยกัน',
+        housingType: 'บ้านพักอาศัยตนเอง',
+        incomeMonthly: parseInt(document.getElementById('hvFatherIncome')?.value) || 18000,
         commuteMethod: 'เดินเท้า / จักรยาน',
-        hobby: 'ช่วยงานบ้าน',
-        problemObserved: document.getElementById('hvProblem').value.trim() || 'สภาพปกติ',
-        assistanceNeeded: document.getElementById('hvAssistance').value.trim() || 'ติดตามดูแลการเรียน',
-        teacherSigned: document.getElementById('hvTeacherSign').checked,
-        parentSigned: document.getElementById('hvParentSign').checked,
-        photoHouseUrl: 'https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=400&q=80',
-        photoFamilyUrl: 'https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=400&q=80'
+        hobby: 'ช่วยงานบ้าน และทบทวนบทเรียน',
+
+        problemObserved: document.getElementById('hvProblem')?.value.trim() || 'สภาพแวดล้อมที่บ้านมีความเหมาะสมต่อการเรียนรู้',
+        assistanceNeeded: document.getElementById('hvAssistance')?.value.trim() || 'ประสานงานและติดตามผลการเรียนรู้ร่วมกับผู้ปกครอง',
+        photoHouseUrl: document.getElementById('hvPhotoHouseUrl')?.value.trim() || 'https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=600&q=80',
+        photoFamilyUrl: document.getElementById('hvPhotoFamilyUrl')?.value.trim() || 'https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=600&q=80',
+        teacherSigned: document.getElementById('hvTeacherSign')?.checked,
+        parentSigned: document.getElementById('hvParentSign')?.checked
       };
 
       state.ext.homeVisits.unshift(newVisit);
       saveExtendedState();
       closeModal('modalNewHomeVisit');
       renderHomeVisitsGrid();
-      showToast('บันทึกการเยี่ยมบ้านนักเรียนเรียบร้อยแล้ว');
+      showToast('บันทึกรายงานการเยี่ยมบ้านนักเรียน (สพฐ.) เรียบร้อยแล้ว');
+    }
+
+    function getHomeVisitReportHtml(v, isWordDoc = false) {
+      const schoolName = state.schoolInfo?.schoolName || 'โรงเรียนฝันใหม่';
+      const academicYear = state.schoolInfo?.academicYear || '2569';
+      const logoUrl = state.schoolInfo?.logoUrl || 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=150&q=80';
+      const thaiDate = formatThaiDate(v.visitDate) || v.visitDate || '5 พฤษภาคม 2569';
+
+      const blank = (val, minW = '80px') => {
+        const text = (val !== undefined && val !== null && val !== '') ? String(val) : '';
+        if (isWordDoc) {
+          return `<span style="border-bottom:1px dotted #000; text-decoration:underline; font-weight:bold; min-width:${minW}; padding:0 4px;">&nbsp;${text || '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'}&nbsp;</span>`;
+        }
+        return `<span class="fill-blank" style="border-bottom:1px dotted #333; display:inline-block; min-width:${minW}; text-align:center; padding:0 4px; font-weight:600; color:#000;">${text || '&nbsp;'}</span>`;
+      };
+
+      const chk = (cond) => {
+        return cond ? '&#9745;' : '&#9744;';
+      };
+
+      return `
+        <div style="font-family:'TH Sarabun PSK', 'TH Sarabun New', 'Sarabun', sans-serif; font-size:14pt; color:#000; line-height:1.45; max-width:820px; margin:0 auto; padding:10px 20px;">
+          
+          <!-- ================= PAGE 1 ================= -->
+          <div style="text-align:center; margin-bottom:12px;">
+            <img src="${logoUrl}" alt="ตราโรงเรียน" style="width:62px; height:62px; object-fit:contain; margin-bottom:4px;" />
+            <div style="font-size:18pt; font-weight:bold; line-height:1.2;">เยี่ยมบ้านนักเรียนรายบุคคล</div>
+            <div style="font-size:15pt; font-weight:bold; line-height:1.2;">${schoolName} ปีการศึกษา ${academicYear}</div>
+          </div>
+
+          <div style="margin-bottom:10px; font-size:14pt; line-height:1.75;">
+            <div>
+              คำนำหน้าชื่อ ${blank(v.title || '', '50px')}
+              ชื่อ ${blank(v.firstName || v.name?.split(' ')[0] || '', '140px')}
+              นามสกุล ${blank(v.lastName || v.name?.split(' ').slice(1).join(' ') || '', '150px')}
+              ชื่อเล่น ${blank(v.nickname || '', '80px')}
+            </div>
+            <div>
+              เลขประจำตัว ${blank(v.studentId || '', '100px')}
+              เลขที่ ${blank(v.number || '1', '50px')}
+              ชั้น ${blank(v.class || '', '80px')}
+              วันที่เยี่ยมบ้าน ${blank(thaiDate, '140px')}
+            </div>
+            <div>
+              คุณครูที่ปรึกษา 1 ${blank(v.advisor1 || v.teacherName || '', '210px')}
+              คุณครูที่ปรึกษา 2 ${blank(v.advisor2 || '', '210px')}
+            </div>
+          </div>
+
+          <div style="border-bottom:1px dotted #333; margin:8px 0 12px 0;"></div>
+
+          <div style="font-size:16pt; font-weight:bold; margin-bottom:8px;">ตอนที่ 1 ข้อมูลส่วนตัว</div>
+
+          <!-- ข้อ 1. ที่อยู่ปัจจุบัน -->
+          <div style="margin-bottom:10px; line-height:1.75;">
+            <div style="font-weight:bold;">1. ข้อมูลที่อยู่ปัจจุบัน</div>
+            <div style="padding-left:14px;">
+              <div>
+                บ้านเลขที่ ${blank(v.houseNo || '-', '50px')}
+                หมู่ที่ ${blank(v.moo || '-', '40px')}
+                ซอย ${blank(v.soi || '-', '90px')}
+                ถนน ${blank(v.road || '-', '110px')}
+              </div>
+              <div>
+                แขวง/ตำบล ${blank(v.subdistrict || '-', '120px')}
+                เขต/อำเภอ ${blank(v.district || '-', '120px')}
+                จังหวัด ${blank(v.province || '-', '120px')}
+                รหัสไปรษณีย์ ${blank(v.postalCode || '-', '70px')}
+              </div>
+              <div>
+                เบอร์โทรศัพท์นักเรียน ${blank(v.studentPhone || '-', '130px')}
+                อีเมลนักเรียน ${blank(v.studentEmail || '-', '190px')}
+              </div>
+            </div>
+          </div>
+
+          <!-- ข้อ 2. ข้อมูลบิดา -->
+          <div style="margin-bottom:10px; line-height:1.75;">
+            <div style="font-weight:bold;">2. ข้อมูลบิดา</div>
+            <div style="padding-left:14px;">
+              <div>
+                บิดาชื่อ ${blank(v.fatherName || '-', '160px')}
+                อายุ ${blank(v.fatherAge || '-', '40px')} ปี
+                อาชีพ ${blank(v.fatherJob || '-', '110px')}
+                รายได้ต่อเดือน ${blank(v.fatherIncome || '-', '80px')} บาท
+              </div>
+              <div>
+                สถานที่ประกอบอาชีพ ${blank(v.fatherWorkplace || '-', '220px')}
+                เบอร์โทรศัพท์ ${blank(v.fatherPhone || '-', '150px')}
+              </div>
+            </div>
+          </div>
+
+          <!-- ข้อ 3. ข้อมูลมารดา -->
+          <div style="margin-bottom:10px; line-height:1.75;">
+            <div style="font-weight:bold;">3. ข้อมูลมารดา</div>
+            <div style="padding-left:14px;">
+              <div>
+                มารดาชื่อ ${blank(v.motherName || '-', '160px')}
+                อายุ ${blank(v.motherAge || '-', '40px')} ปี
+                อาชีพ ${blank(v.motherJob || '-', '110px')}
+                รายได้ต่อเดือน ${blank(v.motherIncome || '-', '80px')} บาท
+              </div>
+              <div>
+                สถานที่ประกอบอาชีพ ${blank(v.motherWorkplace || '-', '220px')}
+                เบอร์โทรศัพท์ ${blank(v.motherPhone || '-', '150px')}
+              </div>
+            </div>
+          </div>
+
+          <!-- ข้อ 4. กรณีบิดา/มารดา ไม่ใช่ผู้ปกครอง -->
+          <div style="margin-bottom:10px; line-height:1.75;">
+            <div style="font-weight:bold;">4. กรณีบิดา/มารดา ไม่ใช่ผู้ปกครอง ข้อมูลผู้ปกครอง (หรือผู้ให้ข้อมูล)</div>
+            <div style="padding-left:14px;">
+              <div>
+                ชื่อผู้ปกครอง ${blank(v.guardianName || '-', '160px')}
+                อายุ ${blank(v.guardianAge || '-', '40px')} ปี
+                เกี่ยวข้องเป็น ${blank(v.guardianRelation || '-', '90px')}
+                อาชีพ ${blank(v.guardianJob || '-', '110px')}
+                รายได้ต่อเดือน ${blank(v.guardianIncome || '-', '80px')} บาท
+              </div>
+              <div>
+                สถานที่ประกอบอาชีพ ${blank(v.guardianWorkplace || '-', '220px')}
+                เบอร์โทรศัพท์ ${blank(v.guardianPhone || '-', '150px')}
+              </div>
+            </div>
+          </div>
+
+          <!-- ข้อ 5. จำนวนพี่น้อง -->
+          <div style="margin-bottom:10px; line-height:1.75;">
+            <div style="font-weight:bold;">5. จำนวนพี่น้อง</div>
+            <div style="padding-left:14px;">
+              <div>
+                - ร่วมบิดา มารดา รวม ${blank(v.siblingsTotal ?? 0, '40px')} คน
+                กำลังศึกษาอยู่ ${blank(v.siblingsStudying ?? 0, '40px')} คน
+                ประกอบอาชีพ ${blank(v.siblingsWorking ?? 0, '40px')} คน
+              </div>
+              <div>
+                - ต่างบิดา หรือ ต่างมารดา รวม ${blank(v.halfSiblingsTotal ?? 0, '40px')} คน
+                กำลังศึกษาอยู่ ${blank(v.halfSiblingsStudying ?? 0, '40px')} คน
+                ประกอบอาชีพ ${blank(v.halfSiblingsWorking ?? 0, '40px')} คน
+              </div>
+            </div>
+          </div>
+
+          <!-- ข้อ 6. นักเรียนอาศัยอยู่กับ -->
+          <div style="margin-bottom:10px; line-height:1.75;">
+            <div style="font-weight:bold;">6. นักเรียนอาศัยอยู่กับ</div>
+            <div style="padding-left:14px; display:flex; flex-wrap:wrap; gap:16px;">
+              <span>${chk(v.livingWith === 'บิดามารดา')} บิดามารดา</span>
+              <span>${chk(v.livingWith === 'บิดา')} บิดา</span>
+              <span>${chk(v.livingWith === 'มารดา')} มารดา</span>
+              <span>${chk(v.livingWith === 'พี่/น้อง')} พี่/น้อง</span>
+              <span>${chk(v.livingWith === 'ปู่/ย่า')} ปู่/ย่า</span>
+              <span>${chk(v.livingWith === 'ตา/ยาย')} ตา/ยาย</span>
+              <span>${chk(v.livingWith === 'อื่นๆ')} อื่นๆ</span>
+            </div>
+          </div>
+
+          <!-- ข้อ 7. สถานะของครอบครัวนักเรียน -->
+          <div style="margin-bottom:10px; line-height:1.75;">
+            <div style="font-weight:bold;">7. สถานะของครอบครัวนักเรียน</div>
+            <div style="padding-left:14px; display:flex; flex-wrap:wrap; gap:16px;">
+              <span>${chk(v.familyStatusOption === 'อยู่ด้วยกัน')} อยู่ด้วยกัน</span>
+              <span>${chk(v.familyStatusOption === 'หย่าร้าง')} หย่าร้าง</span>
+              <span>${chk(v.familyStatusOption === 'แยกกันอยู่')} แยกกันอยู่</span>
+              <span>${chk(v.familyStatusOption === 'บิดาเสียชีวิต')} บิดาเสียชีวิต</span>
+              <span>${chk(v.familyStatusOption === 'มารดาเสียชีวิต')} มารดาเสียชีวิต</span>
+            </div>
+          </div>
+
+          <!-- ================= PAGE 2 ================= -->
+          <div class="page-break" style="page-break-before:always; break-before:page; margin-top:24px; padding-top:16px;"></div>
+
+          <div style="text-align:center; margin-bottom:14px;">
+            <div style="font-size:16pt; font-weight:bold; line-height:1.3;">ตอนที่ 2 ข้อมูลสภาพแวดล้อม ภาพถ่าย และการลงนามรับรอง</div>
+            <div style="font-size:13pt; color:#444;">แบบรายงานการเยี่ยมบ้านนักเรียน: ${v.name} (${v.class})</div>
+          </div>
+
+          <!-- ข้อ 8. สภาพแวดล้อมและพฤติกรรมที่พบ -->
+          <div style="margin-bottom:12px; line-height:1.6;">
+            <div style="font-weight:bold;">8. สภาพแวดล้อมและพฤติกรรมที่พบ:</div>
+            <div style="border:1px solid #777; border-radius:6px; padding:10px 14px; min-height:48px; background:#fcfcfc; margin-top:4px; font-size:13.5pt;">
+              ${v.problemObserved || 'สภาพแวดล้อมที่บ้านมีความเหมาะสมต่อการเรียนรู้ มีความอบอุ่นในครอบครัว'}
+            </div>
+          </div>
+
+          <!-- ข้อ 9. ข้อเสนอแนะและความต้องการความช่วยเหลือ -->
+          <div style="margin-bottom:16px; line-height:1.6;">
+            <div style="font-weight:bold;">9. ข้อเสนอแนะและความต้องการความช่วยเหลือ:</div>
+            <div style="border:1px solid #777; border-radius:6px; padding:10px 14px; min-height:48px; background:#fcfcfc; margin-top:4px; font-size:13.5pt;">
+              ${v.assistanceNeeded || 'ส่งเสริมและประสานความร่วมมือระหว่างบ้านและโรงเรียนอย่างต่อเนื่อง'}
+            </div>
+          </div>
+
+          <!-- ข้อ 10. ภาพถ่ายบรรยากาศการเยี่ยมบ้าน -->
+          <div style="margin-bottom:20px;">
+            <div style="font-weight:bold; margin-bottom:8px;">10. ภาพถ่ายบรรยากาศการเยี่ยมบ้านและสภาพที่อยู่อาศัย</div>
+            <table style="width:100%; border-collapse:collapse; text-align:center;">
+              <tr>
+                <td style="width:50%; padding:6px; vertical-align:top;">
+                  <div style="border:1px solid #aaa; border-radius:8px; padding:6px; background:#fff;">
+                    <img src="${v.photoHouseUrl}" alt="ภาพถ่ายสภาพบ้าน" style="width:100%; height:170px; object-fit:cover; border-radius:6px;" />
+                    <div style="font-size:12pt; font-weight:bold; margin-top:6px;">ภาพถ่ายที่ 1: สภาพบ้านและที่พักอาศัย</div>
+                  </div>
+                </td>
+                <td style="width:50%; padding:6px; vertical-align:top;">
+                  <div style="border:1px solid #aaa; border-radius:8px; padding:6px; background:#fff;">
+                    <img src="${v.photoFamilyUrl}" alt="ภาพถ่ายร่วมกับครอบครัว" style="width:100%; height:170px; object-fit:cover; border-radius:6px;" />
+                    <div style="font-size:12pt; font-weight:bold; margin-top:6px;">ภาพถ่ายที่ 2: ภาพถ่ายร่วมกับนักเรียนและผู้ปกครอง</div>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+
+          <!-- ลายมือชื่อ 3 ท่าน -->
+          <div style="margin-top:28px;">
+            <table style="width:100%; border-collapse:collapse; text-align:center; font-size:13pt; line-height:1.6;">
+              <tr>
+                <td style="width:33.3%; vertical-align:top; padding:0 8px;">
+                  <div>(ลงชื่อ) .....................................................</div>
+                  <div style="font-weight:bold; margin-top:4px;">( ${v.guardianName || v.parentName || '.....................................................'} )</div>
+                  <div>ผู้ปกครองนักเรียน</div>
+                  <div style="margin-top:2px;">วันที่ ........ เดือน .................... พ.ศ. ........</div>
+                </td>
+                <td style="width:33.3%; vertical-align:top; padding:0 8px;">
+                  <div>(ลงชื่อ) .....................................................</div>
+                  <div style="font-weight:bold; margin-top:4px;">( ${v.advisor1 || v.teacherName || '.....................................................'} )</div>
+                  <div>คุณครูที่ปรึกษา 1 / ครูผู้เยี่ยมบ้าน</div>
+                  <div style="margin-top:2px;">วันที่ ........ เดือน .................... พ.ศ. ........</div>
+                </td>
+                <td style="width:33.3%; vertical-align:top; padding:0 8px;">
+                  <div>(ลงชื่อ) .....................................................</div>
+                  <div style="font-weight:bold; margin-top:4px;">( ${v.advisor2 || '.....................................................'} )</div>
+                  <div>คุณครูที่ปรึกษา 2</div>
+                  <div style="margin-top:2px;">วันที่ ........ เดือน .................... พ.ศ. ........</div>
+                </td>
+              </tr>
+            </table>
+          </div>
+
+        </div>
+      `;
     }
 
     function printSingleHomeVisitReport(visitId) {
       initExtendedState();
       const v = state.ext.homeVisits.find(x => x.id === visitId);
       if (!v) return;
+      const html = getHomeVisitReportHtml(v, false);
+      printDocument(html, `แบบรายงานการเยี่ยมบ้าน_${v.name.replace(/\s+/g, '_')}.pdf`, 'portrait');
+    }
 
-      const html = `
-        <div style="font-family:'Sarabun', sans-serif; padding:15px; color:#000; line-height:1.6;">
-          <div style="text-align:center; margin-bottom:20px;">
-            <h2 style="font-size:16pt; margin:0; font-weight:bold;">แบบรายงานการเยี่ยมบ้านนักเรียน (ระบบดูแลช่วยเหลือนักเรียน สพฐ.)</h2>
-            <h3 style="font-size:12pt; margin:4px 0 0; font-weight:normal;">โรงเรียนฝันใหม่ สำนักงานเขตพื้นที่การศึกษาประถมศึกษาหนองบัวลำภู เขต 1</h3>
-          </div>
-          <table style="width:100%; border-collapse:collapse; font-size:11pt; margin-bottom:15px;">
-            <tr>
-              <td style="padding:6px; width:60%;"><strong>ชื่อ - นามสกุลนักเรียน:</strong> ${v.name}</td>
-              <td style="padding:6px;"><strong>ชั้น:</strong> ${v.class}</td>
-            </tr>
-            <tr>
-              <td style="padding:6px;"><strong>วันที่เยี่ยมบ้าน:</strong> ${v.visitDate}</td>
-              <td style="padding:6px;"><strong>ครูผู้เยี่ยมบ้าน:</strong> ${v.teacherName}</td>
-            </tr>
-            <tr>
-              <td style="padding:6px;"><strong>ชื่อผู้ปกครองที่ให้ข้อมูล:</strong> ${v.parentName}</td>
-              <td style="padding:6px;"><strong>สถานภาพครอบครัว:</strong> ${v.familyStatus}</td>
-            </tr>
-            <tr>
-              <td style="padding:6px;"><strong>ลักษณะที่อยู่อาศัย:</strong> ${v.housingType}</td>
-              <td style="padding:6px;"><strong>รายได้เฉลี่ย:</strong> ${v.incomeMonthly.toLocaleString()} บาท/เดือน</td>
-            </tr>
-          </table>
+    function downloadHomeVisitWordDoc(visitId) {
+      initExtendedState();
+      const v = state.ext.homeVisits.find(x => x.id === visitId);
+      if (!v) return;
 
-          <div style="border:1px solid #ccc; padding:12px; border-radius:8px; margin-bottom:15px; font-size:11pt;">
-            <p style="margin:0 0 6px;"><strong>1. สภาพแวดล้อมและปัญหาที่พบ:</strong> ${v.problemObserved}</p>
-            <p style="margin:0;"><strong>2. ข้อเสนอแนะและความต้องการช่วยเหลือ:</strong> ${v.assistanceNeeded}</p>
-          </div>
+      const schoolName = state.schoolInfo?.schoolName || 'โรงเรียนฝันใหม่';
+      const academicYear = state.schoolInfo?.academicYear || '2569';
+      const docHtml = getHomeVisitReportHtml(v, true);
 
-          <div style="margin:20px 0; text-align:center;">
-            <p style="font-weight:bold; font-size:11pt; margin-bottom:10px;">ภาพถ่ายบรรยากาศการเยี่ยมบ้านและสภาพที่อยู่อาศัย</p>
-            <div style="display:flex; justify-content:center; gap:20px;">
-              <div style="border:1px solid #ccc; padding:6px; border-radius:8px; width:260px;">
-                <img src="${v.photoHouseUrl}" style="width:100%; height:160px; object-fit:cover; border-radius:6px;">
-                <div style="font-size:10pt; margin-top:4px;">สภาพบ้านและที่พักอาศัย</div>
-              </div>
-              <div style="border:1px solid #ccc; padding:6px; border-radius:8px; width:260px;">
-                <img src="${v.photoFamilyUrl}" style="width:100%; height:160px; object-fit:cover; border-radius:6px;">
-                <div style="font-size:10pt; margin-top:4px;">ภาพถ่ายร่วมกับผู้ปกครอง</div>
-              </div>
-            </div>
-          </div>
+      const docContent = `<!DOCTYPE html>
+<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+<head>
+  <meta charset='utf-8'>
+  <title>แบบรายงานการเยี่ยมบ้านนักเรียน_${v.name}</title>
+  <!--[if gte mso 9]>
+  <xml>
+    <w:WordDocument>
+      <w:View>Print</w:View>
+      <w:Zoom>100</w:Zoom>
+      <w:DoNotOptimizeForBrowser/>
+    </w:WordDocument>
+  </xml>
+  <![endif]-->
+  <style>
+    @page Section1 {
+      size: 595.3pt 841.9pt;
+      margin: 1.8cm 1.8cm 1.8cm 1.8cm;
+      mso-header-margin: 36pt;
+      mso-footer-margin: 36pt;
+      mso-paper-source: 0;
+    }
+    div.Section1 { page: Section1; }
+    body {
+      font-family: 'TH Sarabun PSK', 'TH Sarabun New', 'Sarabun', sans-serif;
+      font-size: 15pt;
+      line-height: 1.4;
+      color: #000;
+    }
+    .fill-blank {
+      border-bottom: 1px dotted #000;
+      text-decoration: underline;
+      display: inline-block;
+      text-align: center;
+      padding: 0 4px;
+      color: #000;
+    }
+    .page-break {
+      page-break-before: always;
+      mso-special-character: line-break;
+    }
+  </style>
+</head>
+<body>
+  <div class="Section1">
+    ${docHtml}
+  </div>
+</body>
+</html>`;
 
-          <div style="margin-top:40px; display:flex; justify-content:space-between; text-align:center; font-size:11pt;">
-            <div style="width:250px;">
-              <p>(ลงชื่อ)......................................................</p>
-              <p style="font-weight:bold;">(${v.parentName})</p>
-              <p>ผู้ปกครองนักเรียน</p>
-            </div>
-            <div style="width:250px;">
-              <p>(ลงชื่อ)......................................................</p>
-              <p style="font-weight:bold;">(${v.teacherName})</p>
-              <p>ครูประจำชั้น / ครูผู้เยี่ยมบ้าน</p>
-            </div>
-          </div>
-        </div>
-      `;
-      printDocument(html, `รายงานเยี่ยมบ้าน_${v.name}.pdf`, 'portrait');
+      const blob = new Blob(['\ufeff' + docContent], { type: 'application/msword' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `แบบรายงานการเยี่ยมบ้าน_${v.name.replace(/\s+/g, '_')}.doc`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast('ดาวน์โหลดเอกสาร Word (.doc) สำเร็จแล้ว');
     }
 
     // -------------------------------------------------------------------------
