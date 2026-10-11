@@ -4483,6 +4483,7 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
   <!-- FRONTEND SCRIPT (GAS CLIENT) -->
   <!-- ================================================================= -->
   <script>
+    const DEFAULT_GAS_URL = 'https://script.google.com/macros/s/AKfycbwKJNHpFNKM2jaw-0rUfhvS_3YlzNq9mm74U4CZNpaLpKH_7Vl5WvFQeR-fB5QCgII/exec';
 
     // DEFAULT STATE FOR 16 NEW MODULES
     const DEFAULT_EXT_STATE = {
@@ -5112,8 +5113,29 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
 
       let sent = false;
 
-      // 1. ส่งผ่าน Google Apps Script (Cloud Backend ส่งฟรีไม่ติด CORS)
-      const gasUrl = state.googleScriptUrl || localStorage.getItem('academic_mis_gas_url') || (typeof DEFAULT_GAS_URL !== 'undefined' ? DEFAULT_GAS_URL : '');
+      // Mode 1: ทำงานใน Google Apps Script Web App iframe โดยตรง
+      if (typeof google !== 'undefined' && google.script && google.script.run) {
+        try {
+          google.script.run
+            .withSuccessHandler(res => {
+              if (res && res.success) {
+                showToast('✅ ส่งข้อความเข้าแอป LINE สำเร็จเรียบร้อย!');
+              } else {
+                showToast('⚠️ ไม่สามารถส่ง LINE ได้: ' + (res.error || 'โปรดตรวจสอบสิทธิ์'));
+              }
+            })
+            .withFailureHandler(err => {
+              showToast('⚠️ เกิดข้อผิดพลาด: ' + (err.message || err));
+            })
+            .apiRouter('sendLineNotify', { token: token, message: message });
+          return;
+        } catch (e) {
+          console.warn('Native GAS call failed, falling back:', e);
+        }
+      }
+
+      // Mode 2: ส่งผ่าน Google Apps Script (Cloud Backend ส่งฟรีไม่ติด CORS)
+      const gasUrl = (typeof getGasWebAppUrl === 'function' ? getGasWebAppUrl() : '') || DEFAULT_GAS_URL;
       if (gasUrl) {
         try {
           const res = await fetch(gasUrl, {
@@ -7588,7 +7610,7 @@ ${isTransferIn ? '🏫 ย้ายมาจาก: ' + t.fromSchool : '🏫 ย
     // =========================================================================
     // GOOGLE SHEETS LIVE CLOUD CONNECTOR (เชื่อมต่อ Google Sheets REST API)
     // =========================================================================
-    const DEFAULT_GAS_URL = 'https://script.google.com/macros/s/AKfycbwKJNHpFNKM2jaw-0rUfhvS_3YlzNq9mm74U4CZNpaLpKH_7Vl5WvFQeR-fB5QCgII/exec';
+    // Note: DEFAULT_GAS_URL is declared globally at top of script
 
     function getGasWebAppUrl() {
       try {
