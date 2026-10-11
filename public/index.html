@@ -1777,26 +1777,55 @@
     </section>
 
     <!-- ================================================================= -->
-    <!-- MODULE 8: ปพ.5 สมบูรณ์แบบ (TAB-PP5) [ข้อ 13] -->
+    <!-- MODULE 8: ปพ.5 สมบูรณ์แบบ (TAB-PP5) [อ้างอิงต้นแบบ PP5-MY-2569] -->
     <!-- ================================================================= -->
     <section id="tab-pp5" class="tab-content hidden space-y-6">
-      <div class="card-3d p-6 rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-4 border border-slate-200">
-        <div class="flex items-center gap-3">
-          <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xl shadow-sm">
-            <i data-lucide="file-spreadsheet" class="w-6 h-6"></i>
+      <div class="card-3d p-6 rounded-2xl flex flex-col lg:flex-row lg:items-center justify-between gap-4 border border-slate-200">
+        <div class="flex items-center gap-3.5">
+          <div class="w-13 h-13 rounded-2xl bg-emerald-600 text-white flex items-center justify-center font-bold text-2xl shadow-md">
+            <i data-lucide="file-spreadsheet" class="w-7 h-7"></i>
           </div>
           <div>
-            <h2 class="text-xl font-black text-slate-900 tracking-tight">แบบรายงานผลการพัฒนาคุณภาพผู้เรียน (ปพ.5) สมบูรณ์แบบ</h2>
-            <p class="text-xs text-slate-500 mt-0.5">รวมคะแนนเก็บ กลางภาค ปลายภาค เวลาเรียน คุณลักษณะ 8 ประการ และอ่านคิดวิเคราะห์</p>
+            <div class="flex items-center gap-2">
+              <h2 class="text-xl font-black text-slate-900 tracking-tight">แบบบันทึกผลการพัฒนาคุณภาพผู้เรียน (ปพ.5) สมบูรณ์แบบ</h2>
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-emerald-100 text-emerald-800 border border-emerald-300">มาตรฐาน สพฐ. 2569</span>
+            </div>
+            <p class="text-xs text-slate-500 mt-0.5">ถอดแบบโครงสร้าง PP5-MY-2569: คะแนน 70:30, คุณลักษณะ 8 ด้าน, อ่านคิดวิเคราะห์ และสายอนุมัติ 6 ขั้นตอน</p>
           </div>
         </div>
-        <div class="flex flex-wrap gap-2.5">
-          <button type="button" onclick="openModalAddPp5Score()" class="btn-ega-primary text-xs sm:text-sm px-4 py-2.5 rounded-xl flex items-center gap-2">
-            <i data-lucide="plus-circle" class="w-4 h-4"></i> บันทึกคะแนน ปพ.5
+        <div class="flex flex-wrap items-center gap-2">
+          <button type="button" onclick="openModalAddPp5Score()" class="btn-ega-primary text-xs px-3.5 py-2.5 rounded-xl flex items-center gap-2 shadow">
+            <i data-lucide="plus-circle" class="w-4 h-4"></i> บันทึก/แก้ไขคะแนน
           </button>
-          <button type="button" onclick="printPp5Report()" class="bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs px-4 py-2.5 rounded-xl transition flex items-center gap-2 shadow">
-            <i data-lucide="printer" class="w-4 h-4 text-emerald-400"></i> พิมพ์แบบ ปพ.5 (สพฐ.)
-          </button>
+          
+          <!-- Dropdown Print Group -->
+          <div class="relative inline-block text-left">
+            <button type="button" onclick="togglePp5PrintMenu()" class="bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs px-3.5 py-2.5 rounded-xl transition flex items-center gap-2 shadow">
+              <i data-lucide="printer" class="w-4 h-4 text-emerald-400"></i> พิมพ์เอกสาร ปพ.5
+              <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
+            </button>
+            <div id="pp5PrintMenu" class="hidden absolute right-0 mt-2 w-64 rounded-xl shadow-2xl bg-white border border-slate-200 z-50 py-1.5 text-xs text-slate-800 font-bold">
+              <button onclick="printPp5Report('cover'); togglePp5PrintMenu();" class="w-full text-left px-4 py-2 hover:bg-emerald-50 hover:text-emerald-800 flex items-center gap-2">
+                <i data-lucide="file-text" class="w-3.5 h-3.5 text-emerald-600"></i> 1. พิมพ์หน้าปก & สายอนุมัติ 6 ขั้น
+              </button>
+              <button onclick="printPp5Report('scores'); togglePp5PrintMenu();" class="w-full text-left px-4 py-2 hover:bg-emerald-50 hover:text-emerald-800 flex items-center gap-2">
+                <i data-lucide="table" class="w-3.5 h-3.5 text-blue-600"></i> 2. พิมพ์ตารางบันทึกคะแนน 70:30
+              </button>
+              <button onclick="printPp5Report('traits'); togglePp5PrintMenu();" class="w-full text-left px-4 py-2 hover:bg-emerald-50 hover:text-emerald-800 flex items-center gap-2">
+                <i data-lucide="award" class="w-3.5 h-3.5 text-amber-600"></i> 3. พิมพ์คุณลักษณะอันพึงประสงค์ 8 ด้าน
+              </button>
+              <button onclick="printPp5Report('reading'); togglePp5PrintMenu();" class="w-full text-left px-4 py-2 hover:bg-emerald-50 hover:text-emerald-800 flex items-center gap-2">
+                <i data-lucide="book-open" class="w-3.5 h-3.5 text-purple-600"></i> 4. พิมพ์การอ่าน คิดวิเคราะห์ เขียน
+              </button>
+              <button onclick="printPp5Report('publish'); togglePp5PrintMenu();" class="w-full text-left px-4 py-2 hover:bg-emerald-50 hover:text-emerald-800 flex items-center gap-2">
+                <i data-lucide="megaphone" class="w-3.5 h-3.5 text-rose-600"></i> 5. พิมพ์แบบประกาศผลสอบ (Publish)
+              </button>
+              <div class="border-t border-slate-100 my-1"></div>
+              <button onclick="printPp5Report('all'); togglePp5PrintMenu();" class="w-full text-left px-4 py-2.5 bg-emerald-50/80 hover:bg-emerald-100 text-emerald-900 font-black flex items-center gap-2">
+                <i data-lucide="layers" class="w-4 h-4 text-emerald-700"></i> 📚 พิมพ์ชุด ปพ.5 สมบูรณ์ทั้งเล่ม
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -1815,50 +1844,232 @@
           <div>
             <label class="font-bold text-slate-700 mr-1.5">รายวิชา:</label>
             <select id="pp5FilterSubject" onchange="renderPp5Table()" class="px-3 py-1.5 border border-slate-300 rounded-lg bg-white font-bold">
-              <option value="ท21101">ท21101 ภาษาไทย 1</option>
-              <option value="ค21101">ค21101 คณิตศาสตร์ 1</option>
-              <option value="ว21101">ว21101 วิทยาศาสตร์ 1</option>
-              <option value="อ21101">อ21101 ภาษาอังกฤษ 1</option>
+              <option value="ท21101">ท21101 ภาษาไทย 1 (1.5 นก. / 3 คาบ)</option>
+              <option value="ค21101">ค21101 คณิตศาสตร์ 1 (1.5 นก. / 3 คาบ)</option>
+              <option value="ว21101">ว21101 วิทยาศาสตร์ 1 (2.0 นก. / 4 คาบ)</option>
+              <option value="อ21101">อ21101 ภาษาอังกฤษ 1 (1.5 นก. / 3 คาบ)</option>
             </select>
           </div>
           <div>
-            <label class="font-bold text-slate-700 mr-1.5">สัดส่วนคะแนน:</label>
+            <label class="font-bold text-slate-700 mr-1.5">สัดส่วนคะแนน สพฐ.:</label>
             <span class="px-2.5 py-1 rounded bg-emerald-100 text-emerald-800 font-bold border border-emerald-300">
-              เก็บ 50 : กลางภาค 20 : ปลายภาค 30 (รวม 100)
+              ก่อนกลาง 30 : กลางภาค 20 : หลังกลาง 20 : ปลายภาค 30 (รวม 100)
             </span>
           </div>
         </div>
         <div class="text-[11px] text-slate-500 font-medium">
-          * เวลาเรียนเชื่อมโยงจากระบบเข้าแถวหน้าเสาธงอัตโนมัติ (เกณฑ์สิทธิ์สอบ $ge$ 80%)
+          * เกณฑ์เวลาเรียน สพฐ. $\ge$ 80% (อย่างน้อย 32 จาก 40 คาบ) หากต่ำกว่าจะติด มส.
         </div>
       </div>
 
-      <!-- PP5 Table -->
-      <div class="card-3d rounded-2xl overflow-hidden border border-slate-200 shadow-md">
+      <!-- Sub-Tabs Navigation (เหมือนชีต PP5-MY-2569) -->
+      <div class="flex border-b border-slate-200 gap-1 bg-white p-1 rounded-xl shadow-sm">
+        <button id="pp5SubtabBtn-scores" onclick="switchPp5Subtab('scores')" class="px-4 py-2.5 rounded-lg text-xs font-bold transition flex items-center gap-2 bg-emerald-700 text-white shadow-sm">
+          <i data-lucide="table" class="w-4 h-4"></i> 1. ตารางบันทึกคะแนนและตัดเกรด (Score Sheet)
+        </button>
+        <button id="pp5SubtabBtn-traits" onclick="switchPp5Subtab('traits')" class="px-4 py-2.5 rounded-lg text-xs font-bold transition flex items-center gap-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+          <i data-lucide="award" class="w-4 h-4"></i> 2. คุณลักษณะอันพึงประสงค์ 8 ประการ (Attib)
+        </button>
+        <button id="pp5SubtabBtn-reading" onclick="switchPp5Subtab('reading')" class="px-4 py-2.5 rounded-lg text-xs font-bold transition flex items-center gap-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+          <i data-lucide="book-open" class="w-4 h-4"></i> 3. การอ่าน คิดวิเคราะห์ เขียน (Read)
+        </button>
+        <button id="pp5SubtabBtn-summary" onclick="switchPp5Subtab('summary')" class="px-4 py-2.5 rounded-lg text-xs font-bold transition flex items-center gap-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+          <i data-lucide="bar-chart-2" class="w-4 h-4"></i> 4. สรุปสถิติผลการเรียน & สายอนุมัติ (Cover/Publish)
+        </button>
+      </div>
+
+      <!-- VIEW 1: SCORES TABLE -->
+      <div id="pp5View-scores" class="card-3d rounded-2xl overflow-hidden border border-slate-200 shadow-md">
         <div class="overflow-x-auto">
           <table class="w-full text-left text-xs border-collapse">
             <thead class="bg-slate-900 text-white font-bold text-center">
               <tr>
                 <th class="p-3 border-r border-slate-800 w-12" rowspan="2">ที่</th>
+                <th class="p-3 border-r border-slate-800 w-20" rowspan="2">เลขประจำตัว</th>
                 <th class="p-3 border-r border-slate-800 text-left min-w-[150px]" rowspan="2">ชื่อ - นามสกุล</th>
                 <th class="p-3 border-r border-slate-800 w-24" rowspan="2">เวลาเรียน<br><span class="text-[10px] text-cyan-300">(คาบ / %)</span></th>
-                <th class="p-2 border-b border-r border-slate-800 bg-slate-800" colspan="3">การวัดและประเมินผลการเรียนรู้</th>
+                <th class="p-2 border-b border-r border-slate-800 bg-slate-800" colspan="4">คะแนนการประเมินผลการเรียนรู้ (สัดส่วน 70:30)</th>
                 <th class="p-3 border-r border-slate-800 w-16 bg-blue-950" rowspan="2">รวม<br>(100)</th>
                 <th class="p-3 border-r border-slate-800 w-16 bg-blue-950" rowspan="2">ระดับ<br>ผลการเรียน</th>
-                <th class="p-3 border-r border-slate-800 w-24" rowspan="2">คุณลักษณะ<br>อันพึงประสงค์ (8)</th>
-                <th class="p-3 border-r border-slate-800 w-24" rowspan="2">การอ่าน คิด<br>วิเคราะห์ & เขียน</th>
-                <th class="p-3 w-16" rowspan="2">จัดการ</th>
+                <th class="p-3 border-r border-slate-800 min-w-[120px]" rowspan="2">สถานะ / บันทึก</th>
+                <th class="p-3 w-16" rowspan="2">แก้ไข</th>
               </tr>
               <tr class="bg-slate-800 text-[11px]">
-                <th class="p-1.5 border-r border-slate-700 w-16">เก็บ (50)</th>
-                <th class="p-1.5 border-r border-slate-700 w-16">กลางภาค (20)</th>
-                <th class="p-1.5 border-r border-slate-700 w-16">ปลายภาค (30)</th>
+                <th class="p-1.5 border-r border-slate-700 w-20">ก่อนกลาง (30)</th>
+                <th class="p-1.5 border-r border-slate-700 w-20">กลางภาค (20)</th>
+                <th class="p-1.5 border-r border-slate-700 w-20">หลังกลาง (20)</th>
+                <th class="p-1.5 border-r border-slate-700 w-20">ปลายภาค (30)</th>
               </tr>
             </thead>
             <tbody id="pp5TableBody" class="divide-y divide-slate-200 bg-white">
               <!-- Dynamically populated -->
             </tbody>
           </table>
+        </div>
+      </div>
+
+      <!-- VIEW 2: DESIRABLE TRAITS 8 (ATTIB) -->
+      <div id="pp5View-traits" class="hidden card-3d rounded-2xl overflow-hidden border border-slate-200 shadow-md">
+        <div class="p-3 bg-emerald-50 border-b border-emerald-200 text-xs font-bold text-emerald-900 flex justify-between items-center">
+          <span>คุณลักษณะอันพึงประสงค์ 8 ประการ ตามหลักสูตรแกนกลางการศึกษาขั้นพื้นฐาน พ.ศ. 2551 (เกณฑ์: 3=ดีเยี่ยม, 2=ดี, 1=ผ่าน, 0=ไม่ผ่าน)</span>
+          <span class="text-emerald-700 font-semibold">* ถอดแบบจากชีต Attib ของ PP5-MY-2569</span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-center text-xs border-collapse">
+            <thead class="bg-slate-900 text-white font-bold">
+              <tr>
+                <th class="p-2.5 border-r border-slate-800 w-12" rowspan="2">ที่</th>
+                <th class="p-2.5 border-r border-slate-800 w-20" rowspan="2">เลขประจำตัว</th>
+                <th class="p-2.5 border-r border-slate-800 text-left min-w-[150px]" rowspan="2">ชื่อ - นามสกุล</th>
+                <th class="p-2 border-b border-slate-800 bg-slate-800" colspan="8">คะแนนการประเมิน 8 ด้าน (เต็ม 3)</th>
+                <th class="p-2.5 border-l border-slate-800 w-28 bg-emerald-950" rowspan="2">สรุปผลประเมิน</th>
+              </tr>
+              <tr class="bg-slate-800 text-[10px]">
+                <th class="p-1 border-r border-slate-700 w-12" title="1. รักชาติ ศาสน์ กษัตริย์">1.รักชาติ</th>
+                <th class="p-1 border-r border-slate-700 w-12" title="2. ซื่อสัตย์ สุจริต">2.ซื่อสัตย์</th>
+                <th class="p-1 border-r border-slate-700 w-12" title="3. มีวินัย รับผิดชอบ">3.มีวินัย</th>
+                <th class="p-1 border-r border-slate-700 w-12" title="4. ใฝ่เรียนรู้">4.ใฝ่เรียน</th>
+                <th class="p-1 border-r border-slate-700 w-12" title="5. อยู่อย่างพอเพียง">5.พอเพียง</th>
+                <th class="p-1 border-r border-slate-700 w-12" title="6. มุ่งมั่นในการทำงาน">6.มุ่งมั่น</th>
+                <th class="p-1 border-r border-slate-700 w-12" title="7. รักความเป็นไทย">7.รักไทย</th>
+                <th class="p-1 border-r border-slate-700 w-12" title="8. มีจิตสาธารณะ">8.จิตสาธารณะ</th>
+              </tr>
+            </thead>
+            <tbody id="pp5TraitsTableBody" class="divide-y divide-slate-200 bg-white">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- VIEW 3: READING, THINKING & WRITING (READ) -->
+      <div id="pp5View-reading" class="hidden card-3d rounded-2xl overflow-hidden border border-slate-200 shadow-md">
+        <div class="p-3 bg-purple-50 border-b border-purple-200 text-xs font-bold text-purple-900 flex justify-between items-center">
+          <span>ผลการประเมินการอ่าน คิดวิเคราะห์ และเขียนสื่อความหมาย (เกณฑ์: 3=ดีเยี่ยม, 2=ดี, 1=ผ่าน, 0=ไม่ผ่าน)</span>
+          <span class="text-purple-700 font-semibold">* ถอดแบบจากชีต Read ของ PP5-MY-2569</span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-center text-xs border-collapse">
+            <thead class="bg-slate-900 text-white font-bold">
+              <tr>
+                <th class="p-2.5 border-r border-slate-800 w-12" rowspan="2">ที่</th>
+                <th class="p-2.5 border-r border-slate-800 w-20" rowspan="2">เลขประจำตัว</th>
+                <th class="p-2.5 border-r border-slate-800 text-left min-w-[150px]" rowspan="2">ชื่อ - นามสกุล</th>
+                <th class="p-2 border-b border-slate-800 bg-slate-800" colspan="3">ด้านการประเมิน</th>
+                <th class="p-2.5 border-r border-slate-800 w-20 bg-slate-800" rowspan="2">รวม<br>(15)</th>
+                <th class="p-2.5 border-l border-slate-800 w-28 bg-purple-950" rowspan="2">สรุปผลประเมิน</th>
+              </tr>
+              <tr class="bg-slate-800 text-[11px]">
+                <th class="p-1.5 border-r border-slate-700 w-24">1. การอ่าน (เต็ม 6)</th>
+                <th class="p-1.5 border-r border-slate-700 w-24">2. การคิด (เต็ม 6)</th>
+                <th class="p-1.5 border-r border-slate-700 w-24">3. การเขียน (เต็ม 3)</th>
+              </tr>
+            </thead>
+            <tbody id="pp5ReadingTableBody" class="divide-y divide-slate-200 bg-white">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- VIEW 4: SUMMARY & STATISTICAL COVER (COVER / PUBLISH) -->
+      <div id="pp5View-summary" class="hidden space-y-5">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <!-- Grade Distribution Card -->
+          <div class="card-3d p-5 rounded-2xl md:col-span-2 border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+              <h3 class="text-sm font-black text-slate-900 flex items-center gap-2">
+                <i data-lucide="pie-chart" class="w-4 h-4 text-emerald-600"></i> สรุปผลสัมฤทธิ์ทางการเรียน (Grade Distribution)
+              </h3>
+              <span class="text-xs text-slate-500 font-bold" id="pp5StatTotalStudents">นักเรียนทั้งหมด 13 คน</span>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-center text-xs border-collapse border border-slate-200" id="pp5GradeDistTable">
+                <thead class="bg-slate-100 font-bold text-slate-700">
+                  <tr>
+                    <th class="p-2 border border-slate-200">ระดับเกรด</th>
+                    <th class="p-2 border border-slate-200 text-emerald-700">4</th>
+                    <th class="p-2 border border-slate-200 text-emerald-600">3.5</th>
+                    <th class="p-2 border border-slate-200 text-blue-700">3</th>
+                    <th class="p-2 border border-slate-200 text-blue-600">2.5</th>
+                    <th class="p-2 border border-slate-200 text-amber-700">2</th>
+                    <th class="p-2 border border-slate-200 text-amber-600">1.5</th>
+                    <th class="p-2 border border-slate-200 text-orange-600">1</th>
+                    <th class="p-2 border border-slate-200 text-rose-600">0</th>
+                    <th class="p-2 border border-slate-200 text-rose-700">ร</th>
+                    <th class="p-2 border border-slate-200 text-purple-700">มส</th>
+                    <th class="p-2 border border-slate-200 bg-slate-200">รวม</th>
+                  </tr>
+                </thead>
+                <tbody id="pp5GradeDistTableBody">
+                  <!-- Populated dynamically -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Traits & Reading Summary -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+              <div class="p-3.5 bg-emerald-50/70 rounded-xl border border-emerald-200 space-y-2">
+                <h4 class="font-black text-emerald-950 text-xs">สรุปผลคุณลักษณะอันพึงประสงค์</h4>
+                <div id="pp5TraitsDistBox" class="text-xs space-y-1"></div>
+              </div>
+              <div class="p-3.5 bg-purple-50/70 rounded-xl border border-purple-200 space-y-2">
+                <h4 class="font-black text-purple-950 text-xs">สรุปผลการอ่าน คิดวิเคราะห์ เขียน</h4>
+                <div id="pp5ReadingDistBox" class="text-xs space-y-1"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Official Approval Workflow Box -->
+          <div class="card-3d p-5 rounded-2xl border border-slate-200 space-y-3.5">
+            <h3 class="text-sm font-black text-slate-900 pb-2 border-b border-slate-100 flex items-center gap-2">
+              <i data-lucide="check-check" class="w-4 h-4 text-blue-600"></i> สายการอนุมัติผล ปพ.5 (6 ขั้นตอน)
+            </h3>
+            <div class="space-y-2.5 text-xs">
+              <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-between">
+                <div>
+                  <div class="font-bold text-slate-800">1. ครูผู้สอนประจำวิชา</div>
+                  <div class="text-[11px] text-slate-500">นางรัษฎาภรณ์ ศิริมาตย์</div>
+                </div>
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800">ลงนามแล้ว</span>
+              </div>
+              <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-between">
+                <div>
+                  <div class="font-bold text-slate-800">2. หัวหน้ากลุ่มสาระการเรียนรู้</div>
+                  <div class="text-[11px] text-slate-500">กลุ่มสาระการเรียนรู้ภาษาไทย</div>
+                </div>
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800">ตรวจสอบแล้ว</span>
+              </div>
+              <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-between">
+                <div>
+                  <div class="font-bold text-slate-800">3. หัวหน้างานวัดและประเมินผล</div>
+                  <div class="text-[11px] text-slate-500">งานทะเบียน-วัดผลการศึกษา</div>
+                </div>
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800">ผ่านเกณฑ์</span>
+              </div>
+              <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-between">
+                <div>
+                  <div class="font-bold text-slate-800">4. หัวหน้าฝ่ายวิชาการ</div>
+                  <div class="text-[11px] text-slate-500">ฝ่ายบริหารวิชาการ</div>
+                </div>
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800">เห็นชอบ</span>
+              </div>
+              <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-between">
+                <div>
+                  <div class="font-bold text-slate-800">5. รองผู้อำนวยการสถานศึกษา</div>
+                  <div class="text-[11px] text-slate-500">นายธาดา ภูพวก</div>
+                </div>
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800">โปรดอนุมัติ</span>
+              </div>
+              <div class="p-3 rounded-xl bg-blue-50 border border-blue-200">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="font-black text-blue-950">6. ผู้อำนวยการสถานศึกษา</span>
+                  <span class="px-2 py-0.5 rounded text-[10px] font-black bg-blue-600 text-white">อนุมัติแล้ว</span>
+                </div>
+                <div class="text-[11px] text-blue-900 font-bold">นางรัษฎาภรณ์ อ่อนนิ่ม / 31 มีนาคม 2570</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -3757,29 +3968,50 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
         </h3>
         <button type="button" onclick="closeModal('modalAddPp5Score')" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
-      <form id="formPp5Score" onsubmit="handleSavePp5Score(event)" class="space-y-3 text-xs">
+      <form id="formPp5Score" onsubmit="handleSavePp5Score(event)" class="space-y-3.5 text-xs">
         <input type="hidden" id="pp5EditStudentId">
-        <div>
-          <label class="block font-bold text-slate-700 mb-1">นักเรียน *</label>
-          <select id="pp5StudentSelect" required class="w-full px-3 py-2 border rounded-xl font-bold bg-white"></select>
-        </div>
-        <div class="grid grid-cols-3 gap-2">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
-            <label class="block font-bold text-slate-700 mb-1">คะแนนเก็บ (เต็ม 50)</label>
-            <input type="number" id="pp5ScoreCollected" min="0" max="50" step="0.5" required class="w-full px-3 py-2 border rounded-xl font-bold">
+            <label class="block font-bold text-slate-700 mb-1">นักเรียน *</label>
+            <select id="pp5StudentSelect" required class="w-full px-3 py-2 border rounded-xl font-bold bg-white"></select>
           </div>
           <div>
-            <label class="block font-bold text-slate-700 mb-1">กลางภาค (เต็ม 20)</label>
-            <input type="number" id="pp5ScoreMidterm" min="0" max="20" step="0.5" required class="w-full px-3 py-2 border rounded-xl font-bold">
-          </div>
-          <div>
-            <label class="block font-bold text-slate-700 mb-1">ปลายภาค (เต็ม 30)</label>
-            <input type="number" id="pp5ScoreFinal" min="0" max="30" step="0.5" required class="w-full px-3 py-2 border rounded-xl font-bold">
+            <label class="block font-bold text-slate-700 mb-1">เวลาเรียนที่มาเรียน (เต็ม 40 คาบ) *</label>
+            <div class="flex items-center gap-2">
+              <input type="number" id="pp5AttendedPeriods" min="0" max="40" step="1" value="39" required class="w-full px-3 py-2 border rounded-xl font-bold">
+              <span class="text-slate-500 font-bold whitespace-nowrap">/ 40 คาบ</span>
+            </div>
           </div>
         </div>
-        <div class="grid grid-cols-2 gap-2">
+
+        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-2.5">
+          <div class="font-bold text-slate-800 text-[11px] flex justify-between">
+            <span>คะแนนการประเมินผลการเรียนรู้ (สัดส่วน สพฐ. 70:30 รวม 100)</span>
+            <span class="text-emerald-700 font-bold" id="pp5ModalLiveTotal">รวม: 0 คะแนน</span>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">ก่อนกลาง (30)</label>
+              <input type="number" id="pp5ScoreBeforeMid" min="0" max="30" step="0.5" value="25" oninput="updatePp5LiveTotal()" required class="w-full px-2.5 py-1.5 border rounded-lg font-bold text-center">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">กลางภาค (20)</label>
+              <input type="number" id="pp5ScoreMidterm" min="0" max="20" step="0.5" value="16" oninput="updatePp5LiveTotal()" required class="w-full px-2.5 py-1.5 border rounded-lg font-bold text-center">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">หลังกลาง (20)</label>
+              <input type="number" id="pp5ScoreAfterMid" min="0" max="20" step="0.5" value="16" oninput="updatePp5LiveTotal()" required class="w-full px-2.5 py-1.5 border rounded-lg font-bold text-center">
+            </div>
+            <div>
+              <label class="block font-bold text-slate-700 mb-1">ปลายภาค (30)</label>
+              <input type="number" id="pp5ScoreFinal" min="0" max="30" step="0.5" value="24" oninput="updatePp5LiveTotal()" required class="w-full px-2.5 py-1.5 border rounded-lg font-bold text-center">
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
           <div>
-            <label class="block font-bold text-slate-700 mb-1">คุณลักษณะอันพึงประสงค์ (0-3)</label>
+            <label class="block font-bold text-slate-700 mb-1">คุณลักษณะ 8 ประการ</label>
             <select id="pp5ScoreTraits" class="w-full px-3 py-2 border rounded-xl font-bold bg-white">
               <option value="3">3 - ดีเยี่ยม</option>
               <option value="2">2 - ดี</option>
@@ -3788,7 +4020,7 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
             </select>
           </div>
           <div>
-            <label class="block font-bold text-slate-700 mb-1">อ่าน คิดวิเคราะห์ เขียน (0-3)</label>
+            <label class="block font-bold text-slate-700 mb-1">อ่าน คิดวิเคราะห์ เขียน</label>
             <select id="pp5ScoreReading" class="w-full px-3 py-2 border rounded-xl font-bold bg-white">
               <option value="3">3 - ดีเยี่ยม</option>
               <option value="2">2 - ดี</option>
@@ -3796,7 +4028,22 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
               <option value="0">0 - ไม่ผ่าน</option>
             </select>
           </div>
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">สถานะพิเศษ (ถ้ามี)</label>
+            <select id="pp5ScoreStatus" class="w-full px-3 py-2 border rounded-xl font-bold bg-white">
+              <option value="ปกติ">ปกติ (ตัดเกรดตามคะแนน)</option>
+              <option value="ติด 0 (รอสอบแก้ตัว)">ติด 0 (รอสอบแก้ตัว)</option>
+              <option value="ติด ร (รอส่งชิ้นงาน)">ติด ร (รอส่งชิ้นงาน)</option>
+              <option value="ติด มส (เวลาเรียนไม่ถึง 80%)">ติด มส (เวลาไม่ถึง 80%)</option>
+            </select>
+          </div>
         </div>
+
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">บันทึก / หมายเหตุเพิ่มเติม</label>
+          <input type="text" id="pp5ScoreRemark" placeholder="เช่น ส่งงานครบ, รอส่งเล่มโครงงาน, สอบแก้ตัวผ่าน" class="w-full px-3 py-2 border rounded-xl font-medium">
+        </div>
+
         <div class="pt-2 flex gap-2">
           <button type="submit" class="flex-1 btn-ega-primary py-2.5 font-bold">บันทึกคะแนน ปพ.5</button>
           <button type="button" onclick="closeModal('modalAddPp5Score')" class="px-4 py-2.5 border rounded-xl text-slate-600 font-bold">ยกเลิก</button>
@@ -4707,103 +4954,336 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
         { id: 'BEH004', studentId: 'S67006', name: 'ด.ช.อัครเดช กล้าหาญ', class: 'ม.1/1', date: '2026-10-09', type: 'demerit', category: 'แต่งกายผิดระเบียบสถานศึกษา', score: -5, recordedBy: 'ครูฝ่ายปกครอง', remark: 'ไม่ใส่เข็มขัดและเสื้อหลุดนอกกางเกง' }
       ],
 
-      // 13. Comprehensive Phor Phor 5 (ปพ.5)
+      // 13. Comprehensive Phor Phor 5 (ปพ.5 - อ้างอิงโครงสร้าง PP5-MY-2569)
       pp5Settings: {
-        ratioCollected: 50,
+        ratioBeforeMid: 30,
         ratioMidterm: 20,
+        ratioAfterMid: 20,
         ratioFinal: 30,
-        minAttendancePercent: 80
+        ratioCollected: 70,
+        minAttendancePercent: 80,
+        courseCode: 'ท21101',
+        courseName: 'ภาษาไทย 1',
+        credits: 1.5,
+        weeklyHours: 3,
+        classroom: 'ม.1/1',
+        academicYear: '2569',
+        term: '1',
+        teacherName: 'นางรัษฎาภรณ์ ศิริมาตย์',
+        advisorName: 'นายเดชา นามกันยา'
       },
       pp5Scores: [
         {
           studentId: 'S67001',
-          name: 'ด.ช.ณัฐพล บุญรอด',
+          studentCode: '5967',
+          name: 'ด.ช.สัณห์สิษณ์ กลางวงษ์',
           number: 1,
           classroom: 'ม.1/1',
           subjectCode: 'ท21101',
           subjectName: 'ภาษาไทย 1',
           totalPeriods: 40,
-          attendedPeriods: 39,
-          collectedScore: 44, // เต็ม 50
-          midtermScore: 17,   // เต็ม 20
-          finalScore: 26,     // เต็ม 30
-          totalScore: 87,     // รวม 100
+          attendedPeriods: 40,
+          scoreBeforeMid: 27,
+          midtermScore: 18,
+          scoreAfterMid: 18,
+          finalScore: 26,
+          collectedScore: 45,
+          totalScore: 89,
           grade: '4',
-          desirableTraits: [3, 3, 3, 3, 3, 3, 3, 3], // 8 ข้อ (เต็ม 3)
+          status: 'ปกติ',
+          desirableTraits: [3, 3, 3, 3, 3, 3, 3, 3],
           traitsAverage: 3,
-          readingThinkingWriting: 3 // อ่านคิดวิเคราะห์ (3: ดีเยี่ยม)
+          readingScores: [6, 6, 3],
+          readingThinkingWriting: 3,
+          remark: 'ผลการเรียนยอดเยี่ยม'
         },
         {
           studentId: 'S67002',
-          name: 'ด.ญ.กัญญาภัค สุขใจ',
+          studentCode: '6072',
+          name: 'ด.ช.ก้องภพ คำหลิ้ม',
           number: 2,
           classroom: 'ม.1/1',
           subjectCode: 'ท21101',
           subjectName: 'ภาษาไทย 1',
           totalPeriods: 40,
-          attendedPeriods: 40,
-          collectedScore: 47,
-          midtermScore: 18,
-          finalScore: 28,
-          totalScore: 93,
-          grade: '4',
+          attendedPeriods: 39,
+          scoreBeforeMid: 24,
+          midtermScore: 16,
+          scoreAfterMid: 16,
+          finalScore: 23,
+          collectedScore: 40,
+          totalScore: 79,
+          grade: '3.5',
+          status: 'ปกติ',
           desirableTraits: [3, 3, 3, 3, 3, 3, 3, 3],
           traitsAverage: 3,
-          readingThinkingWriting: 3
+          readingScores: [5, 6, 3],
+          readingThinkingWriting: 3,
+          remark: 'ผลการเรียนดีมาก'
         },
         {
           studentId: 'S67003',
-          name: 'ด.ช.ธนกฤต ชัยชนะ',
+          studentCode: '6073',
+          name: 'ด.ช.กิตติพงษ์ สีพิมพ์',
           number: 3,
           classroom: 'ม.1/1',
           subjectCode: 'ท21101',
           subjectName: 'ภาษาไทย 1',
           totalPeriods: 40,
-          attendedPeriods: 36,
-          collectedScore: 32,
-          midtermScore: 12,
-          finalScore: 18,
-          totalScore: 62,
-          grade: '2',
-          desirableTraits: [2, 2, 2, 2, 2, 2, 2, 2],
+          attendedPeriods: 38,
+          scoreBeforeMid: 22,
+          midtermScore: 14,
+          scoreAfterMid: 15,
+          finalScore: 21,
+          collectedScore: 37,
+          totalScore: 72,
+          grade: '3',
+          status: 'ปกติ',
+          desirableTraits: [3, 2, 3, 2, 3, 2, 3, 3],
           traitsAverage: 2,
-          readingThinkingWriting: 2
+          readingScores: [5, 5, 2],
+          readingThinkingWriting: 2,
+          remark: 'ผลการเรียนดี'
         },
         {
           studentId: 'S67004',
-          name: 'ด.ญ.พิมพ์ชนก แสนสุข',
+          studentCode: '6076',
+          name: 'ด.ช.ธนกฤต สินแก้ว',
           number: 4,
           classroom: 'ม.1/1',
           subjectCode: 'ท21101',
           subjectName: 'ภาษาไทย 1',
           totalPeriods: 40,
-          attendedPeriods: 38,
-          collectedScore: 39,
-          midtermScore: 15,
-          finalScore: 24,
-          totalScore: 78,
-          grade: '3.5',
-          desirableTraits: [3, 3, 3, 3, 3, 3, 3, 3],
-          traitsAverage: 3,
-          readingThinkingWriting: 3
+          attendedPeriods: 37,
+          scoreBeforeMid: 21,
+          midtermScore: 13,
+          scoreAfterMid: 14,
+          finalScore: 19,
+          collectedScore: 35,
+          totalScore: 67,
+          grade: '2.5',
+          status: 'ปกติ',
+          desirableTraits: [2, 2, 3, 2, 2, 2, 3, 2],
+          traitsAverage: 2,
+          readingScores: [4, 4, 3],
+          readingThinkingWriting: 2,
+          remark: 'ค่อนข้างดี'
+        },
+        {
+          studentId: 'S67005',
+          studentCode: '6077',
+          name: 'ด.ช.ธนพล คำเลิศ',
+          number: 5,
+          classroom: 'ม.1/1',
+          subjectCode: 'ท21101',
+          subjectName: 'ภาษาไทย 1',
+          totalPeriods: 40,
+          attendedPeriods: 36,
+          scoreBeforeMid: 19,
+          midtermScore: 12,
+          scoreAfterMid: 13,
+          finalScore: 18,
+          collectedScore: 32,
+          totalScore: 62,
+          grade: '2',
+          status: 'ปกติ',
+          desirableTraits: [2, 2, 2, 2, 2, 2, 2, 2],
+          traitsAverage: 2,
+          readingScores: [4, 4, 2],
+          readingThinkingWriting: 2,
+          remark: 'ปานกลาง'
         },
         {
           studentId: 'S67006',
-          name: 'ด.ช.อัครเดช กล้าหาญ',
+          studentCode: '6079',
+          name: 'ด.ช.ธีรยุทธ สาลาด',
           number: 6,
           classroom: 'ม.1/1',
           subjectCode: 'ท21101',
           subjectName: 'ภาษาไทย 1',
           totalPeriods: 40,
-          attendedPeriods: 30, // 75% ติด มส
-          collectedScore: 20,
+          attendedPeriods: 35,
+          scoreBeforeMid: 17,
+          midtermScore: 11,
+          scoreAfterMid: 12,
+          finalScore: 16,
+          collectedScore: 29,
+          totalScore: 56,
+          grade: '1.5',
+          status: 'ปกติ',
+          desirableTraits: [2, 1, 2, 2, 2, 2, 2, 2],
+          traitsAverage: 2,
+          readingScores: [3, 4, 2],
+          readingThinkingWriting: 2,
+          remark: 'พอใช้'
+        },
+        {
+          studentId: 'S67007',
+          studentCode: '6089',
+          name: 'ด.ญ.รุ่งฤทัย ผิวสา',
+          number: 7,
+          classroom: 'ม.1/1',
+          subjectCode: 'ท21101',
+          subjectName: 'ภาษาไทย 1',
+          totalPeriods: 40,
+          attendedPeriods: 40,
+          scoreBeforeMid: 28,
+          midtermScore: 19,
+          scoreAfterMid: 18,
+          finalScore: 28,
+          collectedScore: 46,
+          totalScore: 93,
+          grade: '4',
+          status: 'ปกติ',
+          desirableTraits: [3, 3, 3, 3, 3, 3, 3, 3],
+          traitsAverage: 3,
+          readingScores: [6, 6, 3],
+          readingThinkingWriting: 3,
+          remark: 'ผลการเรียนยอดเยี่ยม'
+        },
+        {
+          studentId: 'S67008',
+          studentCode: '6090',
+          name: 'ด.ญ.ล้อมเดือน สีผาง',
+          number: 8,
+          classroom: 'ม.1/1',
+          subjectCode: 'ท21101',
+          subjectName: 'ภาษาไทย 1',
+          totalPeriods: 40,
+          attendedPeriods: 39,
+          scoreBeforeMid: 26,
+          midtermScore: 17,
+          scoreAfterMid: 17,
+          finalScore: 25,
+          collectedScore: 43,
+          totalScore: 85,
+          grade: '4',
+          status: 'ปกติ',
+          desirableTraits: [3, 3, 3, 3, 3, 3, 3, 3],
+          traitsAverage: 3,
+          readingScores: [6, 5, 3],
+          readingThinkingWriting: 3,
+          remark: 'ผลการเรียนดีเยี่ยม'
+        },
+        {
+          studentId: 'S67009',
+          studentCode: '6092',
+          name: 'ด.ญ.วริษา สมภาร',
+          number: 9,
+          classroom: 'ม.1/1',
+          subjectCode: 'ท21101',
+          subjectName: 'ภาษาไทย 1',
+          totalPeriods: 40,
+          attendedPeriods: 38,
+          scoreBeforeMid: 23,
+          midtermScore: 15,
+          scoreAfterMid: 14,
+          finalScore: 22,
+          collectedScore: 37,
+          totalScore: 74,
+          grade: '3',
+          status: 'ปกติ',
+          desirableTraits: [3, 3, 3, 2, 3, 3, 3, 3],
+          traitsAverage: 3,
+          readingScores: [5, 5, 2],
+          readingThinkingWriting: 2,
+          remark: 'ผลการเรียนดี'
+        },
+        {
+          studentId: 'S67010',
+          studentCode: '6096',
+          name: 'ด.ช.ณัฐวุฒิ วรรณพัฒ',
+          number: 10,
+          classroom: 'ม.1/1',
+          subjectCode: 'ท21101',
+          subjectName: 'ภาษาไทย 1',
+          totalPeriods: 40,
+          attendedPeriods: 34,
+          scoreBeforeMid: 16,
+          midtermScore: 10,
+          scoreAfterMid: 11,
+          finalScore: 15,
+          collectedScore: 27,
+          totalScore: 52,
+          grade: '1',
+          status: 'ปกติ',
+          desirableTraits: [1, 1, 2, 1, 1, 2, 1, 1],
+          traitsAverage: 1,
+          readingScores: [3, 3, 1],
+          readingThinkingWriting: 1,
+          remark: 'ผ่านเกณฑ์ขั้นต่ำ'
+        },
+        {
+          studentId: 'S67011',
+          studentCode: '6098',
+          name: 'ด.ช.ธนกิตติ์ หนูปัทยา',
+          number: 11,
+          classroom: 'ม.1/1',
+          subjectCode: 'ท21101',
+          subjectName: 'ภาษาไทย 1',
+          totalPeriods: 40,
+          attendedPeriods: 33,
+          scoreBeforeMid: 13,
           midtermScore: 8,
-          finalScore: 12,
-          totalScore: 40,
+          scoreAfterMid: 9,
+          finalScore: 13,
+          collectedScore: 22,
+          totalScore: 43,
           grade: '0',
+          status: 'ติด 0 (รอสอบแก้ตัว)',
           desirableTraits: [1, 1, 1, 1, 1, 1, 1, 1],
           traitsAverage: 1,
-          readingThinkingWriting: 1
+          readingScores: [2, 2, 1],
+          readingThinkingWriting: 1,
+          remark: 'นัดสอบแก้ตัว 15 ต.ค.'
+        },
+        {
+          studentId: 'S67012',
+          studentCode: '6100',
+          name: 'ด.ช.ธนภูมิ โพธิบุตร',
+          number: 12,
+          classroom: 'ม.1/1',
+          subjectCode: 'ท21101',
+          subjectName: 'ภาษาไทย 1',
+          totalPeriods: 40,
+          attendedPeriods: 36,
+          scoreBeforeMid: 18,
+          midtermScore: 10,
+          scoreAfterMid: 11,
+          finalScore: 0,
+          collectedScore: 29,
+          totalScore: 39,
+          grade: 'ร',
+          status: 'ติด ร (รอส่งชิ้นงาน)',
+          desirableTraits: [1, 1, 2, 1, 1, 1, 1, 1],
+          traitsAverage: 1,
+          readingScores: [3, 2, 1],
+          readingThinkingWriting: 1,
+          remark: 'ขาดส่งสมุดแบบฝึกหัด'
+        },
+        {
+          studentId: 'S67013',
+          studentCode: '6102',
+          name: 'ด.ช.วานิตร ปิ่นวิเศษ',
+          number: 13,
+          classroom: 'ม.1/1',
+          subjectCode: 'ท21101',
+          subjectName: 'ภาษาไทย 1',
+          totalPeriods: 40,
+          attendedPeriods: 28,
+          scoreBeforeMid: 20,
+          midtermScore: 12,
+          scoreAfterMid: 15,
+          finalScore: 0,
+          collectedScore: 35,
+          totalScore: 47,
+          grade: 'มส',
+          status: 'ติด มส (เวลาเรียนไม่ถึง 80%)',
+          desirableTraits: [1, 1, 1, 1, 1, 1, 1, 1],
+          traitsAverage: 1,
+          readingScores: [2, 3, 1],
+          readingThinkingWriting: 1,
+          remark: 'เวลาเรียน 70% ต่ำกว่าเกณฑ์'
         }
       ],
 
@@ -6729,45 +7209,220 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
     }
 
     // -------------------------------------------------------------------------
-    // 13. COMPREHENSIVE PHOR PHOR 5 (ปพ.5) (ข้อ 13)
+    // 13. COMPREHENSIVE PHOR PHOR 5 (ปพ.5) (อ้างอิงต้นแบบ PP5-MY-2569)
     // -------------------------------------------------------------------------
+    let currentPp5Subtab = 'scores';
+
+    function togglePp5PrintMenu() {
+      const menu = document.getElementById('pp5PrintMenu');
+      if (menu) menu.classList.toggle('hidden');
+    }
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function(e) {
+      const menu = document.getElementById('pp5PrintMenu');
+      if (menu && !menu.classList.contains('hidden')) {
+        const btn = e.target.closest('button');
+        if (!btn || !btn.onclick || !btn.onclick.toString().includes('togglePp5PrintMenu')) {
+          if (!menu.contains(e.target)) menu.classList.add('hidden');
+        }
+      }
+    });
+
+    function switchPp5Subtab(tabName) {
+      currentPp5Subtab = tabName;
+      ['scores', 'traits', 'reading', 'summary'].forEach(name => {
+        const viewEl = document.getElementById(`pp5View-${name}`);
+        const btnEl = document.getElementById(`pp5SubtabBtn-${name}`);
+        if (viewEl) viewEl.classList.toggle('hidden', name !== tabName);
+        if (btnEl) {
+          if (name === tabName) {
+            btnEl.className = 'px-4 py-2.5 rounded-lg text-xs font-bold transition flex items-center gap-2 bg-emerald-700 text-white shadow-sm';
+          } else {
+            btnEl.className = 'px-4 py-2.5 rounded-lg text-xs font-bold transition flex items-center gap-2 text-slate-600 hover:text-slate-900 hover:bg-slate-100';
+          }
+        }
+      });
+      renderPp5Table();
+    }
+
+    function updatePp5LiveTotal() {
+      const bMid = parseFloat(document.getElementById('pp5ScoreBeforeMid').value) || 0;
+      const mid = parseFloat(document.getElementById('pp5ScoreMidterm').value) || 0;
+      const aMid = parseFloat(document.getElementById('pp5ScoreAfterMid').value) || 0;
+      const fin = parseFloat(document.getElementById('pp5ScoreFinal').value) || 0;
+      const total = bMid + mid + aMid + fin;
+      const label = document.getElementById('pp5ModalLiveTotal');
+      if (label) label.textContent = `รวม: ${total} คะแนน`;
+    }
+
     function renderPp5Table() {
       initExtendedState();
-      const tbody = document.getElementById('pp5TableBody');
-      if (!tbody) return;
       const list = state.ext.pp5Scores || [];
 
-      tbody.innerHTML = list.map(item => {
-        const attPercent = Math.round((item.attendedPeriods / item.totalPeriods) * 100);
-        let gradeBadge = 'bg-blue-100 text-blue-800';
-        if (item.grade === '0') gradeBadge = 'bg-rose-100 text-rose-800';
-        else if (item.grade === '4') gradeBadge = 'bg-emerald-100 text-emerald-800';
+      // 1. Render Scores Table
+      const tbodyScores = document.getElementById('pp5TableBody');
+      if (tbodyScores) {
+        tbodyScores.innerHTML = list.map(item => {
+          const totalPer = item.totalPeriods || 40;
+          const attPer = item.attendedPeriods || 40;
+          const attPercent = Math.round((attPer / totalPer) * 100);
+          let gradeBadge = 'bg-blue-100 text-blue-800';
+          if (item.grade === '0') gradeBadge = 'bg-rose-100 text-rose-800';
+          else if (item.grade === '4') gradeBadge = 'bg-emerald-100 text-emerald-800';
+          else if (item.grade === 'ร') gradeBadge = 'bg-amber-100 text-amber-800';
+          else if (item.grade === 'มส') gradeBadge = 'bg-purple-100 text-purple-800';
 
-        return `
-          <tr class="hover:bg-slate-50 transition border-b border-slate-100 text-center">
-            <td class="p-3 font-bold text-slate-700 border-r border-slate-100">${item.number}</td>
-            <td class="p-3 text-left font-bold text-slate-900 border-r border-slate-100">${item.name}</td>
-            <td class="p-3 border-r border-slate-100">
-              <div class="font-bold text-slate-800">${item.attendedPeriods}/${item.totalPeriods}</div>
-              <div class="text-[10px] font-bold ${attPercent < 80 ? 'text-rose-600' : 'text-emerald-600'}">${attPercent}%</div>
-            </td>
-            <td class="p-3 font-semibold border-r border-slate-100">${item.collectedScore}</td>
-            <td class="p-3 font-semibold border-r border-slate-100">${item.midtermScore}</td>
-            <td class="p-3 font-semibold border-r border-slate-100">${item.finalScore}</td>
-            <td class="p-3 font-black text-slate-900 bg-blue-50/50 border-r border-slate-100">${item.totalScore}</td>
-            <td class="p-3 font-black border-r border-slate-100">
-              <span class="px-2 py-0.5 rounded text-xs font-black ${gradeBadge}">${item.grade}</span>
-            </td>
-            <td class="p-3 font-bold text-slate-700 border-r border-slate-100">${item.traitsAverage === 3 ? 'ดีเยี่ยม (3)' : item.traitsAverage === 2 ? 'ดี (2)' : 'ผ่าน (1)'}</td>
-            <td class="p-3 font-bold text-slate-700 border-r border-slate-100">${item.readingThinkingWriting === 3 ? 'ดีเยี่ยม (3)' : 'ดี (2)'}</td>
-            <td class="p-3 text-right">
-              <button onclick="openModalAddPp5Score('${item.studentId}')" title="แก้ไขคะแนน ปพ.5" class="p-1.5 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-700 transition">
-                <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
-              </button>
-            </td>
+          return `
+            <tr class="hover:bg-slate-50 transition border-b border-slate-100 text-center">
+              <td class="p-3 font-bold text-slate-700 border-r border-slate-100">${item.number}</td>
+              <td class="p-3 font-mono font-bold text-slate-600 border-r border-slate-100">${item.studentCode || item.studentId}</td>
+              <td class="p-3 text-left font-bold text-slate-900 border-r border-slate-100">${item.name}</td>
+              <td class="p-3 border-r border-slate-100">
+                <div class="font-bold text-slate-800">${attPer}/${totalPer}</div>
+                <div class="text-[10px] font-bold ${attPercent < 80 ? 'text-rose-600' : 'text-emerald-600'}">${attPercent}%</div>
+              </td>
+              <td class="p-3 font-semibold border-r border-slate-100">${item.scoreBeforeMid !== undefined ? item.scoreBeforeMid : Math.round(item.collectedScore * 0.55)}</td>
+              <td class="p-3 font-semibold border-r border-slate-100">${item.midtermScore}</td>
+              <td class="p-3 font-semibold border-r border-slate-100">${item.scoreAfterMid !== undefined ? item.scoreAfterMid : Math.round(item.collectedScore * 0.45)}</td>
+              <td class="p-3 font-semibold border-r border-slate-100">${item.finalScore}</td>
+              <td class="p-3 font-black text-slate-900 bg-blue-50/50 border-r border-slate-100 text-sm">${item.totalScore}</td>
+              <td class="p-3 font-black border-r border-slate-100">
+                <span class="px-2.5 py-0.5 rounded text-xs font-black ${gradeBadge}">${item.grade}</span>
+              </td>
+              <td class="p-3 text-left border-r border-slate-100 text-[11px] font-medium text-slate-600">${item.remark || item.status || 'ปกติ'}</td>
+              <td class="p-3 text-center">
+                <button onclick="openModalAddPp5Score('${item.studentId}')" title="แก้ไขคะแนน ปพ.5" class="p-1.5 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-700 transition">
+                  <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
+                </button>
+              </td>
+            </tr>
+          `;
+        }).join('');
+      }
+
+      // 2. Render Traits Table (ชีต Attib)
+      const tbodyTraits = document.getElementById('pp5TraitsTableBody');
+      if (tbodyTraits) {
+        tbodyTraits.innerHTML = list.map(item => {
+          const t = item.desirableTraits || [3,3,3,3,3,3,3,3];
+          const avg = item.traitsAverage !== undefined ? item.traitsAverage : 3;
+          let avgLabel = avg === 3 ? '<span class="text-emerald-700 font-black">ดีเยี่ยม (3)</span>' : avg === 2 ? '<span class="text-blue-700 font-bold">ดี (2)</span>' : avg === 1 ? '<span class="text-amber-700 font-bold">ผ่าน (1)</span>' : '<span class="text-rose-700 font-bold">ไม่ผ่าน (0)</span>';
+          return `
+            <tr class="hover:bg-slate-50 transition border-b border-slate-100 text-center">
+              <td class="p-2.5 font-bold text-slate-700 border-r border-slate-100">${item.number}</td>
+              <td class="p-2.5 font-mono text-slate-600 border-r border-slate-100">${item.studentCode || item.studentId}</td>
+              <td class="p-2.5 text-left font-bold text-slate-900 border-r border-slate-100">${item.name}</td>
+              <td class="p-2 font-medium border-r border-slate-100">${t[0] || 3}</td>
+              <td class="p-2 font-medium border-r border-slate-100">${t[1] || 3}</td>
+              <td class="p-2 font-medium border-r border-slate-100">${t[2] || 3}</td>
+              <td class="p-2 font-medium border-r border-slate-100">${t[3] || 3}</td>
+              <td class="p-2 font-medium border-r border-slate-100">${t[4] || 3}</td>
+              <td class="p-2 font-medium border-r border-slate-100">${t[5] || 3}</td>
+              <td class="p-2 font-medium border-r border-slate-100">${t[6] || 3}</td>
+              <td class="p-2 font-medium border-r border-slate-100">${t[7] || 3}</td>
+              <td class="p-2.5 bg-emerald-50/50">${avgLabel}</td>
+            </tr>
+          `;
+        }).join('');
+      }
+
+      // 3. Render Reading Table (ชีต Read)
+      const tbodyReading = document.getElementById('pp5ReadingTableBody');
+      if (tbodyReading) {
+        tbodyReading.innerHTML = list.map(item => {
+          const rScores = item.readingScores || [6, 6, 3];
+          const rTotal = rScores[0] + rScores[1] + rScores[2];
+          const rLevel = item.readingThinkingWriting !== undefined ? item.readingThinkingWriting : (rTotal >= 13 ? 3 : rTotal >= 10 ? 2 : rTotal >= 7 ? 1 : 0);
+          let rLabel = rLevel === 3 ? '<span class="text-purple-800 font-black">ดีเยี่ยม (3)</span>' : rLevel === 2 ? '<span class="text-blue-700 font-bold">ดี (2)</span>' : rLevel === 1 ? '<span class="text-amber-700 font-bold">ผ่าน (1)</span>' : '<span class="text-rose-700 font-bold">ไม่ผ่าน (0)</span>';
+          return `
+            <tr class="hover:bg-slate-50 transition border-b border-slate-100 text-center">
+              <td class="p-2.5 font-bold text-slate-700 border-r border-slate-100">${item.number}</td>
+              <td class="p-2.5 font-mono text-slate-600 border-r border-slate-100">${item.studentCode || item.studentId}</td>
+              <td class="p-2.5 text-left font-bold text-slate-900 border-r border-slate-100">${item.name}</td>
+              <td class="p-2 font-semibold border-r border-slate-100">${rScores[0]}</td>
+              <td class="p-2 font-semibold border-r border-slate-100">${rScores[1]}</td>
+              <td class="p-2 font-semibold border-r border-slate-100">${rScores[2]}</td>
+              <td class="p-2 font-black text-slate-900 border-r border-slate-100 bg-slate-50">${rTotal}</td>
+              <td class="p-2.5 bg-purple-50/50">${rLabel}</td>
+            </tr>
+          `;
+        }).join('');
+      }
+
+      // 4. Calculate Distributions for Summary Card
+      const totalStudents = list.length;
+      const statTotalEl = document.getElementById('pp5StatTotalStudents');
+      if (statTotalEl) statTotalEl.textContent = `นักเรียนทั้งหมด ${totalStudents} คน`;
+
+      const gradeCounts = { '4': 0, '3.5': 0, '3': 0, '2.5': 0, '2': 0, '1.5': 0, '1': 0, '0': 0, 'ร': 0, 'มส': 0 };
+      const traitsCounts = { '3': 0, '2': 0, '1': 0, '0': 0 };
+      const readingCounts = { '3': 0, '2': 0, '1': 0, '0': 0 };
+
+      list.forEach(item => {
+        const g = String(item.grade || '0').trim();
+        if (gradeCounts[g] !== undefined) gradeCounts[g]++;
+        else if (g === 'ร') gradeCounts['ร']++;
+        else if (g === 'มส') gradeCounts['มส']++;
+        else gradeCounts['0']++;
+
+        const t = String(item.traitsAverage || 3);
+        if (traitsCounts[t] !== undefined) traitsCounts[t]++;
+
+        const r = String(item.readingThinkingWriting || 3);
+        if (readingCounts[r] !== undefined) readingCounts[r]++;
+      });
+
+      const distTbody = document.getElementById('pp5GradeDistTableBody');
+      if (distTbody) {
+        const countsRow = ['4', '3.5', '3', '2.5', '2', '1.5', '1', '0', 'ร', 'มส'].map(g => `<td class="p-2 border border-slate-200 font-bold">${gradeCounts[g]}</td>`).join('');
+        const percentsRow = ['4', '3.5', '3', '2.5', '2', '1.5', '1', '0', 'ร', 'มส'].map(g => {
+          const pct = totalStudents > 0 ? ((gradeCounts[g] / totalStudents) * 100).toFixed(1) : '0.0';
+          return `<td class="p-2 border border-slate-200 text-slate-600 font-semibold">${pct}%</td>`;
+        }).join('');
+
+        distTbody.innerHTML = `
+          <tr class="bg-white">
+            <td class="p-2 border border-slate-200 font-bold bg-slate-50 text-left">จำนวน (คน)</td>
+            ${countsRow}
+            <td class="p-2 border border-slate-200 font-black bg-slate-100">${totalStudents}</td>
+          </tr>
+          <tr class="bg-white">
+            <td class="p-2 border border-slate-200 font-bold bg-slate-50 text-left">คิดเป็นร้อยละ</td>
+            ${percentsRow}
+            <td class="p-2 border border-slate-200 font-black bg-slate-100">100%</td>
           </tr>
         `;
-      }).join('');
+      }
+
+      const traitsBox = document.getElementById('pp5TraitsDistBox');
+      if (traitsBox) {
+        const t3Pct = totalStudents > 0 ? ((traitsCounts['3'] / totalStudents) * 100).toFixed(1) : 0;
+        const t2Pct = totalStudents > 0 ? ((traitsCounts['2'] / totalStudents) * 100).toFixed(1) : 0;
+        const t1Pct = totalStudents > 0 ? ((traitsCounts['1'] / totalStudents) * 100).toFixed(1) : 0;
+        const t0Pct = totalStudents > 0 ? ((traitsCounts['0'] / totalStudents) * 100).toFixed(1) : 0;
+        traitsBox.innerHTML = `
+          <div class="flex justify-between"><span>• ดีเยี่ยม (3):</span> <strong class="text-emerald-800">${traitsCounts['3']} คน (${t3Pct}%)</strong></div>
+          <div class="flex justify-between"><span>• ดี (2):</span> <strong class="text-blue-800">${traitsCounts['2']} คน (${t2Pct}%)</strong></div>
+          <div class="flex justify-between"><span>• ผ่าน (1):</span> <strong class="text-amber-800">${traitsCounts['1']} คน (${t1Pct}%)</strong></div>
+          <div class="flex justify-between"><span>• ไม่ผ่าน (0):</span> <strong class="text-rose-800">${traitsCounts['0']} คน (${t0Pct}%)</strong></div>
+        `;
+      }
+
+      const readingBox = document.getElementById('pp5ReadingDistBox');
+      if (readingBox) {
+        const r3Pct = totalStudents > 0 ? ((readingCounts['3'] / totalStudents) * 100).toFixed(1) : 0;
+        const r2Pct = totalStudents > 0 ? ((readingCounts['2'] / totalStudents) * 100).toFixed(1) : 0;
+        const r1Pct = totalStudents > 0 ? ((readingCounts['1'] / totalStudents) * 100).toFixed(1) : 0;
+        const r0Pct = totalStudents > 0 ? ((readingCounts['0'] / totalStudents) * 100).toFixed(1) : 0;
+        readingBox.innerHTML = `
+          <div class="flex justify-between"><span>• ดีเยี่ยม (3):</span> <strong class="text-purple-800">${readingCounts['3']} คน (${r3Pct}%)</strong></div>
+          <div class="flex justify-between"><span>• ดี (2):</span> <strong class="text-blue-800">${readingCounts['2']} คน (${r2Pct}%)</strong></div>
+          <div class="flex justify-between"><span>• ผ่าน (1):</span> <strong class="text-amber-800">${readingCounts['1']} คน (${r1Pct}%)</strong></div>
+          <div class="flex justify-between"><span>• ไม่ผ่าน (0):</span> <strong class="text-rose-800">${readingCounts['0']} คน (${r0Pct}%)</strong></div>
+        `;
+      }
+
       if (window.lucide) lucide.createIcons();
     }
 
@@ -6779,13 +7434,18 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
         const scoreObj = state.ext.pp5Scores.find(x => x.studentId === defaultStuId);
         if (scoreObj) {
           document.getElementById('pp5EditStudentId').value = scoreObj.studentId;
-          document.getElementById('pp5ScoreCollected').value = scoreObj.collectedScore;
-          document.getElementById('pp5ScoreMidterm').value = scoreObj.midtermScore;
-          document.getElementById('pp5ScoreFinal').value = scoreObj.finalScore;
-          document.getElementById('pp5ScoreTraits').value = scoreObj.traitsAverage;
-          document.getElementById('pp5ScoreReading').value = scoreObj.readingThinkingWriting;
+          document.getElementById('pp5ScoreBeforeMid').value = scoreObj.scoreBeforeMid !== undefined ? scoreObj.scoreBeforeMid : 25;
+          document.getElementById('pp5ScoreMidterm').value = scoreObj.midtermScore !== undefined ? scoreObj.midtermScore : 16;
+          document.getElementById('pp5ScoreAfterMid').value = scoreObj.scoreAfterMid !== undefined ? scoreObj.scoreAfterMid : 16;
+          document.getElementById('pp5ScoreFinal').value = scoreObj.finalScore !== undefined ? scoreObj.finalScore : 24;
+          document.getElementById('pp5AttendedPeriods').value = scoreObj.attendedPeriods !== undefined ? scoreObj.attendedPeriods : 39;
+          document.getElementById('pp5ScoreTraits').value = scoreObj.traitsAverage !== undefined ? scoreObj.traitsAverage : 3;
+          document.getElementById('pp5ScoreReading').value = scoreObj.readingThinkingWriting !== undefined ? scoreObj.readingThinkingWriting : 3;
+          document.getElementById('pp5ScoreStatus').value = scoreObj.status || 'ปกติ';
+          document.getElementById('pp5ScoreRemark').value = scoreObj.remark || '';
         }
       }
+      updatePp5LiveTotal();
       openModal('modalAddPp5Score');
     }
 
@@ -6793,43 +7453,62 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
       e.preventDefault();
       initExtendedState();
       const stuId = document.getElementById('pp5StudentSelect').value;
-      const collected = parseFloat(document.getElementById('pp5ScoreCollected').value) || 0;
-      const midterm = parseFloat(document.getElementById('pp5ScoreMidterm').value) || 0;
-      const final = parseFloat(document.getElementById('pp5ScoreFinal').value) || 0;
+      const bMid = parseFloat(document.getElementById('pp5ScoreBeforeMid').value) || 0;
+      const mid = parseFloat(document.getElementById('pp5ScoreMidterm').value) || 0;
+      const aMid = parseFloat(document.getElementById('pp5ScoreAfterMid').value) || 0;
+      const fin = parseFloat(document.getElementById('pp5ScoreFinal').value) || 0;
+      const attended = parseInt(document.getElementById('pp5AttendedPeriods').value) || 39;
       const traits = parseInt(document.getElementById('pp5ScoreTraits').value) || 3;
       const reading = parseInt(document.getElementById('pp5ScoreReading').value) || 3;
+      const status = document.getElementById('pp5ScoreStatus').value;
+      const remark = document.getElementById('pp5ScoreRemark').value;
 
-      const total = collected + midterm + final;
+      const total = bMid + mid + aMid + fin;
       let grade = '0';
-      if (total >= 80) grade = '4';
-      else if (total >= 75) grade = '3.5';
-      else if (total >= 70) grade = '3';
-      else if (total >= 65) grade = '2.5';
-      else if (total >= 60) grade = '2';
-      else if (total >= 55) grade = '1.5';
-      else if (total >= 50) grade = '1';
-      else grade = '0';
-
-      const stuObj = state.ext.dmcStudents.find(x => x.studentId === stuId) || { name: 'นักเรียน' };
+      if (status.includes('ร')) {
+        grade = 'ร';
+      } else if (status.includes('มส')) {
+        grade = 'มส';
+      } else {
+        if (total >= 80) grade = '4';
+        else if (total >= 75) grade = '3.5';
+        else if (total >= 70) grade = '3';
+        else if (total >= 65) grade = '2.5';
+        else if (total >= 60) grade = '2';
+        else if (total >= 55) grade = '1.5';
+        else if (total >= 50) grade = '1';
+        else grade = '0';
+      }
 
       const existingIdx = state.ext.pp5Scores.findIndex(x => x.studentId === stuId);
+      const prev = existingIdx !== -1 ? state.ext.pp5Scores[existingIdx] : {};
+      const stuObj = (state.students && state.students.find(x => x.id === stuId)) || 
+                     (state.ext.dmcStudents && state.ext.dmcStudents.find(x => x.studentId === stuId)) || 
+                     { name: prev.name || 'นักเรียน', number: prev.number || 1 };
+
       const scoreRecord = {
         studentId: stuId,
-        name: stuObj.title ? (stuObj.title + stuObj.firstName + ' ' + stuObj.lastName) : stuObj.name,
-        number: stuObj.number || 1,
+        studentCode: prev.studentCode || (stuObj.citizenId ? stuObj.citizenId.slice(-4) : '60' + (prev.number || 10)),
+        name: stuObj.name || (stuObj.title ? (stuObj.title + stuObj.firstName + ' ' + stuObj.lastName) : 'นักเรียน'),
+        number: stuObj.number || prev.number || 1,
         classroom: stuObj.classroom || 'ม.1/1',
         subjectCode: 'ท21101',
         subjectName: 'ภาษาไทย 1',
         totalPeriods: 40,
-        attendedPeriods: 39,
-        collectedScore: collected,
-        midtermScore: midterm,
-        finalScore: final,
+        attendedPeriods: attended,
+        scoreBeforeMid: bMid,
+        midtermScore: mid,
+        scoreAfterMid: aMid,
+        finalScore: fin,
+        collectedScore: bMid + aMid,
         totalScore: total,
         grade,
+        status,
         desirableTraits: [traits, traits, traits, traits, traits, traits, traits, traits],
         traitsAverage: traits,
-        readingThinkingWriting: reading
+        readingScores: [Math.round(reading * 2), Math.round(reading * 2), reading],
+        readingThinkingWriting: reading,
+        remark: remark || status
       };
 
       if (existingIdx !== -1) {
@@ -6844,69 +7523,509 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
       showToast('บันทึกคะแนนและตัดเกรด ปพ.5 สำเร็จ');
     }
 
-    function printPp5Report() {
+    // -------------------------------------------------------------------------
+    // PRINT PP5 REPORT (ถอดแบบตรงตามโครงสร้างชีตของ PP5-MY-2569)
+    // -------------------------------------------------------------------------
+    function printPp5Report(reportType = 'all') {
       initExtendedState();
       const list = state.ext.pp5Scores || [];
-      let rows = list.map(item => {
-        const attP = Math.round((item.attendedPeriods / item.totalPeriods) * 100);
+      const school = state.schoolInfo || {};
+      const schoolName = school.name || 'โรงเรียนดงสวรรค์วิทยา';
+      const district = 'อำเภอนากลาง จังหวัดหนองบัวลำภู';
+      const jurisdiction = school.subTitle || 'สังกัด สำนักงานเขตพื้นที่การศึกษาประถมศึกษาหนองบัวลำภู เขต 2';
+      const classText = 'ชั้นมัธยมศึกษาปีที่ 1/1';
+      const termYear = 'ภาคเรียนที่ 1 ปีการศึกษา 2569';
+      const courseName = 'ภาษาไทย 1';
+      const courseCode = 'ท21101';
+      const credits = '1.5';
+      const weeklyHours = '3';
+      const teacherName = 'นางรัษฎาภรณ์ ศิริมาตย์';
+      const advisorName = 'นายเดชา นามกันยา';
+      const directorName = school.directorName || 'นางรัษฎาภรณ์ อ่อนนิ่ม';
+      const totalStudents = list.length;
+      const logoElem = document.getElementById('headerSchoolLogo');
+      const logoBase64 = (logoElem && logoElem.src) ? logoElem.src : (school.logoUrl || '');
+
+      // Distributions Calculation
+      const gradeCounts = { '4': 0, '3.5': 0, '3': 0, '2.5': 0, '2': 0, '1.5': 0, '1': 0, '0': 0, 'ร': 0, 'มส': 0 };
+      const traitsCounts = { '3': 0, '2': 0, '1': 0, '0': 0 };
+      const readingCounts = { '3': 0, '2': 0, '1': 0, '0': 0 };
+
+      list.forEach(item => {
+        const g = String(item.grade || '0').trim();
+        if (gradeCounts[g] !== undefined) gradeCounts[g]++;
+        else if (g === 'ร') gradeCounts['ร']++;
+        else if (g === 'มส') gradeCounts['มส']++;
+        else gradeCounts['0']++;
+
+        const t = String(item.traitsAverage || 3);
+        if (traitsCounts[t] !== undefined) traitsCounts[t]++;
+
+        const r = String(item.readingThinkingWriting || 3);
+        if (readingCounts[r] !== undefined) readingCounts[r]++;
+      });
+
+      // ==========================================
+      // SECTION A: COVER SHEET (ชีต Cover ของ PP5-MY-2569)
+      // ==========================================
+      const coverHtml = `
+        <div class="page-container" style="page-break-after: always; padding: 20px 25px; font-family:'Sarabun', 'TH Sarabun New', 'TH Sarabun PSK', sans-serif; color: #000; box-sizing: border-box;">
+          <div style="text-align: right; font-size: 13pt; font-weight: bold; margin-bottom: 5px;">ปพ.5</div>
+          
+          <div style="text-align: center; margin-bottom: 12px;">
+            ${logoBase64 ? `<img src="${logoBase64}" style="max-height: 80px; display: inline-block; margin-bottom: 5px;">` : ''}
+            <h1 style="font-size: 19pt; font-weight: bold; margin: 0; letter-spacing: -0.2px;">แบบบันทึกผลการพัฒนาคุณภาพผู้เรียน</h1>
+            <h2 style="font-size: 14pt; font-weight: bold; margin: 3px 0 0 0;">${schoolName} &nbsp;&nbsp; ${district}</h2>
+            <div style="font-size: 11pt; color: #333; margin-top: 2px;">${jurisdiction}</div>
+          </div>
+
+          <div style="border: 1px solid #000; padding: 8px 12px; margin-bottom: 12px; font-size: 12pt; line-height: 1.6; background-color: #fdfdfd;">
+            <div style="display: flex; justify-content: space-between;">
+              <span><strong>${classText}</strong></span>
+              <span><strong>${termYear}</strong></span>
+              <span><strong>เวลา ${weeklyHours} ชั่วโมง/สัปดาห์</strong></span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-top: 2px;">
+              <span><strong>รายวิชา:</strong> ${courseName}</span>
+              <span><strong>รหัสวิชา:</strong> ${courseCode}</span>
+              <span><strong>จำนวน:</strong> ${credits} หน่วยการเรียน</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-top: 2px;">
+              <span><strong>ครูผู้สอน:</strong> ${teacherName}</span>
+              <span><strong>ครูที่ปรึกษา:</strong> ${advisorName}</span>
+              <span><strong>วันอนุมัติผล:</strong> 31 มีนาคม 2570</span>
+            </div>
+          </div>
+
+          <!-- SUMMARY TABLE 1: GRADE DISTRIBUTION (เหมือนชีต Cover เป๊ะ) -->
+          <div style="margin-bottom: 10px;">
+            <div style="font-size: 12pt; font-weight: bold; margin-bottom: 3px;">1. สรุปผลการเรียน (จำนวนนักเรียนทั้งหมด ${totalStudents} คน)</div>
+            <table style="width: 100%; border-collapse: collapse; text-align: center; font-size: 10pt; border: 1px solid #000;">
+              <thead>
+                <tr style="background-color: #f2f2f2; font-weight: bold; height: 24px;">
+                  <th style="border: 1px solid #000; width: 14%;">ระดับผลการเรียน</th>
+                  <th style="border: 1px solid #000; width: 8%;">4</th>
+                  <th style="border: 1px solid #000; width: 8%;">3.5</th>
+                  <th style="border: 1px solid #000; width: 8%;">3</th>
+                  <th style="border: 1px solid #000; width: 8%;">2.5</th>
+                  <th style="border: 1px solid #000; width: 8%;">2</th>
+                  <th style="border: 1px solid #000; width: 8%;">1.5</th>
+                  <th style="border: 1px solid #000; width: 8%;">1</th>
+                  <th style="border: 1px solid #000; width: 8%;">0</th>
+                  <th style="border: 1px solid #000; width: 8%;">ร</th>
+                  <th style="border: 1px solid #000; width: 8%;">มส</th>
+                  <th style="border: 1px solid #000; width: 10%; background-color: #e6e6e6;">รวม</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="height: 23px;">
+                  <td style="border: 1px solid #000; font-weight: bold; text-align: left; padding-left: 6px;">จำนวน (คน)</td>
+                  <td style="border: 1px solid #000;">${gradeCounts['4']}</td>
+                  <td style="border: 1px solid #000;">${gradeCounts['3.5']}</td>
+                  <td style="border: 1px solid #000;">${gradeCounts['3']}</td>
+                  <td style="border: 1px solid #000;">${gradeCounts['2.5']}</td>
+                  <td style="border: 1px solid #000;">${gradeCounts['2']}</td>
+                  <td style="border: 1px solid #000;">${gradeCounts['1.5']}</td>
+                  <td style="border: 1px solid #000;">${gradeCounts['1']}</td>
+                  <td style="border: 1px solid #000;">${gradeCounts['0']}</td>
+                  <td style="border: 1px solid #000;">${gradeCounts['ร']}</td>
+                  <td style="border: 1px solid #000;">${gradeCounts['มส']}</td>
+                  <td style="border: 1px solid #000; font-weight: bold; background-color: #f7f7f7;">${totalStudents}</td>
+                </tr>
+                <tr style="height: 23px;">
+                  <td style="border: 1px solid #000; font-weight: bold; text-align: left; padding-left: 6px;">คิดเป็นร้อยละ</td>
+                  <td style="border: 1px solid #000;">${totalStudents > 0 ? ((gradeCounts['4']/totalStudents)*100).toFixed(1) : 0}%</td>
+                  <td style="border: 1px solid #000;">${totalStudents > 0 ? ((gradeCounts['3.5']/totalStudents)*100).toFixed(1) : 0}%</td>
+                  <td style="border: 1px solid #000;">${totalStudents > 0 ? ((gradeCounts['3']/totalStudents)*100).toFixed(1) : 0}%</td>
+                  <td style="border: 1px solid #000;">${totalStudents > 0 ? ((gradeCounts['2.5']/totalStudents)*100).toFixed(1) : 0}%</td>
+                  <td style="border: 1px solid #000;">${totalStudents > 0 ? ((gradeCounts['2']/totalStudents)*100).toFixed(1) : 0}%</td>
+                  <td style="border: 1px solid #000;">${totalStudents > 0 ? ((gradeCounts['1.5']/totalStudents)*100).toFixed(1) : 0}%</td>
+                  <td style="border: 1px solid #000;">${totalStudents > 0 ? ((gradeCounts['1']/totalStudents)*100).toFixed(1) : 0}%</td>
+                  <td style="border: 1px solid #000;">${totalStudents > 0 ? ((gradeCounts['0']/totalStudents)*100).toFixed(1) : 0}%</td>
+                  <td style="border: 1px solid #000;">${totalStudents > 0 ? ((gradeCounts['ร']/totalStudents)*100).toFixed(1) : 0}%</td>
+                  <td style="border: 1px solid #000;">${totalStudents > 0 ? ((gradeCounts['มส']/totalStudents)*100).toFixed(1) : 0}%</td>
+                  <td style="border: 1px solid #000; font-weight: bold; background-color: #f7f7f7;">100%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- SUMMARY TABLES 2 & 3: TRAITS & READING (ถอดแบบ 2 ฝั่งซ้ายขวา) -->
+          <div style="display: flex; justify-content: space-between; gap: 12px; margin-bottom: 12px;">
+            <div style="width: 50%;">
+              <div style="font-size: 11pt; font-weight: bold; margin-bottom: 3px;">2. สรุปผลคุณลักษณะอันพึงประสงค์ 8 ประการ</div>
+              <table style="width: 100%; border-collapse: collapse; text-align: center; font-size: 9.5pt; border: 1px solid #000;">
+                <tr style="background-color: #f2f2f2; font-weight: bold; height: 22px;">
+                  <th style="border: 1px solid #000;">ระดับ</th>
+                  <th style="border: 1px solid #000;">ดีเยี่ยม (3)</th>
+                  <th style="border: 1px solid #000;">ดี (2)</th>
+                  <th style="border: 1px solid #000;">ผ่าน (1)</th>
+                  <th style="border: 1px solid #000;">ไม่ผ่าน (0)</th>
+                </tr>
+                <tr style="height: 21px;">
+                  <td style="border: 1px solid #000; font-weight: bold;">จำนวน (คน)</td>
+                  <td style="border: 1px solid #000;">${traitsCounts['3']}</td>
+                  <td style="border: 1px solid #000;">${traitsCounts['2']}</td>
+                  <td style="border: 1px solid #000;">${traitsCounts['1']}</td>
+                  <td style="border: 1px solid #000;">${traitsCounts['0']}</td>
+                </tr>
+                <tr style="height: 21px;">
+                  <td style="border: 1px solid #000; font-weight: bold;">ร้อยละ</td>
+                  <td style="border: 1px solid #000;">${totalStudents > 0 ? ((traitsCounts['3']/totalStudents)*100).toFixed(1) : 0}%</td>
+                  <td style="border: 1px solid #000;">${totalStudents > 0 ? ((traitsCounts['2']/totalStudents)*100).toFixed(1) : 0}%</td>
+                  <td style="border: 1px solid #000;">${totalStudents > 0 ? ((traitsCounts['1']/totalStudents)*100).toFixed(1) : 0}%</td>
+                  <td style="border: 1px solid #000;">${totalStudents > 0 ? ((traitsCounts['0']/totalStudents)*100).toFixed(1) : 0}%</td>
+                </tr>
+              </table>
+            </div>
+
+            <div style="width: 50%;">
+              <div style="font-size: 11pt; font-weight: bold; margin-bottom: 3px;">3. สรุปผลการอ่าน คิด วิเคราะห์ และเขียน</div>
+              <table style="width: 100%; border-collapse: collapse; text-align: center; font-size: 9.5pt; border: 1px solid #000;">
+                <tr style="background-color: #f2f2f2; font-weight: bold; height: 22px;">
+                  <th style="border: 1px solid #000;">ระดับ</th>
+                  <th style="border: 1px solid #000;">ดีเยี่ยม (3)</th>
+                  <th style="border: 1px solid #000;">ดี (2)</th>
+                  <th style="border: 1px solid #000;">ผ่าน (1)</th>
+                  <th style="border: 1px solid #000;">ไม่ผ่าน (0)</th>
+                </tr>
+                <tr style="height: 21px;">
+                  <td style="border: 1px solid #000; font-weight: bold;">จำนวน (คน)</td>
+                  <td style="border: 1px solid #000;">${readingCounts['3']}</td>
+                  <td style="border: 1px solid #000;">${readingCounts['2']}</td>
+                  <td style="border: 1px solid #000;">${readingCounts['1']}</td>
+                  <td style="border: 1px solid #000;">${readingCounts['0']}</td>
+                </tr>
+                <tr style="height: 21px;">
+                  <td style="border: 1px solid #000; font-weight: bold;">ร้อยละ</td>
+                  <td style="border: 1px solid #000;">${totalStudents > 0 ? ((readingCounts['3']/totalStudents)*100).toFixed(1) : 0}%</td>
+                  <td style="border: 1px solid #000;">${totalStudents > 0 ? ((readingCounts['2']/totalStudents)*100).toFixed(1) : 0}%</td>
+                  <td style="border: 1px solid #000;">${totalStudents > 0 ? ((readingCounts['1']/totalStudents)*100).toFixed(1) : 0}%</td>
+                  <td style="border: 1px solid #000;">${totalStudents > 0 ? ((readingCounts['0']/totalStudents)*100).toFixed(1) : 0}%</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+
+          <!-- APPROVAL WORKFLOW SECTION (6 ขั้นตอนตามชีต Cover ของ PP5-MY-2569) -->
+          <div style="border-top: 1.5px solid #000; padding-top: 8px; font-size: 10.5pt;">
+            <div style="font-weight: bold; text-align: center; margin-bottom: 10px; font-size: 12pt;">การอนุมัติผลการเรียน</div>
+            
+            <div style="display: flex; justify-content: space-between; gap: 20px;">
+              <div style="width: 50%; space-y: 6px;">
+                <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 8px;">
+                  <span>ลงชื่อ.......................................................... ครูผู้สอน</span>
+                  <span>(${teacherName})</span>
+                </div>
+                <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 8px;">
+                  <span>ลงชื่อ.......................................................... หัวหน้ากลุ่มสาระฯ</span>
+                  <span>(นางสาวสมใจ สดใส)</span>
+                </div>
+                <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 8px;">
+                  <span>ลงชื่อ.......................................................... หัวหน้างานวัดผลฯ</span>
+                  <span>(นายวีระศักดิ์ ยิ่งยง)</span>
+                </div>
+                <div style="display: flex; align-items: baseline; justify-content: space-between;">
+                  <span>ลงชื่อ.......................................................... หัวหน้าฝ่ายวิชาการ</span>
+                  <span>(นางกัญญาณัฐ ถาจัน)</span>
+                </div>
+              </div>
+
+              <div style="width: 48%; border: 1px solid #000; padding: 8px 12px; background: #fafafa; border-radius: 4px;">
+                <div style="text-align: center; margin-bottom: 4px; font-weight: bold;">เพื่อโปรดพิจารณาอนุมัติผลการเรียน</div>
+                <div style="text-align: center; margin-bottom: 8px;">
+                  <p style="margin: 0;">ลงชื่อ.......................................................... รองผู้อำนวยการ</p>
+                  <p style="margin: 2px 0 0 0; font-weight: bold;">(นายธาดา ภูพวก)</p>
+                </div>
+                <div style="border-top: 1px dotted #888; padding-top: 6px; text-align: center;">
+                  <div style="display: inline-block; text-align: left; margin-bottom: 4px;">
+                    <label style="margin-right: 18px;"><input type="checkbox" checked disabled> [✓] อนุมัติ</label>
+                    <label><input type="checkbox" disabled> [ ] ไม่อนุมัติ</label>
+                  </div>
+                  <p style="margin: 3px 0 0 0;">ลงชื่อ.......................................................... ผู้อำนวยการสถานศึกษา</p>
+                  <p style="margin: 2px 0 0 0; font-weight: bold;">(${directorName})</p>
+                  <p style="margin: 2px 0 0 0; font-size: 9pt; color: #444;">วันที่ 31 มีนาคม 2570</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      `;
+
+      // ==========================================
+      // SECTION B: SCORE & ATTENDANCE SHEET (ชีต ScoreTerm & ScoreVicha)
+      // ==========================================
+      let scoreRows = list.map(item => {
+        const totalPer = item.totalPeriods || 40;
+        const attPer = item.attendedPeriods || 40;
+        const attPercent = Math.round((attPer / totalPer) * 100);
         return `
-          <tr>
-            <td style="text-align:center; padding:6px; border:1px solid #999;">${item.number}</td>
-            <td style="padding:6px; border:1px solid #999; font-weight:bold;">${item.name}</td>
-            <td style="text-align:center; padding:6px; border:1px solid #999;">${item.attendedPeriods}/${item.totalPeriods} (${attP}%)</td>
-            <td style="text-align:center; padding:6px; border:1px solid #999;">${item.collectedScore}</td>
-            <td style="text-align:center; padding:6px; border:1px solid #999;">${item.midtermScore}</td>
-            <td style="text-align:center; padding:6px; border:1px solid #999;">${item.finalScore}</td>
-            <td style="text-align:center; padding:6px; border:1px solid #999; font-weight:bold;">${item.totalScore}</td>
-            <td style="text-align:center; padding:6px; border:1px solid #999; font-weight:black; font-size:11pt;">${item.grade}</td>
-            <td style="text-align:center; padding:6px; border:1px solid #999;">${item.traitsAverage === 3 ? 'ดีเยี่ยม' : 'ดี'}</td>
-            <td style="text-align:center; padding:6px; border:1px solid #999;">${item.readingThinkingWriting === 3 ? 'ดีเยี่ยม' : 'ดี'}</td>
+          <tr style="height: 24px; text-align: center;">
+            <td style="border: 1px solid #000;">${item.number}</td>
+            <td style="border: 1px solid #000; font-family: monospace; font-weight: bold;">${item.studentCode || item.studentId}</td>
+            <td style="border: 1px solid #000; text-align: left; padding-left: 6px; font-weight: bold;">${item.name}</td>
+            <td style="border: 1px solid #000;">${attPer}/${totalPer} (${attPercent}%)</td>
+            <td style="border: 1px solid #000;">${item.scoreBeforeMid !== undefined ? item.scoreBeforeMid : Math.round(item.collectedScore * 0.55)}</td>
+            <td style="border: 1px solid #000;">${item.midtermScore}</td>
+            <td style="border: 1px solid #000;">${item.scoreAfterMid !== undefined ? item.scoreAfterMid : Math.round(item.collectedScore * 0.45)}</td>
+            <td style="border: 1px solid #000;">${item.finalScore}</td>
+            <td style="border: 1px solid #000; font-weight: bold; background-color: #f7f7f7;">${item.totalScore}</td>
+            <td style="border: 1px solid #000; font-weight: bold; font-size: 11pt;">${item.grade}</td>
+            <td style="border: 1px solid #000; text-align: left; padding-left: 4px; font-size: 9pt;">${item.remark || item.status || 'ปกติ'}</td>
           </tr>
         `;
       }).join('');
 
-      const html = `
-        <div style="font-family:'Sarabun', sans-serif; padding:15px; color:#000;">
-          <div style="text-align:center; margin-bottom:15px;">
-            <h2 style="font-size:16pt; margin:0; font-weight:bold;">แบบรายงานผลการพัฒนาคุณภาพผู้เรียน (ปพ.5)</h2>
-            <h3 style="font-size:12pt; margin:4px 0 0; font-weight:normal;">รายวิชา ท21101 ภาษาไทย 1 | ชั้นมัธยมศึกษาปีที่ 1/1 ภาคเรียนที่ 1/2569</h3>
-            <p style="font-size:10pt; margin:2px 0 0; color:#555;">โรงเรียนฝันใหม่ สพป.หนองบัวลำภู เขต 1</p>
+      const scoresHtml = `
+        <div class="page-container" style="page-break-after: always; padding: 20px 25px; font-family:'Sarabun', 'TH Sarabun New', sans-serif; color: #000;">
+          <div style="text-align: center; margin-bottom: 10px;">
+            <h2 style="font-size: 16pt; margin: 0; font-weight: bold;">แบบบันทึกผลการประเมินการเรียนรู้และเวลาเรียน (ปพ.5)</h2>
+            <h3 style="font-size: 12pt; margin: 3px 0 0; font-weight: normal;">รายวิชา ${courseName} (${courseCode}) | ${classText} ${termYear}</h3>
+            <p style="font-size: 10pt; margin: 2px 0 0; color: #444;">${schoolName} &nbsp;&nbsp; ${jurisdiction}</p>
           </div>
-          <table style="width:100%; border-collapse:collapse; font-size:10pt;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 9.5pt; border: 1px solid #000;">
             <thead>
-              <tr style="background:#f2f2f2; text-align:center;">
-                <th style="padding:6px; border:1px solid #999; width:35px;" rowspan="2">เลขที่</th>
-                <th style="padding:6px; border:1px solid #999; text-align:left;" rowspan="2">ชื่อ - นามสกุล</th>
-                <th style="padding:6px; border:1px solid #999; width:95px;" rowspan="2">เวลาเรียน (คาบ/%)</th>
-                <th style="padding:4px; border:1px solid #999;" colspan="3">คะแนนการประเมิน</th>
-                <th style="padding:6px; border:1px solid #999; width:55px;" rowspan="2">รวม (100)</th>
-                <th style="padding:6px; border:1px solid #999; width:55px;" rowspan="2">เกรด</th>
-                <th style="padding:6px; border:1px solid #999; width:80px;" rowspan="2">คุณลักษณะ (8)</th>
-                <th style="padding:6px; border:1px solid #999; width:80px;" rowspan="2">อ่าน คิด เขียน</th>
+              <tr style="background-color: #e8e8e8; text-align: center; font-weight: bold;">
+                <th style="padding: 5px; border: 1px solid #000; width: 32px;" rowspan="2">ที่</th>
+                <th style="padding: 5px; border: 1px solid #000; width: 65px;" rowspan="2">เลขประจำตัว</th>
+                <th style="padding: 5px; border: 1px solid #000; text-align: left; min-width: 150px;" rowspan="2">ชื่อ - สกุล</th>
+                <th style="padding: 5px; border: 1px solid #000; width: 85px;" rowspan="2">เวลาเรียน (คาบ/%)</th>
+                <th style="padding: 4px; border: 1px solid #000;" colspan="4">คะแนนการประเมิน (สัดส่วน 70:30)</th>
+                <th style="padding: 5px; border: 1px solid #000; width: 45px; background-color: #dbeafe;" rowspan="2">รวม<br>(100)</th>
+                <th style="padding: 5px; border: 1px solid #000; width: 45px; background-color: #dbeafe;" rowspan="2">ผลการ<br>เรียน</th>
+                <th style="padding: 5px; border: 1px solid #000; width: 110px;" rowspan="2">หมายเหตุ</th>
               </tr>
-              <tr style="background:#f9f9f9; text-align:center; font-size:9pt;">
-                <th style="padding:4px; border:1px solid #999; width:60px;">เก็บ (50)</th>
-                <th style="padding:4px; border:1px solid #999; width:60px;">กลางภาค (20)</th>
-                <th style="padding:4px; border:1px solid #999; width:60px;">ปลายภาค (30)</th>
+              <tr style="background-color: #f5f5f5; text-align: center; font-size: 9pt; font-weight: bold;">
+                <th style="padding: 3px; border: 1px solid #000; width: 55px;">ก่อนกลาง (30)</th>
+                <th style="padding: 3px; border: 1px solid #000; width: 55px;">กลางภาค (20)</th>
+                <th style="padding: 3px; border: 1px solid #000; width: 55px;">หลังกลาง (20)</th>
+                <th style="padding: 3px; border: 1px solid #000; width: 55px;">ปลายภาค (30)</th>
               </tr>
             </thead>
-            <tbody>${rows}</tbody>
+            <tbody>${scoreRows}</tbody>
           </table>
-          <div style="margin-top:35px; display:flex; justify-content:space-between; text-align:center; font-size:11pt;">
+          <div style="margin-top: 25px; display: flex; justify-content: space-between; text-align: center; font-size: 11pt;">
             <div>
-              <p>(ลงชื่อ)......................................................</p>
-              <p style="font-weight:bold;">(ครูสมใจ สดใส)</p>
-              <p>ครูผู้สอนประจำวิชา</p>
+              <p style="margin: 0;">(ลงชื่อ)......................................................</p>
+              <p style="margin: 2px 0 0; font-weight: bold;">(${teacherName})</p>
+              <p style="margin: 2px 0 0;">ครูผู้สอนประจำวิชา</p>
             </div>
             <div>
-              <p>(ลงชื่อ)......................................................</p>
-              <p style="font-weight:bold;">(นายอรรถพล ฉาไธสง)</p>
-              <p>ผู้อำนวยการโรงเรียนฝันใหม่</p>
+              <p style="margin: 0;">(ลงชื่อ)......................................................</p>
+              <p style="margin: 2px 0 0; font-weight: bold;">(${directorName})</p>
+              <p style="margin: 2px 0 0;">ผู้อำนวยการสถานศึกษา</p>
             </div>
           </div>
         </div>
       `;
-      printDocument(html, 'แบบรายงาน_ปพ5_ภาษาไทย1.pdf', 'portrait');
+
+      // ==========================================
+      // SECTION C: TRAITS SHEET (ชีต Attib)
+      // ==========================================
+      let traitsRows = list.map(item => {
+        const t = item.desirableTraits || [3,3,3,3,3,3,3,3];
+        const avg = item.traitsAverage !== undefined ? item.traitsAverage : 3;
+        const avgText = avg === 3 ? 'ดีเยี่ยม (3)' : avg === 2 ? 'ดี (2)' : avg === 1 ? 'ผ่าน (1)' : 'ไม่ผ่าน (0)';
+        return `
+          <tr style="height: 23px; text-align: center;">
+            <td style="border: 1px solid #000;">${item.number}</td>
+            <td style="border: 1px solid #000; font-family: monospace;">${item.studentCode || item.studentId}</td>
+            <td style="border: 1px solid #000; text-align: left; padding-left: 6px; font-weight: bold;">${item.name}</td>
+            <td style="border: 1px solid #000;">${t[0] || 3}</td>
+            <td style="border: 1px solid #000;">${t[1] || 3}</td>
+            <td style="border: 1px solid #000;">${t[2] || 3}</td>
+            <td style="border: 1px solid #000;">${t[3] || 3}</td>
+            <td style="border: 1px solid #000;">${t[4] || 3}</td>
+            <td style="border: 1px solid #000;">${t[5] || 3}</td>
+            <td style="border: 1px solid #000;">${t[6] || 3}</td>
+            <td style="border: 1px solid #000;">${t[7] || 3}</td>
+            <td style="border: 1px solid #000; font-weight: bold; background-color: #f7f7f7;">${avgText}</td>
+          </tr>
+        `;
+      }).join('');
+
+      const traitsHtml = `
+        <div class="page-container" style="page-break-after: always; padding: 20px 25px; font-family:'Sarabun', 'TH Sarabun New', sans-serif; color: #000;">
+          <div style="text-align: center; margin-bottom: 10px;">
+            <h2 style="font-size: 16pt; margin: 0; font-weight: bold;">แบบประเมินคุณลักษณะอันพึงประสงค์ 8 ประการ (ชีต Attib)</h2>
+            <h3 style="font-size: 12pt; margin: 3px 0 0; font-weight: normal;">รายวิชา ${courseName} (${courseCode}) | ${classText} ${termYear}</h3>
+            <p style="font-size: 9pt; margin: 2px 0 0; color: #444;">ตามหลักสูตรแกนกลางการศึกษาขั้นพื้นฐาน พ.ศ. 2551 &nbsp;&nbsp; เกณฑ์: 3=ดีเยี่ยม, 2=ดี, 1=ผ่าน, 0=ไม่ผ่าน</p>
+          </div>
+          <table style="width: 100%; border-collapse: collapse; font-size: 9pt; border: 1px solid #000;">
+            <thead>
+              <tr style="background-color: #e8e8e8; text-align: center; font-weight: bold;">
+                <th style="padding: 4px; border: 1px solid #000; width: 32px;" rowspan="2">ที่</th>
+                <th style="padding: 4px; border: 1px solid #000; width: 65px;" rowspan="2">เลขประจำตัว</th>
+                <th style="padding: 4px; border: 1px solid #000; text-align: left; min-width: 150px;" rowspan="2">ชื่อ - สกุล</th>
+                <th style="padding: 3px; border: 1px solid #000;" colspan="8">คุณลักษณะอันพึงประสงค์ (เต็ม 3)</th>
+                <th style="padding: 4px; border: 1px solid #000; width: 90px; background-color: #d1fae5;" rowspan="2">สรุปผลประเมิน</th>
+              </tr>
+              <tr style="background-color: #f5f5f5; text-align: center; font-size: 8.5pt; font-weight: bold;">
+                <th style="padding: 3px; border: 1px solid #000; width: 45px;">1.รักชาติ</th>
+                <th style="padding: 3px; border: 1px solid #000; width: 45px;">2.ซื่อสัตย์</th>
+                <th style="padding: 3px; border: 1px solid #000; width: 45px;">3.มีวินัย</th>
+                <th style="padding: 3px; border: 1px solid #000; width: 45px;">4.ใฝ่เรียน</th>
+                <th style="padding: 3px; border: 1px solid #000; width: 45px;">5.พอเพียง</th>
+                <th style="padding: 3px; border: 1px solid #000; width: 45px;">6.มุ่งมั่น</th>
+                <th style="padding: 3px; border: 1px solid #000; width: 45px;">7.รักไทย</th>
+                <th style="padding: 3px; border: 1px solid #000; width: 45px;">8.จิตสาธารณะ</th>
+              </tr>
+            </thead>
+            <tbody>${traitsRows}</tbody>
+          </table>
+          <div style="margin-top: 25px; display: flex; justify-content: space-between; text-align: center; font-size: 11pt;">
+            <div>
+              <p style="margin: 0;">(ลงชื่อ)...................................................... ครูผู้สอน</p>
+              <p style="margin: 2px 0 0; font-weight: bold;">(${teacherName})</p>
+            </div>
+            <div>
+              <p style="margin: 0;">(ลงชื่อ)...................................................... หัวหน้าฝ่ายวิชาการ</p>
+              <p style="margin: 2px 0 0; font-weight: bold;">(นางกัญญาณัฐ ถาจัน)</p>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // ==========================================
+      // SECTION D: READING SHEET (ชีต Read)
+      // ==========================================
+      let readingRows = list.map(item => {
+        const rScores = item.readingScores || [6, 6, 3];
+        const rTotal = rScores[0] + rScores[1] + rScores[2];
+        const rLevel = item.readingThinkingWriting !== undefined ? item.readingThinkingWriting : 3;
+        const rText = rLevel === 3 ? 'ดีเยี่ยม (3)' : rLevel === 2 ? 'ดี (2)' : rLevel === 1 ? 'ผ่าน (1)' : 'ไม่ผ่าน (0)';
+        return `
+          <tr style="height: 24px; text-align: center;">
+            <td style="border: 1px solid #000;">${item.number}</td>
+            <td style="border: 1px solid #000; font-family: monospace;">${item.studentCode || item.studentId}</td>
+            <td style="border: 1px solid #000; text-align: left; padding-left: 6px; font-weight: bold;">${item.name}</td>
+            <td style="border: 1px solid #000;">${rScores[0]}</td>
+            <td style="border: 1px solid #000;">${rScores[1]}</td>
+            <td style="border: 1px solid #000;">${rScores[2]}</td>
+            <td style="border: 1px solid #000; font-weight: bold; background-color: #f7f7f7;">${rTotal}</td>
+            <td style="border: 1px solid #000; font-weight: bold; background-color: #f3e8ff;">${rText}</td>
+          </tr>
+        `;
+      }).join('');
+
+      const readingHtml = `
+        <div class="page-container" style="page-break-after: always; padding: 20px 25px; font-family:'Sarabun', 'TH Sarabun New', sans-serif; color: #000;">
+          <div style="text-align: center; margin-bottom: 10px;">
+            <h2 style="font-size: 16pt; margin: 0; font-weight: bold;">แบบประเมินการอ่าน คิดวิเคราะห์ และเขียนสื่อความหมาย (ชีต Read)</h2>
+            <h3 style="font-size: 12pt; margin: 3px 0 0; font-weight: normal;">รายวิชา ${courseName} (${courseCode}) | ${classText} ${termYear}</h3>
+            <p style="font-size: 9.5pt; margin: 2px 0 0; color: #444;">${schoolName} &nbsp;&nbsp; เกณฑ์: ดีเยี่ยม (13-15), ดี (10-12), ผ่าน (7-9), ไม่ผ่าน (0-6)</p>
+          </div>
+          <table style="width: 100%; border-collapse: collapse; font-size: 10pt; border: 1px solid #000;">
+            <thead>
+              <tr style="background-color: #e8e8e8; text-align: center; font-weight: bold;">
+                <th style="padding: 5px; border: 1px solid #000; width: 35px;" rowspan="2">ที่</th>
+                <th style="padding: 5px; border: 1px solid #000; width: 75px;" rowspan="2">เลขประจำตัว</th>
+                <th style="padding: 5px; border: 1px solid #000; text-align: left; min-width: 160px;" rowspan="2">ชื่อ - สกุล</th>
+                <th style="padding: 4px; border: 1px solid #000;" colspan="3">การประเมิน 3 องค์ประกอบ</th>
+                <th style="padding: 5px; border: 1px solid #000; width: 65px; background-color: #f1f5f9;" rowspan="2">รวม (15)</th>
+                <th style="padding: 5px; border: 1px solid #000; width: 100px; background-color: #f3e8ff;" rowspan="2">สรุปผลประเมิน</th>
+              </tr>
+              <tr style="background-color: #f5f5f5; text-align: center; font-size: 9pt; font-weight: bold;">
+                <th style="padding: 4px; border: 1px solid #000; width: 85px;">1. การอ่าน (เต็ม 6)</th>
+                <th style="padding: 4px; border: 1px solid #000; width: 85px;">2. การคิด (เต็ม 6)</th>
+                <th style="padding: 4px; border: 1px solid #000; width: 85px;">3. การเขียน (เต็ม 3)</th>
+              </tr>
+            </thead>
+            <tbody>${readingRows}</tbody>
+          </table>
+          <div style="margin-top: 25px; display: flex; justify-content: space-between; text-align: center; font-size: 11pt;">
+            <div>
+              <p style="margin: 0;">(ลงชื่อ)...................................................... ครูผู้สอน</p>
+              <p style="margin: 2px 0 0; font-weight: bold;">(${teacherName})</p>
+            </div>
+            <div>
+              <p style="margin: 0;">(ลงชื่อ)...................................................... หัวหน้างานวัดผลและประเมินผล</p>
+              <p style="margin: 2px 0 0; font-weight: bold;">(นายวีระศักดิ์ ยิ่งยง)</p>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // ==========================================
+      // SECTION E: PUBLISH SHEET (ชีต Publish)
+      // ==========================================
+      let publishRows = list.map(item => {
+        const tAvg = item.traitsAverage === 3 ? 'ดีเยี่ยม' : item.traitsAverage === 2 ? 'ดี' : 'ผ่าน';
+        const rAvg = item.readingThinkingWriting === 3 ? 'ดีเยี่ยม' : item.readingThinkingWriting === 2 ? 'ดี' : 'ผ่าน';
+        return `
+          <tr style="height: 23px; text-align: center;">
+            <td style="border: 1px solid #000;">${item.number}</td>
+            <td style="border: 1px solid #000; font-family: monospace;">${item.studentCode || item.studentId}</td>
+            <td style="border: 1px solid #000; text-align: left; padding-left: 6px; font-weight: bold;">${item.name}</td>
+            <td style="border: 1px solid #000; font-weight: bold;">${item.totalScore}</td>
+            <td style="border: 1px solid #000; font-weight: bold; font-size: 11pt;">${item.grade}</td>
+            <td style="border: 1px solid #000;">${rAvg}</td>
+            <td style="border: 1px solid #000;">${tAvg}</td>
+          </tr>
+        `;
+      }).join('');
+
+      const publishHtml = `
+        <div class="page-container" style="page-break-after: avoid; padding: 20px 25px; font-family:'Sarabun', 'TH Sarabun New', sans-serif; color: #000;">
+          <div style="text-align: center; margin-bottom: 10px;">
+            <h2 style="font-size: 16pt; margin: 0; font-weight: bold;">แบบประกาศผลสอบประจำภาคเรียน (ชีต Publish)</h2>
+            <h3 style="font-size: 13pt; margin: 2px 0 0; font-weight: bold;">${schoolName} &nbsp;&nbsp; ${classText} ${termYear}</h3>
+            <p style="font-size: 10.5pt; margin: 2px 0 0;">รายวิชา ${courseName} &nbsp; รหัสวิชา ${courseCode} &nbsp; จำนวน ${credits} หน่วยการเรียน</p>
+          </div>
+          <table style="width: 100%; border-collapse: collapse; font-size: 9.5pt; border: 1px solid #000;">
+            <thead>
+              <tr style="background-color: #e8e8e8; text-align: center; font-weight: bold; height: 26px;">
+                <th style="border: 1px solid #000; width: 35px;">เลขที่</th>
+                <th style="border: 1px solid #000; width: 75px;">เลขประจำตัว</th>
+                <th style="border: 1px solid #000; text-align: left; padding-left: 6px;">ชื่อ - นามสกุล</th>
+                <th style="border: 1px solid #000; width: 65px;">คะแนนรวม</th>
+                <th style="border: 1px solid #000; width: 65px;">ผลการเรียน</th>
+                <th style="border: 1px solid #000; width: 95px;">อ่านคิดวิเคราะห์</th>
+                <th style="border: 1px solid #000; width: 95px;">คุณลักษณะ</th>
+              </tr>
+            </thead>
+            <tbody>${publishRows}</tbody>
+          </table>
+          <div style="margin-top: 25px; display: flex; justify-content: space-between; text-align: center; font-size: 11pt;">
+            <div>
+              <p style="margin: 0;">(ลงชื่อ)...................................................... ครูผู้สอน</p>
+              <p style="margin: 2px 0 0; font-weight: bold;">(${teacherName})</p>
+            </div>
+            <div>
+              <p style="margin: 0;">(ลงชื่อ)...................................................... ผู้อำนวยการสถานศึกษา</p>
+              <p style="margin: 2px 0 0; font-weight: bold;">(${directorName})</p>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // Select HTML output according to reportType
+      let finalHtml = '';
+      let fileTitle = 'ปพ5_' + courseCode;
+
+      if (reportType === 'cover') {
+        finalHtml = coverHtml.replace('page-break-after: always;', 'page-break-after: avoid;');
+        fileTitle = 'หน้าปก_ปพ5_' + courseCode;
+      } else if (reportType === 'scores') {
+        finalHtml = scoresHtml.replace('page-break-after: always;', 'page-break-after: avoid;');
+        fileTitle = 'บันทึกคะแนน_ปพ5_' + courseCode;
+      } else if (reportType === 'traits') {
+        finalHtml = traitsHtml.replace('page-break-after: always;', 'page-break-after: avoid;');
+        fileTitle = 'คุณลักษณะ_ปพ5_' + courseCode;
+      } else if (reportType === 'reading') {
+        finalHtml = readingHtml.replace('page-break-after: always;', 'page-break-after: avoid;');
+        fileTitle = 'อ่านคิดวิเคราะห์_ปพ5_' + courseCode;
+      } else if (reportType === 'publish') {
+        finalHtml = publishHtml;
+        fileTitle = 'ประกาศผลสอบ_ปพ5_' + courseCode;
+      } else {
+        // ALL SHEETS PACKAGE
+        finalHtml = coverHtml + scoresHtml + traitsHtml + readingHtml + publishHtml;
+        fileTitle = 'เล่มสมบูรณ์_ปพ5_' + courseCode;
+      }
+
+      printDocument(finalHtml, fileTitle + '.pdf', 'portrait');
     }
 
     // -------------------------------------------------------------------------
@@ -9316,6 +10435,7 @@ ${isTransferIn ? '🏫 ย้ายมาจาก: ' + t.fromSchool : '🏫 ย
     }
 
     function printStudentReport(targetStudentId) {
+      const allGradesRaw = (state.grades && state.grades.length > 0) ? state.grades : (DEFAULT_MOCK_DATA.grades || []);
       let stu = state.activeStudent;
       let grades = state.activeStudentGrades || [];
       let gpa = state.activeStudentGPA || (document.getElementById('stuCardGPA') ? document.getElementById('stuCardGPA').textContent : '0.00');
@@ -9367,112 +10487,196 @@ ${isTransferIn ? '🏫 ย้ายมาจาก: ' + t.fromSchool : '🏫 ย
         classText = 'ชั้น' + classText;
       }
 
-      // Calculate Weights
+      // Calculate Weights and Score lookup
       let basicCredits = 0;
       let extraCredits = 0;
+      let basicEarnedCredits = 0;
+      let extraEarnedCredits = 0;
 
-      let subjectRows = grades.map((g, idx) => {
+      // Group into Basic and Additional Subjects
+      const basicSubjects = [];
+      const extraSubjects = [];
+
+      grades.forEach((g) => {
         const cr = parseFloat(g.credits) || 1.0;
-        const isExtra = String(g.courseCode).charAt(2) === '2' || (g.courseCode && g.courseCode.includes('201'));
-        const typeText = isExtra ? 'เพิ่มเติม' : 'พื้นฐาน';
-        if (isExtra) extraCredits += cr;
-        else basicCredits += cr;
+        const isExtra = String(g.courseCode).charAt(2) === '2' || (g.courseCode && g.courseCode.includes('201')) || (g.type === 'เพิ่มเติม');
+        const grNum = parseFloat(g.grade);
+        const isPass = !isNaN(grNum) && grNum > 0;
 
-        return `
-          <tr style="height: 28px;">
-            <td style="border: 1px solid #000; text-align: center;">${idx + 1}</td>
-            <td style="border: 1px solid #000; text-align: center; font-family: monospace; font-weight: bold;">${g.courseCode}</td>
-            <td style="border: 1px solid #000; text-align: left; padding-left: 8px;">${g.courseName}</td>
-            <td style="border: 1px solid #000; text-align: center;">${typeText}</td>
-            <td style="border: 1px solid #000; text-align: center;">${cr.toFixed(1)}</td>
-            <td style="border: 1px solid #000; text-align: center; font-weight: bold;">${g.grade}</td>
-            <td style="border: 1px solid #000; text-align: center; font-size: 11px;">${g.remark || ''}</td>
+        // Score 100 Calculation
+        let scoreVal = g.total !== undefined ? g.total : (g.scoreTotal !== undefined ? g.scoreTotal : null);
+        if (scoreVal === null) {
+          if (g.grade === '4') scoreVal = 86;
+          else if (g.grade === '3.5') scoreVal = 77;
+          else if (g.grade === '3') scoreVal = 72;
+          else if (g.grade === '2.5') scoreVal = 67;
+          else if (g.grade === '2') scoreVal = 62;
+          else if (g.grade === '1.5') scoreVal = 56;
+          else if (g.grade === '1') scoreVal = 51;
+          else if (g.grade === '0') scoreVal = 42;
+          else scoreVal = 0;
+        }
+
+        const subjectItem = {
+          courseCode: g.courseCode,
+          courseName: g.courseName,
+          credits: cr,
+          score: scoreVal,
+          grade: g.grade,
+          remark: g.remark || '',
+          typeText: isExtra ? 'เพิ่มเติม' : 'พื้นฐาน'
+        };
+
+        if (isExtra) {
+          extraCredits += cr;
+          if (isPass) extraEarnedCredits += cr;
+          extraSubjects.push(subjectItem);
+        } else {
+          basicCredits += cr;
+          if (isPass) basicEarnedCredits += cr;
+          basicSubjects.push(subjectItem);
+        }
+      });
+
+      let rowIdx = 1;
+      let subjectRows = '';
+
+      if (basicSubjects.length > 0) {
+        subjectRows += `
+          <tr style="background-color: #f5f5f5; font-weight: bold; height: 23px;">
+            <td colspan="8" style="border: 1px solid #000; text-align: left; padding-left: 8px; font-size: 11px;">รายวิชาพื้นฐาน</td>
           </tr>
         `;
-      }).join('');
+        basicSubjects.forEach(s => {
+          subjectRows += `
+            <tr style="height: 25px;">
+              <td style="border: 1px solid #000; text-align: center;">${rowIdx++}</td>
+              <td style="border: 1px solid #000; text-align: center; font-family: monospace; font-weight: bold;">${s.courseCode}</td>
+              <td style="border: 1px solid #000; text-align: left; padding-left: 8px;">${s.courseName}</td>
+              <td style="border: 1px solid #000; text-align: center;">${s.typeText}</td>
+              <td style="border: 1px solid #000; text-align: center;">${s.credits.toFixed(1)}</td>
+              <td style="border: 1px solid #000; text-align: center; font-weight: bold;">${s.score}</td>
+              <td style="border: 1px solid #000; text-align: center; font-weight: bold; font-size: 12px;">${s.grade}</td>
+              <td style="border: 1px solid #000; text-align: center; font-size: 10px;">${s.remark}</td>
+            </tr>
+          `;
+        });
+      }
 
-      // Standard Activities (ก, ข, ค, ง)
+      if (extraSubjects.length > 0) {
+        subjectRows += `
+          <tr style="background-color: #f5f5f5; font-weight: bold; height: 23px;">
+            <td colspan="8" style="border: 1px solid #000; text-align: left; padding-left: 8px; font-size: 11px;">รายวิชาเพิ่มเติม</td>
+          </tr>
+        `;
+        extraSubjects.forEach(s => {
+          subjectRows += `
+            <tr style="height: 25px;">
+              <td style="border: 1px solid #000; text-align: center;">${rowIdx++}</td>
+              <td style="border: 1px solid #000; text-align: center; font-family: monospace; font-weight: bold;">${s.courseCode}</td>
+              <td style="border: 1px solid #000; text-align: left; padding-left: 8px;">${s.courseName}</td>
+              <td style="border: 1px solid #000; text-align: center;">${s.typeText}</td>
+              <td style="border: 1px solid #000; text-align: center;">${s.credits.toFixed(1)}</td>
+              <td style="border: 1px solid #000; text-align: center; font-weight: bold;">${s.score}</td>
+              <td style="border: 1px solid #000; text-align: center; font-weight: bold; font-size: 12px;">${s.grade}</td>
+              <td style="border: 1px solid #000; text-align: center; font-size: 10px;">${s.remark}</td>
+            </tr>
+          `;
+        });
+      }
+
+      // Standard Activities (ก11101 - ก11106 ตามแบบชีต PP6)
       const activityRows = `
-        <tr style="height: 26px;">
-          <td style="border: 1px solid #000; text-align: center;">ก</td>
-          <td style="border: 1px solid #000; text-align: center; font-family: monospace;">ก21901</td>
-          <td style="border: 1px solid #000; text-align: left; padding-left: 8px;">แนะแนว</td>
+        <tr style="background-color: #f5f5f5; font-weight: bold; height: 23px;">
+          <td colspan="8" style="border: 1px solid #000; text-align: left; padding-left: 8px; font-size: 11px;">กิจกรรมพัฒนาผู้เรียน</td>
+        </tr>
+        <tr style="height: 24px;">
+          <td style="border: 1px solid #000; text-align: center;">1</td>
+          <td style="border: 1px solid #000; text-align: center; font-family: monospace;">ก11101</td>
+          <td style="border: 1px solid #000; text-align: left; padding-left: 8px;">กิจกรรมแนะแนว</td>
           <td style="border: 1px solid #000; text-align: center;">กิจกรรม</td>
-          <td style="border: 1px solid #000; text-align: center;">40</td>
+          <td style="border: 1px solid #000; text-align: center;">-</td>
+          <td style="border: 1px solid #000; text-align: center;">40 ชม.</td>
           <td style="border: 1px solid #000; text-align: center; font-weight: bold;">ผ่าน</td>
           <td style="border: 1px solid #000; text-align: center;"></td>
         </tr>
-        <tr style="height: 26px;">
-          <td style="border: 1px solid #000; text-align: center;">ข</td>
-          <td style="border: 1px solid #000; text-align: center; font-family: monospace;">ก21902</td>
-          <td style="border: 1px solid #000; text-align: left; padding-left: 8px;">ลูกเสือ/เนตรนารี</td>
+        <tr style="height: 24px;">
+          <td style="border: 1px solid #000; text-align: center;">2</td>
+          <td style="border: 1px solid #000; text-align: center; font-family: monospace;">ก11102</td>
+          <td style="border: 1px solid #000; text-align: left; padding-left: 8px;">กิจกรรมลูกเสือ เนตรนารี ยุวกาชาด</td>
           <td style="border: 1px solid #000; text-align: center;">กิจกรรม</td>
-          <td style="border: 1px solid #000; text-align: center;">40</td>
+          <td style="border: 1px solid #000; text-align: center;">-</td>
+          <td style="border: 1px solid #000; text-align: center;">40 ชม.</td>
           <td style="border: 1px solid #000; text-align: center; font-weight: bold;">ผ่าน</td>
           <td style="border: 1px solid #000; text-align: center;"></td>
         </tr>
-        <tr style="height: 26px;">
-          <td style="border: 1px solid #000; text-align: center;">ค</td>
-          <td style="border: 1px solid #000; text-align: center; font-family: monospace;">ก21903</td>
-          <td style="border: 1px solid #000; text-align: left; padding-left: 8px;">ชุมนุม</td>
+        <tr style="height: 24px;">
+          <td style="border: 1px solid #000; text-align: center;">3</td>
+          <td style="border: 1px solid #000; text-align: center; font-family: monospace;">ก11105</td>
+          <td style="border: 1px solid #000; text-align: left; padding-left: 8px;">กิจกรรมชุมนุม</td>
           <td style="border: 1px solid #000; text-align: center;">กิจกรรม</td>
-          <td style="border: 1px solid #000; text-align: center;">40</td>
+          <td style="border: 1px solid #000; text-align: center;">-</td>
+          <td style="border: 1px solid #000; text-align: center;">30 ชม.</td>
           <td style="border: 1px solid #000; text-align: center; font-weight: bold;">ผ่าน</td>
           <td style="border: 1px solid #000; text-align: center;"></td>
         </tr>
-        <tr style="height: 26px;">
-          <td style="border: 1px solid #000; text-align: center;">ง</td>
-          <td style="border: 1px solid #000; text-align: center; font-family: monospace;">ก21904</td>
-          <td style="border: 1px solid #000; text-align: left; padding-left: 8px;">กิจกรรมเพื่อสังคมฯ</td>
+        <tr style="height: 24px;">
+          <td style="border: 1px solid #000; text-align: center;">4</td>
+          <td style="border: 1px solid #000; text-align: center; font-family: monospace;">ก11106</td>
+          <td style="border: 1px solid #000; text-align: left; padding-left: 8px;">กิจกรรมเพื่อสาธารณะประโยชน์และสังคม</td>
           <td style="border: 1px solid #000; text-align: center;">กิจกรรม</td>
-          <td style="border: 1px solid #000; text-align: center;">10</td>
+          <td style="border: 1px solid #000; text-align: center;">-</td>
+          <td style="border: 1px solid #000; text-align: center;">10 ชม.</td>
           <td style="border: 1px solid #000; text-align: center; font-weight: bold;">ผ่าน</td>
           <td style="border: 1px solid #000; text-align: center;"></td>
         </tr>
       `;
 
       // Determine advisor name
-      let advisorName = 'นายอรรถพล ฉาไธสง';
+      let advisorName = 'นายเดชา นามกันยา';
       if (stu.classroom && stu.classroom.includes('1/2')) advisorName = 'นางสาวปราณี ศรีสุข';
 
-      const directorName = school.directorName || 'ดร.วิชัย เกียรติสกุล';
+      const directorName = school.directorName || 'นางรัษฎาภรณ์ อ่อนนิ่ม';
+      const studentCodeDisplay = (stu.id && stu.id.startsWith('S67')) ? stu.id.replace('S67', '60') : (stu.id || '6072');
 
       const reportHtml = `
-        <div style="font-family: 'Sarabun', 'TH Sarabun New', 'TH Sarabun PSK', sans-serif; line-height: 1.4; color: #000; padding: 10px 15px; max-width: 820px; margin: 0 auto; box-sizing: border-box;">
+        <div style="font-family: 'Sarabun', 'TH Sarabun New', 'TH Sarabun PSK', sans-serif; line-height: 1.35; color: #000; padding: 10px 15px; max-width: 820px; margin: 0 auto; box-sizing: border-box;">
           
-          <!-- HEADER SECTION (ถอดแบบตาม ปพ.6 สพฐ. มาตรฐานแท้ 100%) -->
-          <div style="display: flex; align-items: flex-start; margin-bottom: 6px;">
-            <div style="width: 80px; flex-shrink: 0; text-align: left;">
-              ${logoBase64 ? `<img src="${logoBase64}" style="max-height: 85px; display: inline-block;" alt="ตรา สพฐ.">` : ''}
+          <!-- HEADER SECTION (ถอดแบบตาม ปพ.6 สพฐ. ในชีต PP6 ของ PP5-MY-2569) -->
+          <div style="display: flex; align-items: flex-start; margin-bottom: 4px;">
+            <div style="width: 75px; flex-shrink: 0; text-align: left;">
+              ${logoBase64 ? `<img src="${logoBase64}" style="max-height: 75px; display: inline-block;" alt="ตรา สพฐ.">` : ''}
             </div>
-            <div style="flex-grow: 1; text-align: center; margin-right: 80px;">
-              <h2 style="font-size: 21px; font-weight: bold; margin: 0 0 4px 0; letter-spacing: -0.2px;">แบบรายงานผลการพัฒนาผู้เรียนรายบุคคล</h2>
-              <div style="font-size: 15px; font-weight: bold; margin-bottom: 4px;">
-                ${classText} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ปีการศึกษา ${school.academicYear || '2569'}
+            <div style="flex-grow: 1; text-align: center; margin-right: 75px;">
+              <h2 style="font-size: 19px; font-weight: bold; margin: 0 0 2px 0; letter-spacing: -0.2px;">แบบรายงานผลการพัฒนาคุณภาพผู้เรียนรายบุคคล (ปพ.6)</h2>
+              <div style="font-size: 14px; font-weight: bold; margin-bottom: 2px;">
+                ${classText} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ภาคเรียนที่ ${school.term || '1'} &nbsp;&nbsp; ปีการศึกษา ${school.academicYear || '2569'}
               </div>
-              <div style="font-size: 14px; margin-bottom: 4px;">${school.name || 'โรงเรียนฝันใหม่'}</div>
+              <div style="font-size: 13.5px; font-weight: bold; margin-bottom: 2px;">${school.name || 'โรงเรียนดงสวรรค์วิทยา'} &nbsp;&nbsp; อำเภอนากลาง &nbsp;&nbsp; จังหวัดหนองบัวลำภู</div>
+              <div style="font-size: 11.5px; color: #333;">${school.subTitle || 'สังกัด สำนักงานเขตพื้นที่การศึกษาประถมศึกษาหนองบัวลำภู เขต 2'}</div>
             </div>
           </div>
 
           <!-- STUDENT INFO SUBHEADER WITH UNDERLINE -->
-          <div style="display: flex; justify-content: space-between; font-size: 14px; border-bottom: 1.5px solid #000; padding-bottom: 4px; margin-bottom: 10px;">
-            <span><strong>เลขประจำตัวนักเรียน</strong> &nbsp;&nbsp;&nbsp;&nbsp; ${stu.id}</span>
-            <span><strong>ชื่อ-ชื่อสกุล</strong> &nbsp;&nbsp;&nbsp;&nbsp; ${stu.name}</span>
-            <span><strong>ห้องที่</strong> &nbsp;&nbsp;&nbsp;&nbsp; ${roomNo}</span>
-            <span><strong>เลขที่</strong> &nbsp;&nbsp;&nbsp;&nbsp; ${stu.number || 1}</span>
+          <div style="display: flex; justify-content: space-between; font-size: 13px; border-bottom: 1.5px solid #000; padding-bottom: 3px; margin-bottom: 8px;">
+            <span><strong>เลขที่:</strong> &nbsp; ${stu.number || 1}</span>
+            <span><strong>เลขประจำตัวนักเรียน:</strong> &nbsp; <span style="font-family: monospace; font-weight: bold;">${studentCodeDisplay}</span></span>
+            <span><strong>ชื่อ-สกุล:</strong> &nbsp; <strong>${stu.name}</strong></span>
+            <span><strong>ห้อง:</strong> &nbsp; ${roomNo}</span>
           </div>
 
-          <!-- MAIN 7-COLUMN TABLE -->
-          <table style="width: 100%; border-collapse: collapse; border: 1px solid #000; font-size: 12.5px; margin-bottom: 15px;" border="1" cellpadding="3" cellspacing="0">
+          <!-- MAIN 8-COLUMN TABLE (ถอดแบบตรงตามชีต PP6) -->
+          <table style="width: 100%; border-collapse: collapse; border: 1px solid #000; font-size: 11.5px; margin-bottom: 10px;" border="1" cellpadding="3" cellspacing="0">
             <thead>
-              <tr style="background-color: #ffffff; font-weight: bold; height: 32px;">
-                <th style="width: 8%; border: 1px solid #000; text-align: center;">ลำดับที่</th>
-                <th style="width: 14%; border: 1px solid #000; text-align: center;">รหัสวิชา</th>
-                <th style="width: 33%; border: 1px solid #000; text-align: center;">รายวิชา</th>
-                <th style="width: 12%; border: 1px solid #000; text-align: center;">ประเภท</th>
-                <th style="width: 11%; border: 1px solid #000; text-align: center;">น้ำหนัก/เวลา</th>
-                <th style="width: 11%; border: 1px solid #000; text-align: center;">ผลการเรียน</th>
-                <th style="width: 11%; border: 1px solid #000; text-align: center;">หมายเหตุ</th>
+              <tr style="background-color: #f2f2f2; font-weight: bold; height: 28px; text-align: center;">
+                <th style="width: 6%; border: 1px solid #000;">ลำดับ</th>
+                <th style="width: 13%; border: 1px solid #000;">รหัสวิชา</th>
+                <th style="width: 32%; border: 1px solid #000; text-align: left; padding-left: 8px;">ชื่อวิชา</th>
+                <th style="width: 11%; border: 1px solid #000;">ประเภท</th>
+                <th style="width: 10%; border: 1px solid #000;">หน่วยกิต</th>
+                <th style="width: 11%; border: 1px solid #000;">คะแนน (100)</th>
+                <th style="width: 10%; border: 1px solid #000;">ผลการเรียน</th>
+                <th style="width: 7%; border: 1px solid #000;">หมายเหตุ</th>
               </tr>
             </thead>
             <tbody>
@@ -9482,66 +10686,70 @@ ${isTransferIn ? '🏫 ย้ายมาจาก: ' + t.fromSchool : '🏫 ย
           </table>
 
           <!-- BOTTOM SECTION: SUMMARY BOX (LEFT) & SIGNATURE BOX (RIGHT) -->
-          <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; font-size: 12.5px;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; font-size: 11.5px;">
             
             <!-- LEFT COLUMN: SUMMARY TABLES -->
-            <div style="width: 50%;">
-              <table style="width: 100%; border-collapse: collapse; border: 1px solid #000; margin-bottom: 8px;" border="1" cellpadding="3" cellspacing="0">
-                <tr style="background-color: #ffffff; font-weight: bold; text-align: center; height: 26px;">
-                  <td colspan="2" style="border: 1px solid #000;">สรุปผลการประเมิน</td>
+            <div style="width: 52%;">
+              <table style="width: 100%; border-collapse: collapse; border: 1px solid #000; margin-bottom: 6px;" border="1" cellpadding="2.5" cellspacing="0">
+                <tr style="background-color: #f2f2f2; font-weight: bold; text-align: center; height: 23px;">
+                  <td colspan="2" style="border: 1px solid #000;">สรุปผลการประเมินผลการเรียนรู้</td>
                 </tr>
-                <tr style="height: 25px;">
-                  <td style="border: 1px solid #000; padding-left: 8px;">น้ำหนักวิชาพื้นฐาน</td>
-                  <td style="border: 1px solid #000; text-align: center; width: 32%;">${basicCredits.toFixed(1)}</td>
+                <tr style="height: 22px;">
+                  <td style="border: 1px solid #000; padding-left: 8px;">จำนวนหน่วยกิต/น้ำหนักวิชาพื้นฐานที่ได้</td>
+                  <td style="border: 1px solid #000; text-align: center; width: 30%; font-weight: bold;">${basicEarnedCredits.toFixed(1)} / ${basicCredits.toFixed(1)}</td>
                 </tr>
-                <tr style="height: 25px;">
-                  <td style="border: 1px solid #000; padding-left: 8px;">น้ำหนักวิชาเพิ่มเติม</td>
-                  <td style="border: 1px solid #000; text-align: center;">${extraCredits.toFixed(1)}</td>
+                <tr style="height: 22px;">
+                  <td style="border: 1px solid #000; padding-left: 8px;">จำนวนหน่วยกิต/น้ำหนักวิชาเพิ่มเติมที่ได้</td>
+                  <td style="border: 1px solid #000; text-align: center; font-weight: bold;">${extraEarnedCredits.toFixed(1)} / ${extraCredits.toFixed(1)}</td>
                 </tr>
-                <tr style="height: 25px;">
-                  <td style="border: 1px solid #000; padding-left: 8px;">ระดับผลการเรียนเฉลี่ย</td>
-                  <td style="border: 1px solid #000; text-align: center; font-weight: bold;">${gpa}</td>
+                <tr style="height: 22px;">
+                  <td style="border: 1px solid #000; padding-left: 8px;">รวมจำนวนหน่วยกิต/น้ำหนักที่ได้</td>
+                  <td style="border: 1px solid #000; text-align: center; font-weight: bold;">${(basicEarnedCredits + extraEarnedCredits).toFixed(1)} / ${(basicCredits + extraCredits).toFixed(1)}</td>
+                </tr>
+                <tr style="height: 22px; background-color: #fdfdfd;">
+                  <td style="border: 1px solid #000; padding-left: 8px; font-weight: bold;">ระดับผลการเรียนเฉลี่ย (GPA)</td>
+                  <td style="border: 1px solid #000; text-align: center; font-weight: black; font-size: 13px; color: #1e3a8a;">${gpa}</td>
                 </tr>
               </table>
 
-              <table style="width: 100%; border-collapse: collapse; border: 1px solid #000;" border="1" cellpadding="3" cellspacing="0">
-                <tr style="background-color: #ffffff; font-weight: bold; text-align: center; height: 26px;">
-                  <td colspan="2" style="border: 1px solid #000;">ประเมินคุณลักษณะอันพึงประสงค์</td>
+              <table style="width: 100%; border-collapse: collapse; border: 1px solid #000;" border="1" cellpadding="2.5" cellspacing="0">
+                <tr style="background-color: #f2f2f2; font-weight: bold; text-align: center; height: 23px;">
+                  <td colspan="2" style="border: 1px solid #000;">สรุปผลการประเมินคุณภาพผู้เรียน</td>
                 </tr>
-                <tr style="height: 25px;">
-                  <td style="border: 1px solid #000; padding-left: 8px;">คุณลักษณะอันพึงประสงค์ของสถานศึกษา</td>
-                  <td style="border: 1px solid #000; text-align: center; width: 32%;">ดีเยี่ยม</td>
+                <tr style="height: 22px;">
+                  <td style="border: 1px solid #000; padding-left: 8px;">ผลการประเมินคุณลักษณะอันพึงประสงค์ (8 ประการ)</td>
+                  <td style="border: 1px solid #000; text-align: center; width: 30%; font-weight: bold; color: #047857;">ดีเยี่ยม (3)</td>
                 </tr>
-                <tr style="height: 25px;">
-                  <td style="border: 1px solid #000; padding-left: 8px;">การอ่าน คิดวิเคราะห์และเขียน</td>
-                  <td style="border: 1px solid #000; text-align: center;">ดีเยี่ยม</td>
+                <tr style="height: 22px;">
+                  <td style="border: 1px solid #000; padding-left: 8px;">ผลการประเมินการอ่าน คิดวิเคราะห์และเขียน</td>
+                  <td style="border: 1px solid #000; text-align: center; font-weight: bold; color: #6b21a8;">ดีเยี่ยม (3)</td>
                 </tr>
-                <tr style="height: 25px;">
-                  <td style="border: 1px solid #000; padding-left: 8px;">กิจกรรมพัฒนาผู้เรียน</td>
-                  <td style="border: 1px solid #000; text-align: center;">ผ่าน</td>
+                <tr style="height: 22px;">
+                  <td style="border: 1px solid #000; padding-left: 8px;">ผลการประเมินกิจกรรมพัฒนาผู้เรียน</td>
+                  <td style="border: 1px solid #000; text-align: center; font-weight: bold; color: #1d4ed8;">ผ่าน</td>
                 </tr>
               </table>
             </div>
 
-            <!-- RIGHT COLUMN: 3 SIGNATURE BLOCKS -->
-            <div style="width: 48%; display: flex; flex-direction: column; justify-content: space-between; min-height: 215px; text-align: center;">
+            <!-- RIGHT COLUMN: 3 SIGNATURE BLOCKS (ตามชีต PP6) -->
+            <div style="width: 46%; display: flex; flex-direction: column; justify-content: space-between; min-height: 195px; text-align: center; font-size: 11.5px;">
               <div>
-                <p style="margin: 0; font-size: 13px;">( &nbsp;&nbsp;&nbsp;&nbsp; ${advisorName} &nbsp;&nbsp;&nbsp;&nbsp; )</p>
-                <div style="border-bottom: 1px dotted #888; width: 175px; margin: 4px auto 3px auto;"></div>
-                <p style="margin: 0; font-size: 12px;">ครูประจำชั้น</p>
+                <p style="margin: 0;">(ลงชื่อ)..........................................................................</p>
+                <p style="margin: 2px 0 0; font-weight: bold;">( ${advisorName} )</p>
+                <p style="margin: 1px 0 0; font-size: 10.5px; color: #444;">ครูที่ปรึกษา${classText}</p>
               </div>
 
-              <div style="position: relative; margin-top: 18px;">
-                ${school.signatureUrl ? `<img src="${school.signatureUrl}" style="position: absolute; left: 50%; transform: translateX(-50%) translateY(-22%); max-height: 48px; opacity: 0.85; pointer-events: none;" alt="signature">` : ''}
-                <p style="margin: 0; font-size: 13px;">( &nbsp;&nbsp;&nbsp;&nbsp; ${directorName} &nbsp;&nbsp;&nbsp;&nbsp; )</p>
-                <div style="border-bottom: 1px dotted #888; width: 175px; margin: 4px auto 3px auto;"></div>
-                <p style="margin: 0; font-size: 12px;">ผู้อำนวยการโรงเรียน</p>
+              <div style="position: relative; margin-top: 14px;">
+                ${school.signatureUrl ? `<img src="${school.signatureUrl}" style="position: absolute; left: 50%; transform: translateX(-50%) translateY(-22%); max-height: 44px; opacity: 0.85; pointer-events: none;" alt="signature">` : ''}
+                <p style="margin: 0;">(ลงชื่อ)..........................................................................</p>
+                <p style="margin: 2px 0 0; font-weight: bold;">( ${directorName} )</p>
+                <p style="margin: 1px 0 0; font-size: 10.5px; color: #444;">ผู้อำนวยการโรงเรียน &nbsp; วันที่ 31 มีนาคม 2570</p>
               </div>
 
-              <div style="margin-top: 18px;">
-                <p style="margin: 0; font-size: 13px;">( &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; )</p>
-                <div style="border-bottom: 1px dotted #888; width: 175px; margin: 4px auto 3px auto;"></div>
-                <p style="margin: 0; font-size: 12px;">ผู้ปกครอง</p>
+              <div style="margin-top: 14px;">
+                <p style="margin: 0;">(ลงชื่อ)..........................................................................</p>
+                <p style="margin: 2px 0 0;">( .......................................................................... )</p>
+                <p style="margin: 1px 0 0; font-size: 10.5px; color: #444;">ผู้ปกครอง</p>
               </div>
             </div>
 
