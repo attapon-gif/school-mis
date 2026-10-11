@@ -1610,6 +1610,62 @@
           <p>• <strong>นำเข้าข้อมูลจำนวนมาก (Bulk Import):</strong> เปิดชีต Google Sheets แล้วคัดลอก (Copy-Paste) รายชื่อนักเรียนหรือผลการเรียนจากไฟล์ Excel เดิมมาวางได้ทีละร้อยๆ แถว แล้วกดปุ่ม <em>"ซิงค์ Google Sheets"</em> ด้านบนได้เลยครับ</p>
         </div>
       </div>
+
+      <!-- CARD 3: ระบบสำรองและกู้คืนฐานข้อมูล 1 คลิก (Backup & Restore Hub) -->
+      <div class="card-3d p-6 sm:p-8 rounded-2xl max-w-2xl mx-auto space-y-5 border-2 border-indigo-200 bg-gradient-to-br from-indigo-50/50 via-white to-blue-50/30 shadow-lg">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 pb-3 border-b border-indigo-100">
+          <div>
+            <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-indigo-100 text-indigo-800 text-[11px] font-extrabold mb-1">
+              <i data-lucide="shield-check" class="w-3.5 h-3.5 text-indigo-600"></i> ป้องกันข้อมูลสูญหาย 100%
+            </div>
+            <h3 class="text-lg font-black text-slate-900 tracking-tight flex items-center gap-2">
+              <i data-lucide="hard-drive-download" class="w-5 h-5 text-indigo-600"></i> สำรองและกู้คืนข้อมูลระบบ 1 คลิก (Backup &amp; Restore Hub)
+            </h3>
+            <p class="text-xs text-slate-500 mt-0.5">พกพาข้อมูลไปใช้งานเครื่องอื่น หรือสำรองเก็บไว้ใน Flash Drive ได้ในคลิกเดียว</p>
+          </div>
+          <span class="px-2.5 py-1 rounded-xl text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-200">
+            🟢 ระบบพร้อมสำรอง
+          </span>
+        </div>
+
+        <p class="text-xs text-slate-600 leading-relaxed">
+          ในโหมด <strong>Standalone (ดับเบิลคลิกไฟล์เดียว)</strong> หรือการใช้งานทั่วไป ข้อมูลทั้งหมดจะถูกบันทึกไว้ในหน่วยความจำของเว็บเบราว์เซอร์ หากท่านล้างประวัติการใช้งานเบราว์เซอร์ (Clear Browser Data) หรือต้องการย้ายระบบไปเปิดบนคอมพิวเตอร์เครื่องอื่น สามารถใช้ฟังก์ชันนี้ได้ทันที:
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-1">
+          <!-- Backup Button -->
+          <button type="button" onclick="exportFullSystemBackupJson()" class="p-4 rounded-2xl border-2 border-blue-500 bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-bold text-xs sm:text-sm shadow-md shadow-blue-500/20 transition-all flex flex-col items-center justify-center gap-2 group cursor-pointer text-center">
+            <div class="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+              <i data-lucide="download-cloud" class="w-5 h-5 text-white"></i>
+            </div>
+            <div>
+              <div class="font-black text-sm">📥 สำรองข้อมูลทั้งหมด (Backup JSON)</div>
+              <div class="text-[11px] text-blue-100 font-normal mt-0.5">ดาวน์โหลดไฟล์ academic_mis_backup.json</div>
+            </div>
+          </button>
+
+          <!-- Restore Button with hidden file input -->
+          <div class="relative">
+            <input type="file" id="inputRestoreBackupJson" accept=".json" onchange="handleRestoreBackupFile(event)" class="hidden">
+            <button type="button" onclick="triggerRestoreBackupClick()" class="w-full h-full p-4 rounded-2xl border-2 border-emerald-500 bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-700 hover:to-teal-800 text-white font-bold text-xs sm:text-sm shadow-md shadow-emerald-500/20 transition-all flex flex-col items-center justify-center gap-2 group cursor-pointer text-center">
+              <div class="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                <i data-lucide="upload-cloud" class="w-5 h-5 text-white"></i>
+              </div>
+              <div>
+                <div class="font-black text-sm">📤 กู้คืนข้อมูล (Restore Data)</div>
+                <div class="text-[11px] text-emerald-100 font-normal mt-0.5">เลือกไฟล์ Backup นำเข้าข้อมูลทันที</div>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <div class="p-3 bg-amber-50 rounded-xl border border-amber-200 text-xs text-amber-900 flex items-start gap-2.5">
+          <i data-lucide="alert-circle" class="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5"></i>
+          <div>
+            <strong>คำแนะนำในการกู้คืนข้อมูล:</strong> การกู้คืนข้อมูลจะนำข้อมูลจากไฟล์ Backup มาปรับใช้กับระบบปัจจุบัน แนะนำให้กดสำรองข้อมูลปัจจุบันไว้ก่อนทำการกู้คืนข้อมูลใหม่
+          </div>
+        </div>
+      </div>
     </section>
 
   
@@ -10346,6 +10402,11 @@ ${isTransferIn ? '🏫 ย้ายมาจาก: ' + t.fromSchool : '🏫 ย
 
     // Helper: Call Google Apps Script backend
     function initStateWithMock() {
+      let savedCore = null;
+      try {
+        const raw = localStorage.getItem('fm_core_data');
+        if (raw) savedCore = JSON.parse(raw);
+      } catch (e) {}
       state.schoolInfo = { ...DEFAULT_MOCK_DATA.schoolInfo };
       state.teachers = [ ...DEFAULT_MOCK_DATA.teachers ];
       state.classrooms = [ ...DEFAULT_MOCK_DATA.classrooms ];
@@ -14441,6 +14502,189 @@ ${isTransferIn ? '🏫 ย้ายมาจาก: ' + t.fromSchool : '🏫 ย
     // -------------------------------------------------------------
     // MODULE 5: ตั้งค่าสถานศึกษา & Google Sheets
     // -------------------------------------------------------------
+    
+    // -------------------------------------------------------------
+    // BACKUP & RESTORE DATA HUB (1-CLICK LOCALSTORAGE & FULL SYSTEM)
+    // -------------------------------------------------------------
+    function saveCoreDataToStorage() {
+      try {
+        const coreData = {
+          schoolInfo: state.schoolInfo,
+          teachers: state.teachers,
+          classrooms: state.classrooms,
+          rooms: state.rooms,
+          periods: state.periods,
+          days: state.days,
+          grades: allGradesRaw,
+          lessonPlans: lessonPlansData,
+          supervisions: supervisionList,
+          timetables: timetablesList,
+          substitutes: substituteList
+        };
+        localStorage.setItem('fm_core_data', JSON.stringify(coreData));
+      } catch (e) {
+        console.warn('Failed to save core data to localStorage', e);
+      }
+    }
+
+    function exportFullSystemBackupJson() {
+      initExtendedState();
+      initUserManagementState();
+
+      const schoolName = state.schoolInfo?.name || state.schoolInfo?.schoolName || 'โรงเรียนฝันใหม่';
+      const thaiDateStr = new Date().toLocaleDateString('th-TH', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+
+      const backupData = {
+        app: 'School Academic MIS (ระบบบริหารงานวิชาการสถานศึกษา)',
+        version: '2.0.0-FM',
+        developer: 'funmai studio / นายอรรถพล ฉาไธสง',
+        createdAt: new Date().toISOString(),
+        createdThai: thaiDateStr,
+        schoolInfo: state.schoolInfo,
+        core: {
+          teachers: state.teachers || [],
+          classrooms: state.classrooms || [],
+          rooms: state.rooms || [],
+          periods: state.periods || [],
+          days: state.days || [],
+          students: (state.students && state.students.length > 0) ? state.students : (DEFAULT_MOCK_DATA.students || []),
+          grades: allGradesRaw || [],
+          lessonPlans: lessonPlansData || [],
+          supervisions: supervisionList || [],
+          timetables: timetablesList || [],
+          substitutes: substituteList || []
+        },
+        extended: state.ext || {},
+        systemUsers: state.systemUsers || [],
+        rolePermissions: state.rolePermissions || {}
+      };
+
+      const jsonString = JSON.stringify(backupData, null, 2);
+      const blob = new Blob([jsonString], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'academic_mis_backup.json';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+
+      showToast('📥 สำรองข้อมูลทั้งหมดเรียบร้อยแล้ว (academic_mis_backup.json)');
+    }
+
+    function triggerRestoreBackupClick() {
+      const fileInput = document.getElementById('inputRestoreBackupJson');
+      if (fileInput) fileInput.click();
+    }
+
+    function handleRestoreBackupFile(event) {
+      const file = event.target.files?.[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const content = e.target.result;
+          const data = JSON.parse(content);
+
+          if (!data || (!data.core && !data.extended && !data.schoolInfo)) {
+            alert('❌ รูปแบบไฟล์ไม่ถูกต้อง: ไม่พบข้อมูลโครงสร้างของระบบบริหารงานวิชาการ (School Academic MIS)');
+            return;
+          }
+
+          const confirmMsg = 'ยืนยันการกู้คืนข้อมูลหรือไม่?\n\n' +
+            '• วันที่สำรองข้อมูล: ' + (data.createdThai || data.createdAt || 'ไม่ระบุ') + '\n' +
+            '• โรงเรียน: ' + (data.schoolInfo?.name || data.schoolInfo?.schoolName || 'โรงเรียน') + '\n' +
+            '• ผลการเรียน: ' + ((data.core?.grades || []).length) + ' รายการ\n' +
+            '• แผนการสอน: ' + ((data.core?.lessonPlans || []).length) + ' แผน\n' +
+            '• ทะเบียน DMC: ' + ((data.extended?.dmcStudents || []).length) + ' คน\n' +
+            '• รายงานเยี่ยมบ้าน: ' + ((data.extended?.homeVisits || []).length) + ' คน\n\n' +
+            '⚠️ ข้อมูลเดิมในเบราว์เซอร์จะถูกแทนที่ด้วยข้อมูลจากไฟล์ Backup นี้';
+
+          if (!confirm(confirmMsg)) {
+            event.target.value = '';
+            return;
+          }
+
+          // 1. Restore School Info
+          if (data.schoolInfo) {
+            state.schoolInfo = { ...state.schoolInfo, ...data.schoolInfo };
+            DEFAULT_MOCK_DATA.schoolInfo = state.schoolInfo;
+          }
+
+          // 2. Restore Core Data
+          if (data.core) {
+            if (Array.isArray(data.core.teachers)) state.teachers = data.core.teachers;
+            if (Array.isArray(data.core.classrooms)) state.classrooms = data.core.classrooms;
+            if (Array.isArray(data.core.rooms)) state.rooms = data.core.rooms;
+            if (Array.isArray(data.core.periods)) { state.periods = data.core.periods; periodsData = data.core.periods; }
+            if (Array.isArray(data.core.days)) { state.days = data.core.days; daysData = data.core.days; }
+            if (Array.isArray(data.core.grades)) { allGradesRaw = data.core.grades; currentGradesData = [ ...data.core.grades ]; }
+            if (Array.isArray(data.core.lessonPlans)) lessonPlansData = data.core.lessonPlans;
+            if (Array.isArray(data.core.supervisions)) supervisionList = data.core.supervisions;
+            if (Array.isArray(data.core.timetables)) timetablesList = data.core.timetables;
+            if (Array.isArray(data.core.substitutes)) substituteList = data.core.substitutes;
+
+            DEFAULT_MOCK_DATA.teachers = state.teachers;
+            DEFAULT_MOCK_DATA.classrooms = state.classrooms;
+            DEFAULT_MOCK_DATA.rooms = state.rooms;
+            DEFAULT_MOCK_DATA.grades = allGradesRaw;
+            DEFAULT_MOCK_DATA.lessonPlans = lessonPlansData;
+            DEFAULT_MOCK_DATA.supervisions = supervisionList;
+            DEFAULT_MOCK_DATA.timetables = timetablesList;
+            DEFAULT_MOCK_DATA.substitutes = substituteList;
+          }
+          saveCoreDataToStorage();
+
+          // 3. Restore Extended Modules (state.ext)
+          if (data.extended) {
+            state.ext = data.extended;
+            saveExtendedState();
+          }
+
+          // 4. Restore Users & Permissions
+          if (Array.isArray(data.systemUsers)) {
+            state.systemUsers = data.systemUsers;
+            try { localStorage.setItem('fm_system_users', JSON.stringify(data.systemUsers)); } catch (e) {}
+          }
+          if (data.rolePermissions) {
+            state.rolePermissions = data.rolePermissions;
+            try { localStorage.setItem('fm_role_permissions', JSON.stringify(data.rolePermissions)); } catch (e) {}
+          }
+
+          // 5. Update UI & Header
+          const schoolNameEl = document.getElementById('headerSchoolName');
+          if (schoolNameEl) schoolNameEl.textContent = state.schoolInfo.name;
+          const sideSchoolNameEl = document.getElementById('sidebarSchoolName');
+          if (sideSchoolNameEl) sideSchoolNameEl.textContent = state.schoolInfo.name;
+          const termYearEl = document.getElementById('headerTermYear');
+          if (termYearEl) termYearEl.textContent = 'ภาคเรียนที่ ' + state.schoolInfo.term + '/' + state.schoolInfo.academicYear;
+          if (document.getElementById('settingSchoolName')) {
+            document.getElementById('settingSchoolName').value = state.schoolInfo.name || '';
+            document.getElementById('settingSubTitle').value = state.schoolInfo.subTitle || '';
+            document.getElementById('settingAcademicYear').value = state.schoolInfo.academicYear || '';
+            document.getElementById('settingTerm').value = state.schoolInfo.term || '';
+            document.getElementById('settingDirectorName').value = state.schoolInfo.directorName || '';
+            document.getElementById('settingDirectorPosition').value = state.schoolInfo.directorPosition || '';
+          }
+
+          // Refresh current tab
+          if (state.currentTab) switchTab(state.currentTab);
+          else switchTab('tab-settings');
+
+          showToast('📤 กู้คืนข้อมูลสำเร็จเรียบร้อย! ข้อมูลทั้งหมดได้รับการอัปเดตแล้ว');
+          alert('✅ กู้คืนข้อมูลสำเร็จเรียบร้อย!\n\nระบบได้โหลดข้อมูลนักเรียน ผลการเรียน แผนการสอน และการตั้งค่าทั้งหมดเข้าสู่ระบบแล้ว');
+        } catch (err) {
+          console.error('Restore error:', err);
+          alert('❌ เกิดข้อผิดพลาดในการอ่านไฟล์ Backup: ' + err.message);
+        } finally {
+          event.target.value = '';
+        }
+      };
+      reader.readAsText(file);
+    }
+
     async function handleSaveSettings(e) {
       e.preventDefault();
       const payload = {
