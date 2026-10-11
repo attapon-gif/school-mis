@@ -2254,17 +2254,22 @@
           </div>
         </div>
         <div class="flex flex-wrap items-center gap-2.5">
-          <button type="button" onclick="openCarDriveFolder()" class="px-3.5 py-2.5 rounded-xl border border-blue-200 bg-blue-50 hover:bg-blue-100 text-blue-700 font-bold text-xs flex items-center gap-2 shadow-sm transition">
-            <svg class="w-4 h-4 text-blue-600 flex-shrink-0" viewBox="0 0 87.3 78" fill="currentColor">
-              <path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8h-27.5c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/>
-              <path d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44c-.8 1.4-1.2 2.95-1.2 4.5h27.5z" fill="#00ac47"/>
-              <path d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.502l5.852 11.5z" fill="#ea4335"/>
-              <path d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.2z" fill="#00832d"/>
-              <path d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z" fill="#2684fc"/>
-              <path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 28h27.45c0-1.55-.4-3.1-1.2-4.5z" fill="#ffba00"/>
-            </svg>
-            <span>โฟลเดอร์ Drive งานวิจัย</span>
-          </button>
+          <div class="flex items-center">
+            <button type="button" onclick="openCarDriveFolder()" class="px-3.5 py-2.5 rounded-l-xl border border-blue-200 bg-blue-50 hover:bg-blue-100 text-blue-700 font-bold text-xs flex items-center gap-2 shadow-xs transition">
+              <svg class="w-4 h-4 text-blue-600 flex-shrink-0" viewBox="0 0 87.3 78" fill="currentColor">
+                <path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8h-27.5c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/>
+                <path d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44c-.8 1.4-1.2 2.95-1.2 4.5h27.5z" fill="#00ac47"/>
+                <path d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.502l5.852 11.5z" fill="#ea4335"/>
+                <path d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.2z" fill="#00832d"/>
+                <path d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z" fill="#2684fc"/>
+                <path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 28h27.45c0-1.55-.4-3.1-1.2-4.5z" fill="#ffba00"/>
+              </svg>
+              <span>โฟลเดอร์ Drive งานวิจัย</span>
+            </button>
+            <button type="button" onclick="openModalConfigureCarDrive()" title="ตั้งค่าหรือเปิดโฟลเดอร์ Google Drive รวม" class="px-2 py-2.5 rounded-r-xl border-y border-r border-blue-200 bg-blue-50 hover:bg-blue-100 text-blue-600 shadow-xs transition">
+              <i data-lucide="settings" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
           <button type="button" onclick="openModalSubmitResearch()" class="btn-ega-primary text-xs sm:text-sm px-4 py-2.5 rounded-xl flex items-center gap-2">
             <i data-lucide="plus-circle" class="w-4 h-4"></i> ส่งงานวิจัยหน้าเดียว
           </button>
@@ -4391,6 +4396,45 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
     </div>
   </div>
 
+  <!-- MODAL: CONFIGURE CAR GOOGLE DRIVE FOLDER -->
+  <div id="modalConfigureCarDrive" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 sm:p-4">
+    <div class="card-3d max-w-md w-full p-5 sm:p-6 space-y-4 shadow-2xl rounded-2xl">
+      <div class="flex justify-between items-center pb-3 border-b border-slate-200">
+        <h3 class="text-sm sm:text-base font-black text-slate-900 flex items-center gap-2">
+          <svg class="w-5 h-5 text-blue-600 flex-shrink-0" viewBox="0 0 87.3 78" fill="currentColor">
+            <path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8h-27.5c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/>
+            <path d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44c-.8 1.4-1.2 2.95-1.2 4.5h27.5z" fill="#00ac47"/>
+            <path d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.502l5.852 11.5z" fill="#ea4335"/>
+            <path d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.2z" fill="#00832d"/>
+            <path d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z" fill="#2684fc"/>
+            <path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 28h27.45c0-1.55-.4-3.1-1.2-4.5z" fill="#ffba00"/>
+          </svg>
+          จัดการโฟลเดอร์ Google Drive งานวิจัย
+        </h3>
+        <button type="button" onclick="closeModal('modalConfigureCarDrive')" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+      <div class="p-3 bg-blue-50 rounded-xl text-xs text-blue-900 border border-blue-100 space-y-1">
+        <div class="font-bold flex items-center gap-1.5">
+          <i data-lucide="folder" class="w-3.5 h-3.5 text-blue-600"></i> โฟลเดอร์รวมงานวิจัยในชั้นเรียน
+        </div>
+        <div class="text-[11px] text-blue-800">ระบุลิงก์ Google Drive Folder รวมของโรงเรียน หรือกดปุ่มเปิดไดรฟ์ของฉันได้ทันที</div>
+      </div>
+      <form onsubmit="handleSaveCarDriveFolder(event)" class="space-y-3 text-xs">
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">ลิงก์โฟลเดอร์ Google Drive (Folder URL)</label>
+          <input type="url" id="inputCarDriveFolderUrl" placeholder="https://drive.google.com/drive/folders/..." class="w-full px-3 py-2 border rounded-xl font-bold bg-white">
+        </div>
+        <div class="pt-2 flex flex-col sm:flex-row gap-2">
+          <button type="submit" class="flex-1 btn-ega-primary py-2 font-bold">บันทึกและเปิดโฟลเดอร์</button>
+          <button type="button" onclick="openMyGoogleDriveDirect()" class="px-3 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold flex items-center justify-center gap-1.5">
+            <i data-lucide="external-link" class="w-3.5 h-3.5"></i> เปิดไดรฟ์ของฉัน
+          </button>
+          <button type="button" onclick="closeModal('modalConfigureCarDrive')" class="px-3 py-2 border rounded-xl text-slate-600 font-bold">ปิด</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <!-- MODAL: ADD ACADEMIC DOWNLOAD RESOURCE -->
   <div id="modalAddDownload" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 sm:p-4">
     <div class="card-3d max-w-md w-full p-5 sm:p-6 space-y-4 shadow-2xl rounded-2xl max-h-[92vh] overflow-y-auto">
@@ -5057,7 +5101,7 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
       ],
 
       // 7. One-Page Classroom Action Research (CAR)
-      carDriveFolderUrl: 'https://drive.google.com/drive/folders/1demoCarResearchFolder',
+      carDriveFolderUrl: '',
       researchItems: [
         {
           id: 'RES001',
@@ -5072,8 +5116,8 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
           submitDate: '2026-09-30',
           status: 'approved',
           approvedBy: 'นายอรรถพล ฉาไธสง (ผอ.)',
-          driveUrl: 'https://drive.google.com/file/d/1demoResearchActiveLearningThaiM1/view?usp=sharing',
-          fileName: 'วิจัยหน้าเดียว_การอ่านจับใจความ_ม1_ครูสมใจ.pdf',
+          driveUrl: '',
+          fileName: 'วิจัยหน้าเดียว_การอ่านจับใจความ_ม1_ครูสมใจ.doc',
           fileSize: '1.45 MB'
         },
         {
@@ -5089,8 +5133,8 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
           submitDate: '2026-10-02',
           status: 'pending',
           approvedBy: '-',
-          driveUrl: 'https://drive.google.com/file/d/1demoResearchScienceGamificationTracking/view?usp=sharing',
-          fileName: 'วิจัยหน้าเดียว_แก้ปัญหาส่งงาน_ครูสมหวัง.docx',
+          driveUrl: '',
+          fileName: 'วิจัยหน้าเดียว_แก้ปัญหาส่งงาน_ครูสมหวัง.doc',
           fileSize: '820 KB'
         }
       ],
@@ -5618,6 +5662,18 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
           lastSent: '2026-10-10 20:49'
         };
         saveExtendedState();
+      }
+
+      // Sanitize old demo Google Drive URLs so they don't lead to 404
+      if (state.ext.carDriveFolderUrl && state.ext.carDriveFolderUrl.includes('1demoCarResearchFolder')) {
+        state.ext.carDriveFolderUrl = '';
+      }
+      if (Array.isArray(state.ext.researchItems)) {
+        state.ext.researchItems.forEach(r => {
+          if (r.driveUrl && (r.driveUrl.includes('1demoResearch') || r.driveUrl.includes('/car_') || r.driveUrl.includes('mock_car'))) {
+            r.driveUrl = '';
+          }
+        });
       }
     }
 
@@ -6799,11 +6855,13 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
       if (!confirm(`ต้องการปลดไฟล์แนบ Google Drive ออกจากงานวิจัยเรื่อง "${r.title}" หรือไม่?`)) return;
 
       r.driveUrl = '';
+      r.fileData = '';
       r.fileName = '';
       r.fileSize = '';
+      if (window.fileDataStore) delete window.fileDataStore[resId];
       saveExtendedState();
       renderResearchCards();
-      showToast('ปลดไฟล์แนบ Google Drive เรียบร้อยแล้ว');
+      showToast('ปลดไฟล์แนบงานวิจัยเรียบร้อยแล้ว');
     }
 
     function toggleResUploadMode(mode) {
@@ -6846,10 +6904,235 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
       }
     }
 
+    // Global In-Memory Store for uploaded files during session (survives localStorage quota limits)
+    window.fileDataStore = window.fileDataStore || {};
+
+    // Helper: Generate and download clean formatted Microsoft Word (.doc) document
+    function downloadWordDoc(filename, title, bodyHtml) {
+      const docContent = `
+<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+<head>
+  <meta charset='utf-8'>
+  <title>${title}</title>
+  <!--[if gte mso 9]>
+  <xml>
+    <w:WordDocument>
+      <w:View>Print</w:View>
+      <w:Zoom>100</w:Zoom>
+      <w:DoNotOptimizeForBrowser/>
+    </w:WordDocument>
+  </xml>
+  <![endif]-->
+  <style>
+    @page Section1 { size: 595.3pt 841.9pt; margin: 42.5pt 42.5pt 42.5pt 42.5pt; mso-header-margin: 35.4pt; mso-footer-margin: 35.4pt; mso-paper-source: 0; }
+    div.Section1 { page: Section1; }
+    body { font-family: 'TH Sarabun PSK', 'Sarabun', 'Cordia New', Tahoma, sans-serif; font-size: 16pt; line-height: 1.35; color: #111; }
+    h1 { font-size: 20pt; font-weight: bold; text-align: center; color: #1e3a8a; margin: 0 0 6pt 0; }
+    h2 { font-size: 17pt; font-weight: bold; text-align: center; color: #334155; margin: 0 0 10pt 0; }
+    h3 { font-size: 16pt; font-weight: bold; color: #1e3a8a; margin: 10pt 0 4pt 0; }
+    p { margin: 0 0 6pt 0; text-align: justify; }
+    table { border-collapse: collapse; width: 100%; margin: 8pt 0; }
+    th, td { border: 1pt solid #475569; padding: 6pt 8pt; font-size: 15pt; vertical-align: top; }
+    th { background-color: #f1f5f9; font-weight: bold; text-align: center; color: #0f172a; }
+    .box-section { border: 1.5pt solid #2563eb; background-color: #f8fafc; padding: 10pt 12pt; margin: 8pt 0; border-radius: 4pt; }
+    .center { text-align: center; }
+    .bold { font-weight: bold; }
+    .signature-table { border: none; width: 100%; margin-top: 30pt; }
+    .signature-table td { border: none; text-align: center; padding: 6pt 12pt; }
+  </style>
+</head>
+<body>
+  <div class="Section1">
+    ${bodyHtml}
+  </div>
+</body>
+</html>
+      `;
+      const blob = new Blob(['\ufeff' + docContent], { type: 'application/msword;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
+
+    function openModalConfigureCarDrive() {
+      initExtendedState();
+      const input = document.getElementById('inputCarDriveFolderUrl');
+      if (input) {
+        const curr = state.ext.carDriveFolderUrl || '';
+        input.value = curr.includes('1demoCarResearchFolder') ? '' : curr;
+      }
+      openModal('modalConfigureCarDrive');
+    }
+
+    function handleSaveCarDriveFolder(e) {
+      e.preventDefault();
+      initExtendedState();
+      const input = document.getElementById('inputCarDriveFolderUrl');
+      const val = input ? input.value.trim() : '';
+      if (val && val.startsWith('http')) {
+        state.ext.carDriveFolderUrl = val;
+        saveExtendedState();
+        closeModal('modalConfigureCarDrive');
+        showToast('บันทึกโฟลเดอร์ Google Drive งานวิจัยเรียบร้อยแล้ว');
+        window.open(val, '_blank');
+      } else {
+        showToast('กรุณาระบุลิงก์ Google Drive Folder ที่ถูกต้อง');
+      }
+    }
+
+    function openMyGoogleDriveDirect() {
+      window.open('https://drive.google.com/drive/my-drive', '_blank');
+      closeModal('modalConfigureCarDrive');
+    }
+
     function openCarDriveFolder() {
       initExtendedState();
-      const folderUrl = state.ext.carDriveFolderUrl || 'https://drive.google.com/drive/my-drive';
-      window.open(folderUrl, '_blank');
+      const folderUrl = state.ext.carDriveFolderUrl;
+      if (folderUrl && folderUrl.startsWith('http') && !folderUrl.includes('1demoCarResearchFolder')) {
+        window.open(folderUrl, '_blank');
+      } else {
+        openModalConfigureCarDrive();
+      }
+    }
+
+    function downloadResearchFile(resId) {
+      initExtendedState();
+      const r = state.ext.researchItems.find(x => x.id === resId);
+      if (!r) {
+        showToast('ไม่พบข้อมูลงานวิจัยที่ต้องการดาวน์โหลด');
+        return;
+      }
+
+      // 1. If file data was uploaded locally (base64 Data URL)
+      const localData = r.fileData || (window.fileDataStore && window.fileDataStore[r.id]);
+      if (localData) {
+        const a = document.createElement('a');
+        a.href = localData;
+        a.download = r.fileName || `งานวิจัยในชั้นเรียน_${r.teacherName || 'ครู'}_${r.title || 'CAR'}.pdf`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        showToast('ดาวน์โหลดไฟล์งานวิจัยเรียบร้อยแล้ว: ' + (r.fileName || r.title));
+        return;
+      }
+
+      // 2. If valid external Google Drive link exists
+      if (r.driveUrl && r.driveUrl.startsWith('http') && !r.driveUrl.includes('demo') && !r.driveUrl.includes('mock_car') && !r.driveUrl.includes('/car_')) {
+        const match = r.driveUrl.match(/\/d\/([a-zA-Z0-9_-]+)/);
+        if (match && match[1]) {
+          window.open(`https://drive.google.com/uc?export=download&id=${match[1]}`, '_blank');
+          showToast('กำลังดาวน์โหลดไฟล์จาก Google Drive...');
+          return;
+        } else {
+          window.open(r.driveUrl, '_blank');
+          return;
+        }
+      }
+
+      // 3. Fallback: Generate structured One-Page CAR Word Document (.doc) from research data
+      const schoolName = state.schoolInfo?.name || 'โรงเรียนฝันใหม่';
+      const directorName = state.schoolInfo?.directorName || 'นายอรรถพล ฉาไธสง';
+      const title = r.title || 'แบบสรุปรายงานการวิจัยในชั้นเรียนหน้าเดียว (One-Page CAR)';
+
+      const bodyHtml = `
+        <h1>แบบสรุปรายงานการวิจัยในชั้นเรียนหน้าเดียว (One-Page CAR)</h1>
+        <h2>${schoolName} • ภาคเรียนที่ 1 ปีการศึกษา 2569</h2>
+        <hr style="border:0; border-top:2pt solid #1e3a8a; margin:8pt 0 14pt 0;">
+
+        <table style="margin-bottom:12pt;">
+          <tr>
+            <td style="width:25%; font-weight:bold; background-color:#f1f5f9;">ชื่องานวิจัย</td>
+            <td style="width:75%; font-weight:bold; color:#1e3a8a;">${r.title || 'รายงานการวิจัยในชั้นเรียน'}</td>
+          </tr>
+          <tr>
+            <td style="font-weight:bold; background-color:#f1f5f9;">ครูผู้วิจัย</td>
+            <td>${r.teacherName || 'ครูผู้สอน'}</td>
+          </tr>
+          <tr>
+            <td style="font-weight:bold; background-color:#f1f5f9;">กลุ่มสาระฯ / รายวิชา</td>
+            <td>${r.subject || '-'} (${r.classroom || 'ม.1/1'})</td>
+          </tr>
+          <tr>
+            <td style="font-weight:bold; background-color:#f1f5f9;">กลุ่มเป้าหมาย</td>
+            <td>${r.targetGroup || 'นักเรียนในระดับชั้น'}</td>
+          </tr>
+          <tr>
+            <td style="font-weight:bold; background-color:#f1f5f9;">วันที่ส่งงานวิจัย</td>
+            <td>${r.submitDate || '-'}</td>
+          </tr>
+          <tr>
+            <td style="font-weight:bold; background-color:#f1f5f9;">สถานะการประเมิน</td>
+            <td>${r.status === 'approved' ? '✓ อนุมัติเรียบร้อยแล้ว' : (r.status === 'rejected' ? 'ส่งกลับแก้ไข' : 'รอการตรวจ')} (ผู้อนุมัติ: ${r.approvedBy || directorName})</td>
+          </tr>
+        </table>
+
+        <div class="box-section">
+          <h3 style="margin-top:0;">1. สภาพปัญหาและความสำคัญ (Problem Statement)</h3>
+          <p>${(r.problem || 'นักเรียนมีปัญหาด้านการเรียนรู้ในเนื้อหาและทักษะตามตัวชี้วัด').replace(/\n/g, '<br>')}</p>
+        </div>
+
+        <div class="box-section">
+          <h3 style="margin-top:0;">2. นวัตกรรมและวิธีการแก้ปัญหา (Active Learning Innovation)</h3>
+          <p>${(r.innovation || 'ออกแบบชุดการจัดกิจกรรมการเรียนรู้เชิงรุก (Active Learning) ร่วมกับสื่อและเทคโนโลยีดิจิทัล').replace(/\n/g, '<br>')}</p>
+        </div>
+
+        <div class="box-section">
+          <h3 style="margin-top:0;">3. ผลการวิจัยและข้อค้นพบ (Results & Findings)</h3>
+          <p>${(r.results || 'ผลสัมฤทธิ์ทางการเรียนและพฤติกรรมการเรียนรู้ของนักเรียนกลุ่มเป้าหมายพัฒนาขึ้นอย่างมีนัยสำคัญ').replace(/\n/g, '<br>')}</p>
+        </div>
+
+        <table class="signature-table">
+          <tr>
+            <td style="width:50%;">
+              <p>ลงชื่อ..............................................................</p>
+              <p class="bold">(${r.teacherName || '..............................................................'})</p>
+              <p>ครูผู้วิจัย</p>
+              <p>วันที่ .......... / .......... / 2569</p>
+            </td>
+            <td style="width:50%;">
+              <p>ลงชื่อ..............................................................</p>
+              <p class="bold">(${directorName})</p>
+              <p>ผู้อำนวยการ${schoolName}</p>
+              <p>วันที่ .......... / .......... / 2569</p>
+            </td>
+          </tr>
+        </table>
+      `;
+
+      const safeFilename = `วิจัยหน้าเดียว_${(r.teacherName || 'ครู').replace(/\s+/g, '_')}_${(r.title || 'CAR').slice(0, 30).replace(/[/\\?%*:|"<>]/g, '')}.doc`;
+      downloadWordDoc(safeFilename, title, bodyHtml);
+      showToast('ดาวน์โหลดเอกสารวิจัยหน้าเดียว (.doc) เรียบร้อยแล้ว');
+    }
+
+    function viewResearchFile(resId) {
+      initExtendedState();
+      const r = state.ext.researchItems.find(x => x.id === resId);
+      if (!r) return;
+
+      const localData = r.fileData || (window.fileDataStore && window.fileDataStore[r.id]);
+      if (localData) {
+        const win = window.open();
+        if (win) {
+          if (localData.startsWith('data:application/pdf') || localData.startsWith('data:image/')) {
+            win.document.write(`<iframe src="${localData}" frameborder="0" style="border:0; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%;" allowfullscreen></iframe>`);
+          } else {
+            win.location.href = localData;
+          }
+          return;
+        }
+      }
+
+      if (r.driveUrl && r.driveUrl.startsWith('http') && !r.driveUrl.includes('demo') && !r.driveUrl.includes('mock_car') && !r.driveUrl.includes('/car_')) {
+        window.open(r.driveUrl, '_blank');
+        return;
+      }
+
+      printSingleResearchReport(resId);
     }
 
     function renderResearchCards() {
@@ -6862,7 +7145,7 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
       const totalCount = list.length;
       const approvedCount = list.filter(x => x.status === 'approved').length;
       const pendingCount = list.filter(x => x.status === 'pending').length;
-      const driveCount = list.filter(x => x.driveUrl && x.driveUrl.trim() !== '').length;
+      const driveCount = list.filter(x => (x.driveUrl && x.driveUrl.trim() !== '') || (x.fileData && x.fileData.trim() !== '') || (window.fileDataStore && window.fileDataStore[x.id])).length;
 
       const elTotal = document.getElementById('carStatTotal');
       const elAppr = document.getElementById('carStatApproved');
@@ -6877,6 +7160,7 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
 
       container.innerHTML = list.map(r => {
         const canDelete = canDeleteResearch(r);
+        const hasFile = (r.driveUrl && r.driveUrl.trim() !== '') || (r.fileData && r.fileData.trim() !== '') || (window.fileDataStore && window.fileDataStore[r.id]);
         return `
         <div class="card-3d p-5 rounded-2xl border border-slate-200 bg-white space-y-3 shadow-sm hover:shadow-md transition">
           <div class="flex justify-between items-start gap-2">
@@ -6908,8 +7192,8 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
             <div class="text-indigo-900 font-semibold"><strong>ผลการวิจัย:</strong> ${r.results}</div>
           </div>
 
-          <!-- Google Drive Attachment Badge -->
-          ${r.driveUrl ? `
+          <!-- Attachment Badge (Local File or Google Drive) -->
+          ${hasFile ? `
             <div class="p-2.5 bg-blue-50/80 border border-blue-200/90 rounded-xl flex items-center justify-between text-xs">
               <div class="flex items-center gap-2 text-blue-900 truncate">
                 <svg class="w-4 h-4 flex-shrink-0 text-blue-600" viewBox="0 0 87.3 78" fill="currentColor">
@@ -6921,15 +7205,18 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
                   <path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 28h27.45c0-1.55-.4-3.1-1.2-4.5z" fill="#ffba00"/>
                 </svg>
                 <div class="truncate">
-                  <span class="font-bold block truncate">${r.fileName || 'เอกสารงานวิจัย Google Drive'}</span>
-                  <span class="text-[10px] text-blue-600 font-mono">${r.fileSize || 'จัดเก็บบน Google Drive'}</span>
+                  <span class="font-bold block truncate">${r.fileName || 'เอกสารงานวิจัย'}</span>
+                  <span class="text-[10px] text-blue-600 font-mono">${r.fileSize || (r.fileData ? 'ไฟล์แนบในระบบ' : 'จัดเก็บบน Google Drive')}</span>
                 </div>
               </div>
               <div class="flex items-center gap-1.5">
-                <a href="${r.driveUrl}" target="_blank" class="px-2.5 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold text-[11px] flex items-center gap-1 shadow-xs whitespace-nowrap">
+                <button type="button" onclick="downloadResearchFile('${r.id}')" title="ดาวน์โหลดไฟล์นี้ลงเครื่อง" class="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-bold text-[11px] flex items-center gap-1 shadow-xs whitespace-nowrap">
+                  <i data-lucide="download" class="w-3 h-3 text-white"></i> ดาวน์โหลด
+                </button>
+                <button type="button" onclick="viewResearchFile('${r.id}')" title="เปิดดูเอกสาร" class="px-2.5 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold text-[11px] flex items-center gap-1 shadow-xs whitespace-nowrap">
                   <i data-lucide="external-link" class="w-3 h-3 text-white"></i> เปิดดู
-                </a>
-                <button type="button" onclick="openModalAttachDrive('${r.id}')" title="เปลี่ยนไฟล์ Drive" class="p-1 hover:bg-blue-100 text-blue-700 rounded-lg transition">
+                </button>
+                <button type="button" onclick="openModalAttachDrive('${r.id}')" title="เปลี่ยนหรือแนบไฟล์ใหม่" class="p-1 hover:bg-blue-100 text-blue-700 rounded-lg transition">
                   <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
                 </button>
                 ${canDelete ? `
@@ -6970,21 +7257,11 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
               ) : ''}
             </div>
 
-            <!-- View & Print Controls -->
-            <div class="flex items-center gap-2 ml-auto">
-              ${r.driveUrl ? `
-                <a href="${r.driveUrl}" target="_blank" class="px-3 py-1.5 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 font-bold text-xs flex items-center gap-1.5 shadow-xs">
-                  <svg class="w-3.5 h-3.5 text-blue-600 flex-shrink-0" viewBox="0 0 87.3 78" fill="currentColor">
-                    <path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8h-27.5c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/>
-                    <path d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44c-.8 1.4-1.2 2.95-1.2 4.5h27.5z" fill="#00ac47"/>
-                    <path d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.502l5.852 11.5z" fill="#ea4335"/>
-                    <path d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.2z" fill="#00832d"/>
-                    <path d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z" fill="#2684fc"/>
-                    <path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 28h27.45c0-1.55-.4-3.1-1.2-4.5z" fill="#ffba00"/>
-                  </svg>
-                  ดูไฟล์ Google Drive
-                </a>
-              ` : ''}
+            <!-- View, Download & Print Controls -->
+            <div class="flex items-center gap-2 ml-auto flex-wrap">
+              <button type="button" onclick="downloadResearchFile('${r.id}')" title="ดาวน์โหลดเอกสารงานวิจัย / แบบสรุป One-Page CAR (.doc)" class="px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center gap-1.5 shadow-sm transition">
+                <i data-lucide="download" class="w-3.5 h-3.5 text-white"></i> ดาวน์โหลดเอกสารวิจัย
+              </button>
               <button onclick="printSingleResearchReport('${r.id}')" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs flex items-center gap-1.5 shadow">
                 <i data-lucide="printer" class="w-3.5 h-3.5 text-indigo-400"></i> พิมพ์แบบสรุปวิจัยหน้าเดียว (A4)
               </button>
@@ -7040,37 +7317,38 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
       let driveUrl = urlInput.value.trim();
       let fileName = r.fileName || 'ไฟล์งานวิจัย Google Drive';
       let fileSize = r.fileSize || '';
+      let fileData = r.fileData || '';
 
-      if (fileInput.files.length > 0) {
+      if (fileInput && fileInput.files.length > 0) {
         const file = fileInput.files[0];
         fileName = file.name;
         fileSize = (file.size / 1024 / 1024).toFixed(2) + ' MB';
-        showLoading(true, 'กำลังอัปโหลดไฟล์งานวิจัยขึ้น Google Drive...');
+        showLoading(true, 'กำลังบันทึกและประมวลผลไฟล์งานวิจัย...');
         try {
           const fileObj = await fileToBase64(file);
+          fileData = fileObj.base64Data;
+          window.fileDataStore = window.fileDataStore || {};
+          window.fileDataStore[resId] = fileData;
           const uploadRes = await callBackend('uploadFile', { ...fileObj, subfolder: 'research' });
           if (uploadRes && (uploadRes.downloadUrl || uploadRes.url)) {
             driveUrl = uploadRes.downloadUrl || uploadRes.url;
-          } else {
-            driveUrl = 'https://drive.google.com/file/d/car_' + Date.now() + '/view?usp=sharing';
           }
         } catch (err) {
-          console.warn('Error uploading to drive:', err);
-          driveUrl = 'https://drive.google.com/file/d/car_' + Date.now() + '/view?usp=sharing';
+          console.warn('Note: offline/standalone file storage mode active', err);
         } finally {
           showLoading(false);
         }
       }
 
-      
-      if (driveUrl) {
+      if (driveUrl || fileData) {
         r.driveUrl = driveUrl;
+        r.fileData = fileData;
         r.fileName = fileName;
         r.fileSize = fileSize;
         saveExtendedState();
         closeModal('modalAttachResearchDrive');
         renderResearchCards();
-        showToast('เชื่อมโยงไฟล์ Google Drive เรียบร้อยแล้ว');
+        showToast('เชื่อมโยงไฟล์งานวิจัยเรียบร้อยแล้ว');
       } else {
         showToast('กรุณาเลือกไฟล์หรือระบุลิงก์ Google Drive');
       }
@@ -7081,14 +7359,14 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
       if (isGlobalProcessing) return; // Prevent double trigger
       initExtendedState();
 
-      
-
       const fileInput = document.getElementById('resFileInput');
       const driveUrlInput = document.getElementById('resDriveUrlInput');
 
       let driveUrl = '';
       let fileName = '';
       let fileSize = '';
+      let fileData = '';
+      const newResId = 'RES' + String(Date.now()).slice(-4);
 
       if (currentResUploadMode === 'link' && driveUrlInput && driveUrlInput.value.trim()) {
         driveUrl = driveUrlInput.value.trim();
@@ -7098,25 +7376,25 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
         const file = fileInput.files[0];
         fileName = file.name;
         fileSize = (file.size / 1024 / 1024).toFixed(2) + ' MB';
-        showLoading(true, 'กำลังอัปโหลดไฟล์งานวิจัยขึ้น Google Drive...');
+        showLoading(true, 'กำลังบันทึกและประมวลผลไฟล์งานวิจัย...');
         try {
           const fileObj = await fileToBase64(file);
+          fileData = fileObj.base64Data;
+          window.fileDataStore = window.fileDataStore || {};
+          window.fileDataStore[newResId] = fileData;
           const uploadRes = await callBackend('uploadFile', { ...fileObj, subfolder: 'research' });
           if (uploadRes && (uploadRes.downloadUrl || uploadRes.url)) {
             driveUrl = uploadRes.downloadUrl || uploadRes.url;
-          } else {
-            driveUrl = 'https://drive.google.com/file/d/car_' + Date.now() + '/view?usp=sharing';
           }
         } catch (err) {
-          console.warn('Error uploading to drive, using mock link:', err);
-          driveUrl = 'https://drive.google.com/file/d/car_' + Date.now() + '/view?usp=sharing';
+          console.warn('Note: offline/standalone file storage mode active', err);
         } finally {
           showLoading(false);
         }
       }
 
       const newRes = {
-        id: 'RES' + String(Date.now()).slice(-4),
+        id: newResId,
         title: document.getElementById('resTitle').value.trim(),
         teacherName: document.getElementById('resTeacher').value.trim() || 'ครูผู้สอน',
         subject: document.getElementById('resSubjectClass').value.trim(),
@@ -7129,6 +7407,7 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
         status: (state.currentRole === 'director' || state.currentRole === 'admin') ? 'approved' : 'pending',
         approvedBy: (state.currentRole === 'director' || state.currentRole === 'admin') ? (state.schoolInfo?.directorName || 'นายอรรถพล ฉาไธสง (ผอ.)') : '-',
         driveUrl: driveUrl,
+        fileData: fileData,
         fileName: fileName,
         fileSize: fileSize
       };
@@ -7137,7 +7416,7 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
       closeModal('modalSubmitResearch');
       renderResearchCards();
       
-      showToast('ส่งงานวิจัยในชั้นเรียนหน้าเดียวและบันทึก Google Drive สำเร็จ');
+      showToast('ส่งงานวิจัยในชั้นเรียนหน้าเดียวเรียบร้อยแล้ว');
     }
 
     function printSingleResearchReport(resId) {
@@ -7250,12 +7529,152 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
     function downloadResourceItem(id) {
       initExtendedState();
       const item = state.ext.academicDownloads.find(x => x.id === id);
-      if (item) {
-        item.downloads++;
-        saveExtendedState();
-        renderDownloadsGrid();
-        showToast('กำลังดาวน์โหลดไฟล์: ' + item.title);
+      if (!item) return;
+
+      item.downloads = (item.downloads || 0) + 1;
+      saveExtendedState();
+      renderDownloadsGrid();
+
+      // If valid external link provided
+      if (item.downloadUrl && item.downloadUrl !== '#' && item.downloadUrl.startsWith('http')) {
+        window.open(item.downloadUrl, '_blank');
+        showToast('กำลังเปิดดาวน์โหลดไฟล์: ' + item.title);
+        return;
       }
+
+      showToast('กำลังดาวน์โหลดไฟล์: ' + item.title);
+
+      // DL001 or XLSX: แบบฟอร์ม ปพ.5
+      if (item.id === 'DL001' || item.fileType === 'XLSX') {
+        if (typeof XLSX !== 'undefined') {
+          const wb = XLSX.utils.book_new();
+          const wsInfo = XLSX.utils.aoa_to_sheet([
+            ['แบบบันทึกผลการพัฒนาคุณภาพผู้เรียน (ปพ.5) ฉบับมาตรฐาน สพฐ.'],
+            ['สถานศึกษา: โรงเรียนฝันใหม่ (สพฐ.) • ภาคเรียนที่ 1 ปีการศึกษา 2569'],
+            [''],
+            ['รหัสวิชา', 'ท21101', 'รายวิชา', 'ภาษาไทย 1', 'กลุ่มสาระการเรียนรู้', 'ภาษาไทย'],
+            ['ชั้นมัธยมศึกษาปีที่ 1', 'เวลาเรียน', '120 ชั่วโมง/ปี', 'จำนวนหน่วยกิต', '1.5 หน่วยกิต'],
+            ['ครูผู้สอน', 'นายอรรถพล ฉาไธสง', 'ตำแหน่ง', 'ครูชำนาญการพิเศษ']
+          ]);
+          XLSX.utils.book_append_sheet(wb, wsInfo, 'ข้อมูลทั่วไป');
+
+          const scoreRows = [
+            ['เลขที่', 'รหัสนักเรียน', 'ชื่อ-นามสกุล', 'คะแนนเก็บหน่วย 1 (20)', 'คะแนนเก็บหน่วย 2 (20)', 'สอบกลางภาค (20)', 'คะแนนเก็บหน่วย 3 (20)', 'สอบปลายภาค (20)', 'รวม 100 คะแนน', 'ระดับผลการเรียน']
+          ];
+          const sampleNames = ['ด.ช.สมชาย ใจดี', 'ด.ญ.สุดา สดใส', 'นายเกรียงไกร มีชัย', 'น.ส.วรรณภา พรพิมล', 'นายธนาวัฒน์ บุญยืน', 'ด.ช.กิตติพงษ์ วงศ์สว่าง', 'ด.ญ.พรทิพย์ สุวรรณ', 'นายธีรเดช เจริญผล', 'น.ส.กัญญาณัฐ รุ่งเรือง', 'ด.ช.ชลธิศ มหาสมุทร'];
+          sampleNames.forEach((name, i) => {
+            const u1 = 17 + (i % 3);
+            const u2 = 18 + (i % 2);
+            const mid = 16 + (i % 4);
+            const u3 = 17 + (i % 3);
+            const fin = 16 + (i % 4);
+            const total = u1 + u2 + mid + u3 + fin;
+            let grade = total >= 80 ? '4' : (total >= 75 ? '3.5' : (total >= 70 ? '3' : (total >= 65 ? '2.5' : (total >= 60 ? '2' : (total >= 55 ? '1.5' : (total >= 50 ? '1' : '0'))))));
+            scoreRows.push([i + 1, 'S670' + (10 + i + 1), name, u1, u2, mid, u3, fin, total, grade]);
+          });
+          const wsScores = XLSX.utils.aoa_to_sheet(scoreRows);
+          XLSX.utils.book_append_sheet(wb, wsScores, 'คะแนนผลการเรียน');
+
+          XLSX.writeFile(wb, 'แบบฟอร์ม_ปพ5_ฉบับมาตรฐาน_สพฐ_2569.xlsx');
+          return;
+        }
+      }
+
+      // DL003: แม่แบบวิจัยหน้าเดียว CAR Template
+      if (item.id === 'DL003') {
+        const bodyHtml = `
+          <h1>แบบฟอร์มรายงานการวิจัยในชั้นเรียนหน้าเดียว (One-Page CAR Template)</h1>
+          <h2>สำนักงานคณะกรรมการการศึกษาขั้นพื้นฐาน (สพฐ.) • กระทรวงศึกษาธิการ</h2>
+          <hr style="border:0; border-top:2pt solid #1e3a8a; margin:8pt 0 14pt 0;">
+          <table>
+            <tr><td style="width:25%; font-weight:bold; background-color:#f1f5f9;">ชื่องานวิจัย</td><td>(ระบุชื่อเรื่อง เช่น การพัฒนาผลสัมฤทธิ์ทางการเรียน...)</td></tr>
+            <tr><td style="font-weight:bold; background-color:#f1f5f9;">ชื่อผู้วิจัย</td><td>(ระบุชื่อ-นามสกุล ครูผู้สอน)</td></tr>
+            <tr><td style="font-weight:bold; background-color:#f1f5f9;">กลุ่มสาระฯ / วิชา</td><td>(ระบุกลุ่มสาระฯ และชื่อรายวิชา ระดับชั้น)</td></tr>
+            <tr><td style="font-weight:bold; background-color:#f1f5f9;">กลุ่มเป้าหมาย</td><td>นักเรียนชั้น ................. จำนวน ............ คน</td></tr>
+          </table>
+          <div class="box-section">
+            <h3>1. ปัญหาและความสำคัญ</h3>
+            <p>(ระบุสภาพปัญหาที่พบในชั้นเรียน ข้อมูลคะแนนหรือพฤติกรรมเดิมก่อนการพัฒนา)</p>
+          </div>
+          <div class="box-section">
+            <h3>2. นวัตกรรมและกระบวนการจัดการเรียนรู้</h3>
+            <p>(ระบุนวัตกรรม เช่น ชุดกิจกรรม Active Learning, แอปพลิเคชัน, วิธีการสอน 5 ขั้น GPAS)</p>
+          </div>
+          <div class="box-section">
+            <h3>3. ผลการพัฒนาและข้อค้นพบ</h3>
+            <p>(เปรียบเทียบผลก่อน-หลังเรียน ร้อยละของความก้าวหน้า และข้อเสนอแนะในการต่อยอด)</p>
+          </div>
+          <table class="signature-table">
+            <tr>
+              <td style="width:50%;"><p>ลงชื่อ..............................................................</p><p>( .............................................................. )</p><p>ครูผู้วิจัย</p></td>
+              <td style="width:50%;"><p>ลงชื่อ..............................................................</p><p>( นายอรรถพล ฉาไธสง )</p><p>ผู้อำนวยการโรงเรียนฝันใหม่</p></td>
+            </tr>
+          </table>
+        `;
+        downloadWordDoc('แบบฟอร์มรายงานวิจัยในชั้นเรียนหน้าเดียว_CAR_สพฐ.doc', item.title, bodyHtml);
+        return;
+      }
+
+      // DL002: คู่มือ Active Learning
+      if (item.id === 'DL002') {
+        const bodyHtml = `
+          <h1>คู่มือการจัดทำแผนการจัดการเรียนรู้เชิงรุก (Active Learning)</h1>
+          <h2>สำนักงานคณะกรรมการการศึกษาขั้นพื้นฐาน (สพฐ.)</h2>
+          <hr style="border:0; border-top:2pt solid #1e3a8a; margin:8pt 0 14pt 0;">
+          <div class="box-section">
+            <h3>บทนำ: ความหมายและหัวใจสำคัญของ Active Learning</h3>
+            <p>การจัดการเรียนรู้เชิงรุก (Active Learning) มุ่งเน้นให้ผู้เรียนเป็นผู้ลงมือกระทำ (Doing) และคิดสะท้อนเกี่ยวกับสิ่งที่ตนเองกำลังทำ (Reflecting) โดยมีครูทำหน้าที่เป็นผู้อำนวยความสะดวก (Facilitator)</p>
+          </div>
+          <div class="box-section">
+            <h3>กระบวนการออกแบบแผนการจัดการเรียนรู้ 5 ขั้น (GPAS 5 Steps)</h3>
+            <p>1. <strong>Gathering (รวบรวมข้อมูล):</strong> สังเกต สำรวจ ตั้งคำถาม และรวบรวมความรู้เดิม</p>
+            <p>2. <strong>Processing (คิดวิเคราะห์):</strong> จำแนก จัดกลุ่ม เปรียบเทียบ สรุปเป็นความคิดรวบยอด</p>
+            <p>3. <strong>Applying 1 (ปฏิบัติ):</strong> นำความรู้ไปทดลองปฏิบัติ สร้างชิ้นงาน หรือแก้ปัญหา</p>
+            <p>4. <strong>Applying 2 (สื่อสารและนำเสนอ):</strong> ถ่ายทอดความรู้ แลกเปลี่ยนความคิดเห็น และประเมินร่วมกัน</p>
+            <p>5. <strong>Self-Regulating (ประเมินตนเอง):</strong> สะท้อนคิด กำหนดเป้าหมายการพัฒนาตนเองอย่างต่อเนื่อง</p>
+          </div>
+          <div class="box-section">
+            <h3>เครื่องมือวัดและประเมินผลตามสภาพจริง (Authentic Assessment)</h3>
+            <p>• การประเมินด้วยเกณฑ์รูบริก (Rubric Assessment)<br>• การประเมินสมรรถนะสำคัญของผู้เรียน 5 ประการ<br>• แฟ้มสะสมงานดิจิทัล (Digital Portfolio)</p>
+          </div>
+        `;
+        downloadWordDoc('คู่มือแผนการจัดการเรียนรู้เชิงรุก_ActiveLearning_สพฐ.doc', item.title, bodyHtml);
+        return;
+      }
+
+      // DL004: สมรรถนะและคุณลักษณะ
+      if (item.id === 'DL004') {
+        if (typeof XLSX !== 'undefined') {
+          const wb = XLSX.utils.book_new();
+          const wsComp = XLSX.utils.aoa_to_sheet([
+            ['แบบประเมินสมรรถนะสำคัญของผู้เรียน 5 ด้าน และคุณลักษณะอันพึงประสงค์ 8 ประการ'],
+            ['โรงเรียนฝันใหม่ สำนักงานเขตพื้นที่การศึกษาประถมศึกษาหนองบัวลำภู เขต 1'],
+            [''],
+            ['เลขที่', 'ชื่อ-นามสกุล', 'ความสามารถในการสื่อสาร', 'การคิด', 'การแก้ปัญหา', 'ทักษะชีวิต', 'การใช้เทคโนโลยี', 'รักชาติฯ', 'ซื่อสัตย์', 'มีวินัย', 'ใฝ่เรียนรู้', 'อยู่อย่างพอเพียง', 'มุ่งมั่น', 'รักความเป็นไทย', 'จิตสาธารณะ', 'ผลการประเมิน'],
+            [1, 'ด.ช.สมชาย ใจดี', 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 'ผ่านระดับดีเยี่ยม'],
+            [2, 'ด.ญ.สุดา สดใส', 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 'ผ่านระดับดีเยี่ยม'],
+            [3, 'นายเกรียงไกร มีชัย', 3, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 'ผ่านระดับดีเยี่ยม'],
+            [4, 'น.ส.วรรณภา พรพิมล', 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 'ผ่านระดับดีเยี่ยม'],
+            [5, 'นายธนาวัฒน์ บุญยืน', 3, 3, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 'ผ่านระดับดีเยี่ยม']
+          ]);
+          XLSX.utils.book_append_sheet(wb, wsComp, 'สมรรถนะและคุณลักษณะ');
+          XLSX.writeFile(wb, 'แบบประเมินสมรรถนะและคุณลักษณะ8ประการ.xlsx');
+          return;
+        }
+      }
+
+      // Default fallback
+      const genericHtml = `
+        <h1>${item.title}</h1>
+        <h2>หมวดหมู่: ${item.category} • วันที่ปรับปรุง: ${item.updated}</h2>
+        <hr style="border:0; border-top:2pt solid #1e3a8a; margin:8pt 0 14pt 0;">
+        <div class="box-section">
+          <h3>รายละเอียดเอกสารมาตรฐานวิชาการ</h3>
+          <p>เอกสารมาตรฐานงานวิชาการโรงเรียนฝันใหม่ สำนักงานคณะกรรมการการศึกษาขั้นพื้นฐาน (สพฐ.)</p>
+          <p>ประเภทไฟล์: ${item.fileType} | ขนาดอ้างอิง: ${item.size}</p>
+        </div>
+      `;
+      downloadWordDoc(`${item.title.replace(/[/\\?%*:|"<>]/g, '')}.doc`, item.title, genericHtml);
     }
 
     // -------------------------------------------------------------------------
