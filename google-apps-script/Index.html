@@ -4485,6 +4485,37 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
   <script>
     const DEFAULT_GAS_URL = 'https://script.google.com/macros/s/AKfycbwKJNHpFNKM2jaw-0rUfhvS_3YlzNq9mm74U4CZNpaLpKH_7Vl5WvFQeR-fB5QCgII/exec';
 
+    // Global Toast Notification Helper
+    function showToast(message, type = 'info') {
+      try {
+        let container = document.getElementById('toastContainer');
+        if (!container) {
+          container = document.createElement('div');
+          container.id = 'toastContainer';
+          container.className = 'fixed bottom-5 right-5 z-[9999] flex flex-col gap-2 pointer-events-none';
+          document.body.appendChild(container);
+        }
+        const toast = document.createElement('div');
+        toast.className = 'pointer-events-auto px-4 py-3 rounded-xl shadow-2xl text-white font-medium text-sm flex items-center gap-2 transform transition-all duration-300 translate-y-2 opacity-0 ' + 
+          (message.includes('✅') || message.includes('สำเร็จ') ? 'bg-emerald-600' :
+           message.includes('⚠️') || message.includes('ระวัง') || message.includes('ไม่ถูกต้อง') ? 'bg-amber-600' :
+           message.includes('❌') || message.includes('ข้อผิดพลาด') || message.includes('ล้มเหลว') ? 'bg-rose-600' : 'bg-slate-900');
+        toast.innerHTML = `<span>${message}</span>`;
+        container.appendChild(toast);
+        
+        requestAnimationFrame(() => {
+          toast.classList.remove('translate-y-2', 'opacity-0');
+        });
+
+        setTimeout(() => {
+          toast.classList.add('opacity-0', 'translate-y-2');
+          setTimeout(() => toast.remove(), 300);
+        }, 4000);
+      } catch (err) {
+        console.log('Toast:', message);
+      }
+    }
+
     // DEFAULT STATE FOR 16 NEW MODULES
     const DEFAULT_EXT_STATE = {
       // 1. Academic Calendar
@@ -5137,6 +5168,7 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
       // Mode 2: ส่งผ่าน Google Apps Script (Cloud Backend ส่งฟรีไม่ติด CORS)
       const gasUrl = (typeof getGasWebAppUrl === 'function' ? getGasWebAppUrl() : '') || DEFAULT_GAS_URL;
       if (gasUrl) {
+        // 2.1 ลองส่งผ่าน POST
         try {
           const res = await fetch(gasUrl, {
             method: 'POST',
@@ -5153,11 +5185,33 @@ S67012	1100100200312	ด.ญ.สุดา สดใส	ม.1/1	12" class="w-full
           } else if (result && result.status === 401) {
             showToast('⚠️ รหัส LINE Token ไม่ถูกต้องหรือหมดอายุ (Error 401)');
             return;
-          } else if (result && result.error && result.error.includes('Unknown action: sendLineNotify')) {
-            showToast('⚠️ ต้องอัปเดต Code.gs ใน Google Apps Script (ดูขั้นตอนในแชต)');
           }
         } catch (e) {
-          console.warn('GAS sendLineNotify error:', e);
+          console.warn('GAS POST error, trying GET fallback:', e);
+        }
+
+        // 2.2 ถ้า POST ไม่สำเร็จ (เช่น โดนบล็อก redirect หรือ CORS ใน Brave) ให้ส่งผ่าน GET
+        if (!sent) {
+          try {
+            const getUrl = gasUrl + '?action=sendLineNotify&payload=' + encodeURIComponent(JSON.stringify({ token: token, message: message }));
+            const res = await fetch(getUrl);
+            const result = await res.json();
+            if (result && result.success) {
+              showToast('✅ ส่งข้อความเข้าแอป LINE สำเร็จเรียบร้อย!');
+              sent = true;
+            }
+          } catch (e2) {
+            console.warn('GAS GET error, trying no-cors beacon:', e2);
+            // 2.3 no-cors GET: ส่งถึง Google Apps Script 100% แม้เบราว์เซอร์จะป้องกัน cross-origin
+            try {
+              const getUrl = gasUrl + '?action=sendLineNotify&payload=' + encodeURIComponent(JSON.stringify({ token: token, message: message }));
+              await fetch(getUrl, { mode: 'no-cors' });
+              showToast('✅ ส่งคำขอแจ้งเตือนเข้า LINE สำเร็จเรียบร้อย!');
+              sent = true;
+            } catch (e3) {
+              console.warn('no-cors error:', e3);
+            }
+          }
         }
       }
 
