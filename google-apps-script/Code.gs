@@ -197,8 +197,18 @@ function getOrCreateFolder(subfolderName) {
   let rootFolder = rootFolders.hasNext() ? rootFolders.next() : DriveApp.createFolder(FOLDER_NAME);
   
   if (!subfolderName) return rootFolder;
-  let subFolders = rootFolder.getFoldersByName(subfolderName);
-  return subFolders.hasNext() ? subFolders.next() : rootFolder.createFolder(subfolderName);
+  let targetName = subfolderName;
+  if (subfolderName === 'research' || subfolderName === 'car') {
+    targetName = 'งานวิจัยในชั้นเรียน (CAR)';
+  } else if (subfolderName === 'plans') {
+    targetName = 'แผนการจัดการเรียนรู้';
+  } else if (subfolderName === 'photos') {
+    targetName = 'รูปภาพการนิเทศ';
+  } else if (subfolderName === 'signatures') {
+    targetName = 'ลายเซ็นดิจิทัล';
+  }
+  let subFolders = rootFolder.getFoldersByName(targetName);
+  return subFolders.hasNext() ? subFolders.next() : rootFolder.createFolder(targetName);
 }
 
 function uploadFileToDrive(payload) {

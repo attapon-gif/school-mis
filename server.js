@@ -40,7 +40,7 @@ function writeDb(data) {
 }
 
 // Ensure upload folders exist
-const uploadDirs = ['uploads/signatures', 'uploads/photos', 'uploads/plans'];
+const uploadDirs = ['uploads/signatures', 'uploads/photos', 'uploads/plans', 'uploads/research'];
 uploadDirs.forEach(dir => {
   const p = path.join(__dirname, dir);
   if (!fs.existsSync(p)) fs.mkdirSync(p, { recursive: true });
@@ -51,6 +51,7 @@ const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     if (file.fieldname === 'signature') cb(null, path.join(__dirname, 'uploads/signatures'));
     else if (file.fieldname === 'photo') cb(null, path.join(__dirname, 'uploads/photos'));
+    else if (file.fieldname === 'research') cb(null, path.join(__dirname, 'uploads/research'));
     else cb(null, path.join(__dirname, 'uploads/plans'));
   },
   filename: (req, file, cb) => {
