@@ -1,0 +1,10 @@
+const fs = require('fs');
+const s = fs.readFileSync('index.html', 'utf8');
+const idx = s.indexOf('id="tab-print-center"');
+console.log('--- BEFORE (500 chars) ---');
+console.log(s.slice(idx - 500, idx));
+console.log('--- AFTER (500 chars) ---');
+console.log(s.slice(idx, idx + 500));
+const endSectionIdx = s.indexOf('</section>', idx);
+console.log('--- AFTER SECTION (300 chars) ---');
+console.log(s.slice(endSectionIdx, endSectionIdx + 300));

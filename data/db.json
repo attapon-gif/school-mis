@@ -1,8 +1,8 @@
 {
   "schoolInfo": {
-    "name": "โรงเรียนฝันใหม่",
+    "name": "โรงเรียนดงสวรรค์วิทยา",
     "subTitle": "สำนักงานคณะกรรมการการศึกษาขั้นพื้นฐาน (สพฐ.)",
-    "version": "FM",
+    "version": "BATA",
     "academicYear": "2569",
     "term": "1",
     "directorName": "ดร.วิชัย เกียรติสกุล",
@@ -10,9 +10,9 @@
     "headAcademicName": "นางสาวนฤมล บุญประเสริฐ",
     "logoUrl": "/assets/logo.jpg",
     "signatureUrl": "/uploads/signatures/default_signature.png",
-    "developer": "funmai studio",
-    "developerEmail": "attapon@nbcc.ac.th",
-    "developerPhone": "062-3636031"
+    "developer": "โรงเรียนดงสวรรค์วิทยา",
+    "developerEmail": "dongsawanwit@gmail.com",
+    "developerPhone": "095-691-5034, 083-284-6676"
   },
   "teachers": [
     {
@@ -402,37 +402,50 @@
     {
       "id": 1,
       "time": "08.30 - 09.20",
-      "name": "คาบ 1"
+      "name": "คาบ 1",
+      "isBreak": false
     },
     {
       "id": 2,
       "time": "09.20 - 10.10",
-      "name": "คาบ 2"
+      "name": "คาบ 2",
+      "isBreak": false
     },
     {
       "id": 3,
       "time": "10.10 - 11.00",
-      "name": "คาบ 3"
+      "name": "คาบ 3",
+      "isBreak": false
     },
     {
       "id": 4,
       "time": "11.00 - 11.50",
-      "name": "คาบ 4 (พักกลางวัน)"
+      "name": "คาบ 4 (พักกลางวัน)",
+      "isBreak": true
     },
     {
       "id": 5,
       "time": "12.40 - 13.30",
-      "name": "คาบ 5"
+      "name": "คาบ 5",
+      "isBreak": false
     },
     {
       "id": 6,
       "time": "13.30 - 14.20",
-      "name": "คาบ 6"
+      "name": "คาบ 6",
+      "isBreak": false
     },
     {
       "id": 7,
       "time": "14.20 - 15.10",
-      "name": "คาบ 7"
+      "name": "คาบ 7",
+      "isBreak": false
+    },
+    {
+      "id": 8,
+      "time": "15.10 - 16.00",
+      "name": "คาบ 8",
+      "isBreak": false
     }
   ],
   "days": [
@@ -541,6 +554,89 @@
       "status": "อนุมัติสอนแทนแล้ว",
       "assignedDate": "2026-10-13 15:00",
       "remark": "มอบหมายให้นักเรียนทำแบบฝึกหัดทบทวนวรรณคดี"
+    }
+  ],
+  "subjectGroups": [
+    {
+      "id": "sci",
+      "name": "วิทยาศาสตร์และเทคโนโลยี",
+      "shortName": "วิทย์-คอม",
+      "keywords": "ว,วิทย์,ฟิสิกส์,เคมี,ชีว,คอม,คำนวณ,เทคโนโลยี",
+      "color": "cyan",
+      "dot": "🔵"
+    },
+    {
+      "id": "math",
+      "name": "คณิตศาสตร์",
+      "shortName": "คณิต",
+      "keywords": "ค,คณิต,เลข",
+      "color": "indigo",
+      "dot": "🟣"
+    },
+    {
+      "id": "thai",
+      "name": "ภาษาไทย",
+      "shortName": "ภาษาไทย",
+      "keywords": "ท,ไทย,วรรณคดี",
+      "color": "rose",
+      "dot": "🔴"
+    },
+    {
+      "id": "foreign",
+      "name": "ภาษาต่างประเทศ",
+      "shortName": "ภาษาต่างประเทศ",
+      "keywords": "อ,อังกฤษ,English,ภาษา,จีน,ญี่ปุ่น,ฝรั่งเศส,เยอรมัน,เกาหลี",
+      "color": "amber",
+      "dot": "🟠"
+    },
+    {
+      "id": "social",
+      "name": "สังคมศึกษา ศาสนา และวัฒนธรรม",
+      "shortName": "สังคมศึกษา",
+      "keywords": "ส,สังคม,ประวัติศาสตร์,พุทธ,ภูมิศาสตร์,หน้าที่พลเมือง",
+      "color": "emerald",
+      "dot": "🟢"
+    },
+    {
+      "id": "art",
+      "name": "ศิลปะ ดนตรี นาฏศิลป์",
+      "shortName": "ศิลปะ",
+      "keywords": "ศ,ศิลปะ,ดนตรี,นาฏศิลป์,ทัศนศิลป์",
+      "color": "purple",
+      "dot": "🎨"
+    },
+    {
+      "id": "pe",
+      "name": "สุขศึกษาและพลศึกษา",
+      "shortName": "สุขศึกษา/พละ",
+      "keywords": "พ,สุขศึกษา,พลศึกษา,พละ,กีฬา",
+      "color": "lime",
+      "dot": "🎾"
+    },
+    {
+      "id": "work",
+      "name": "การงานอาชีพ",
+      "shortName": "การงานอาชีพ",
+      "keywords": "ง,การงาน,อาชีพ,เกษตร,คหกรรม,ช่าง",
+      "color": "teal",
+      "dot": "🛠️"
+    },
+    {
+      "id": "activity",
+      "name": "กิจกรรมพัฒนาผู้เรียน",
+      "shortName": "พัฒนาผู้เรียน",
+      "keywords": "กิจกรรม,แนะแนว,ลูกเสือ,เนตรนารี,ชุมนุม,โฮมรูม,เพื่อสังคม,ยุวกาชาด",
+      "color": "slate",
+      "dot": "⚪"
+    },
+    {
+      "id": "lunch",
+      "name": "พักกลางวัน",
+      "shortName": "พักกลางวัน",
+      "keywords": "พักกลางวัน,รับประทานอาหาร,อาหารกลางวัน",
+      "color": "orange",
+      "dot": "🍱",
+      "isBreak": true
     }
   ]
 }

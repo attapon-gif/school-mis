@@ -363,10 +363,31 @@ app.get('/api/timetables', (req, res) => {
     timetables: db.timetables,
     days: db.days,
     periods: db.periods,
+    subjectGroups: db.subjectGroups,
     teachers: db.teachers,
     classrooms: db.classrooms,
     rooms: db.rooms
   });
+});
+
+// Update periods
+app.put('/api/timetables/periods', (req, res) => {
+  const db = readDb();
+  if (Array.isArray(req.body.periods)) {
+    db.periods = req.body.periods;
+    writeDb(db);
+  }
+  res.json({ success: true, periods: db.periods });
+});
+
+// Update subject groups
+app.put('/api/timetables/subject-groups', (req, res) => {
+  const db = readDb();
+  if (Array.isArray(req.body.subjectGroups)) {
+    db.subjectGroups = req.body.subjectGroups;
+    writeDb(db);
+  }
+  res.json({ success: true, subjectGroups: db.subjectGroups });
 });
 
 // Validation endpoint: Check conflict before saving

@@ -15,6 +15,15 @@ function testSendLine() {
   return res;
 }
 
+// กดรันฟังก์ชันนี้ในหน้า Apps Script เพื่อดูลิงก์ Google Sheets และโฟลเดอร์ Google Drive ของระบบ
+function showMyLinks() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var folder = getOrCreateFolder();
+  Logger.log('📊 Google Sheets: ' + ss.getUrl());
+  Logger.log('📁 Google Drive (' + FOLDER_NAME + '): ' + folder.getUrl());
+  return { sheetsUrl: ss.getUrl(), driveUrl: folder.getUrl() };
+}
+
 // เข้าใช้งานหน้าเว็บ Web App หรือรับคำขอ API (GET)
 function doGet(e) {
   if (e && e.parameter && e.parameter.action) {
@@ -28,7 +37,7 @@ function doGet(e) {
       .setMimeType(ContentService.MimeType.JSON);
   }
   return HtmlService.createHtmlOutputFromFile('Index')
-    .setTitle('ระบบบริหารงานวิชาการโรงเรียนฝันใหม่ (เวอร์ชัน FM)')
+    .setTitle('ระบบบริหารงานวิชาการโรงเรียนดงสวรรค์วิทยา (เวอร์ชัน BATA)')
     .addMetaTag('viewport', 'width=device-width, initial-scale=1.0')
     .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
 }
@@ -206,6 +215,8 @@ function getOrCreateFolder(subfolderName) {
     targetName = 'รูปภาพการนิเทศ';
   } else if (subfolderName === 'signatures') {
     targetName = 'ลายเซ็นดิจิทัล';
+  } else if (subfolderName === 'homevisit' || subfolderName === 'homevisits') {
+    targetName = 'การเยี่ยมบ้านนักเรียน';
   }
   let subFolders = rootFolder.getFoldersByName(targetName);
   return subFolders.hasNext() ? subFolders.next() : rootFolder.createFolder(targetName);
@@ -805,17 +816,17 @@ function initSetup() {
   let s = getDbSheet('Config');
   s.clear();
   s.appendRow(['Key', 'Value']);
-  s.appendRow(['name', 'โรงเรียนฝันใหม่']);
+  s.appendRow(['name', 'โรงเรียนดงสวรรค์วิทยา']);
   s.appendRow(['subTitle', 'สำนักงานคณะกรรมการการศึกษาขั้นพื้นฐาน (สพฐ.)']);
-  s.appendRow(['version', 'FM']);
+  s.appendRow(['version', 'BATA']);
   s.appendRow(['academicYear', '2569']);
   s.appendRow(['term', '1']);
   s.appendRow(['directorName', 'ดร.วิชัย เกียรติสกุล']);
   s.appendRow(['directorPosition', 'ผู้อำนวยการสถานศึกษา เชี่ยวชาญ']);
   s.appendRow(['headAcademicName', 'นางสาวนฤมล บุญประเสริฐ']);
-  s.appendRow(['developer', 'funmai studio']);
-  s.appendRow(['developerEmail', 'attapon@nbcc.ac.th']);
-  s.appendRow(['developerPhone', '062-3636031']);
+  s.appendRow(['developer', 'โรงเรียนดงสวรรค์วิทยา']);
+  s.appendRow(['developerEmail', 'dongsawanwit@gmail.com']);
+  s.appendRow(['developerPhone', '095-691-5034, 083-284-6676']);
   s.appendRow(['signatureUrl', 'https://api.iconify.design/lucide:signature.svg']);
 
   // 2. Teachers (8 ท่าน)

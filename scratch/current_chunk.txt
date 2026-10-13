@@ -1,0 +1,104 @@
+           </tr>
+            </thead>
+            <tbody id="transfersTableBody" class="divide-y divide-slate-200 bg-white">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  
+
+
+          </div>
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- MODULE 24: ศูนย์รวมดาวน์โหลด & สั่งพิมพ์เอกสารวิชาการ (TAB-PRINT-CENTER) -->
+    <!-- ================================================================= -->
+    <section id="tab-print-center" class="tab-content hidden space-y-6">
+      <!-- Header Banner -->
+      <div class="card-3d p-6 rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-4 border border-slate-200 bg-gradient-to-r from-rose-50/70 via-white to-pink-50/70">
+        <div class="flex items-center gap-3.5">
+          <div class="w-12 h-12 rounded-2xl bg-rose-100 text-rose-700 flex items-center justify-center font-bold text-xl shadow-sm">
+            <i data-lucide="printer" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h2 class="text-xl font-black text-slate-900 tracking-tight">24. ศูนย์รวมดาวน์โหลด & สั่งพิมพ์เอกสารวิชาการ</h2>
+              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-black bg-rose-100 text-rose-800 border border-rose-300">รวม 26+ รายการ</span>
+            </div>
+            <p class="text-xs text-slate-500 mt-0.5">รวมทุกเอกสาร ปพ.1-ปพ.6, เล่ม ปพ.5, ตารางสอนแนวนอน, ป้ายล็อกเกอร์, เช็คชื่อ, โภชนาการ และแบบฟอร์มทางการ สั่งพิมพ์ได้ในคลิกเดียว</p>
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <button type="button" onclick="triggerPrintCenterQuick('p6_batch')" class="btn-ega-primary text-xs px-3.5 py-2 rounded-xl flex items-center gap-1.5 shadow">
+            <i data-lucide="award" class="w-4 h-4"></i> พิมพ์ ปพ.6 ยกห้อง
+          </button>
+          <button type="button" onclick="triggerPrintCenterQuick('pp5_full')" class="bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 shadow">
+            <i data-lucide="book-open" class="w-4 h-4 text-emerald-300"></i> พิมพ์เล่ม ปพ.5
+          </button>
+          <button type="button" onclick="triggerPrintCenterQuick('timetable')" class="bg-indigo-700 hover:bg-indigo-800 text-white font-bold text-xs px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 shadow">
+            <i data-lucide="calendar" class="w-4 h-4 text-indigo-300"></i> ตารางสอนแนวนอน
+          </button>
+        </div>
+      </div>
+
+      <!-- Filter Controls: Classroom + Category + Live Search -->
+      <div class="card-3d p-4 rounded-2xl border border-slate-200 bg-slate-50 flex flex-col lg:flex-row lg:items-center justify-between gap-3 text-xs">
+        <div class="flex flex-wrap items-center gap-3">
+          <div class="flex items-center gap-1.5">
+            <label class="font-bold text-slate-700 whitespace-nowrap"><i data-lucide="school" class="w-3.5 h-3.5 inline text-blue-600"></i> ระดับชั้น/ห้องเรียน:</label>
+            <select id="printCenterClassSelect" onchange="syncPrintCenterClass(this.value)" class="px-3 py-1.5 border border-slate-300 rounded-xl bg-white font-bold text-slate-800 shadow-2xs focus:ring-2 focus:ring-rose-500">
+              <option value="ป.6/1" selected>ชั้นประถมศึกษาปีที่ 6/1 (19 คน)</option>
+              <option value="ป.6/2">ชั้นประถมศึกษาปีที่ 6/2 (19 คน)</option>
+              <option value="ป.5/1">ชั้นประถมศึกษาปีที่ 5/1 (35 คน)</option>
+              <option value="ป.4/1">ชั้นประถมศึกษาปีที่ 4/1 (32 คน)</option>
+              <option value="ป.3/1">ชั้นประถมศึกษาปีที่ 3/1 (34 คน)</option>
+              <option value="ป.2/1">ชั้นประถมศึกษาปีที่ 2/1 (33 คน)</option>
+              <option value="ป.1/1">ชั้นประถมศึกษาปีที่ 1/1 (23 คน)</option>
+              <option value="ป.1/2">ชั้นประถมศึกษาปีที่ 1/2 (23 คน)</option>
+              <option value="ม.3/1">ชั้นมัธยมศึกษาปีที่ 3/1 (17 คน)</option>
+              <option value="ม.2/1">ชั้นมัธยมศึกษาปีที่ 2/1 (34 คน)</option>
+              <option value="ม.1/1">ชั้นมัธยมศึกษาปีที่ 1/1 (22 คน)</option>
+              <option value="อ.3/1">ชั้นอนุบาล 3/1 (15 คน)</option>
+              <option value="อ.3/2">ชั้นอนุบาล 3/2 (16 คน)</option>
+              <option value="อ.2/1">ชั้นอนุบาล 2/1 (12 คน)</option>
+              <option value="อ.2/2">ชั้นอนุบาล 2/2 (12 คน)</option>
+            </select>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <label class="font-bold text-slate-700 whitespace-nowrap"><i data-lucide="filter" class="w-3.5 h-3.5 inline text-rose-600"></i> หมวดหมู่เอกสาร:</label>
+            <select id="printCenterCategorySelect" onchange="renderPrintCenterCards()" class="px-3 py-1.5 border border-slate-300 rounded-xl bg-white font-bold text-slate-800 shadow-2xs focus:ring-2 focus:ring-rose-500">
+              <option value="all">📂 เอกสารทุกหมวดหมู่ (แสดงทั้งหมด)</option>
+              <option value="grades">🏆 งานวัดผล & ปพ. (ปพ.1, ปพ.5, ปพ.6, ตัดเกรด, CSV)</option>
+              <option value="plans">📚 งานแผนการสอน & นิเทศ (แผน, รูบริก 100 คะแนน, สอนแทน)</option>
+              <option value="timetables">🗓️ งานตารางสอน & ปฏิทินวิชาการ (A4 แนวนอน, ปฏิทิน 2569)</option>
+              <option value="student_affairs">💚 งานกิจวัตร & ดูแลช่วยเหลือ (เสาธง, BMI, ความประพฤติ, ออมเงิน, เยี่ยมบ้าน)</option>
+              <option value="dmc_locker">🗃️ งานทะเบียนนักเรียน & ล็อกเกอร์ (ป้าย 5 ช่อง, ป้ายโต๊ะ, ทะเบียน DMC, ย้ายเข้า-ออก)</option>
+              <option value="activities_templates">🎯 กิจกรรม, CAR & แม่แบบดาวน์โหลด (ชุมนุม, ลูกเสือ, IEP, วิจัย, แม่แบบ Excel)</option>
+            </select>
+          </div>
+          <div class="relative">
+            <i data-lucide="search" class="w-3.5 h-3.5 absolute left-3 top-2.5 text-slate-400"></i>
+            <input type="text" id="printCenterSearchInput" oninput="renderPrintCenterCards()" placeholder="🔍 ค้นหาชื่อเอกสาร หรือแบบฟอร์ม..." class="pl-8 pr-3 py-1.5 border border-slate-300 rounded-xl text-xs bg-white font-normal shadow-2xs focus:ring-2 focus:ring-rose-500 w-52 sm:w-64">
+          </div>
+        </div>
+        <div>
+          <span id="printCenterCountBadge" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-50 text-rose-800 font-bold border border-rose-200 text-xs">
+            ⚡ พร้อมสั่งพิมพ์ 26 รายการ
+          </span>
+        </div>
+      </div>
+
+      <!-- Document Cards Container -->
+      <div id="printCenterCardsContainer" class="space-y-6">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================================================================= -->
+  

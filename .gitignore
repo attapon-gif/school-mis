@@ -16,3 +16,7 @@ _temp_extracted/
 # Environment variables
 .env
 .env.local
+
+# Temp Edge and Firebase Cache
+.temp_edge_*
+.firebase/
